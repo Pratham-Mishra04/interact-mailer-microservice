@@ -1,0 +1,45 @@
+version: '3.8'
+
+networks:
+  backend-network:
+    driver: bridge
+
+services:
+  backend:
+    container_name: backend-template
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - 8000:${PORT}
+    depends_on:
+      - mongo
+    env_file:
+      - .env
+    volumes:
+      - ./public:/app/public/
+      - ./logs:/app/logs/
+    networks:
+      - backend-network
+
+  mongo:
+    container_name: mongo-db
+    image: mongo
+    restart: always
+    ports:
+      - 27017:27017
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - backend-network
+    healthcheck:
+      test: ["CMD", "mongo", "--eval", "db.stats().ok"]
+      interval: 5s
+      timeout: 5s
+      retries: 3
+
+volumes:
+  mongo-data:
+    name: mongo-data
+    driver: local

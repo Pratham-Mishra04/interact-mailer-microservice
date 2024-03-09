@@ -1,0 +1,9 @@
+{  "editor.formatOnSave": true,
+
+"[typescript]": {
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "explicit"
+  }
+},
+"java.saveActions.organizeImports": true,
+}
