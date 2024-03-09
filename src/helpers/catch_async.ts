@@ -6,7 +6,6 @@ type asyncFunction = (req: Request, res: Response, next: NextFunction) => any;
 
 const catchAsync = (fn: asyncFunction) => (req: Request, res: Response, next: NextFunction) => {
     fn(req, res, next).catch((err: Error) => {
-        // logger.info(err.message, req.path, err);
         next(err);
     });
 };

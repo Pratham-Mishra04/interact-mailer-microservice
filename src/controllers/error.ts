@@ -15,12 +15,6 @@ const DuplicateErrorHandler = err => {
     return new AppError(message, 400);
 };
 
-const ValidationErrorHandler = err => {
-    const errors = Object.values(err.errors).map((el: Error) => el.message);
-    const message = `Invalid input: ${errors.join(', ')}`;
-    return new AppError(message, 400);
-};
-
 const JWTErrorHandler = (err, errName) => {
     if (errName === 'invalid') return new AppError('Invalid Token. Please Login Again', 401);
     return new AppError('Token Expired. Please Login Again', 401);
@@ -57,8 +51,6 @@ const ErrorController = (error: Error, req: Request, res: Response) => {
         let error = { ...err };
         if (err?.name === 'CastError') error = CastErrorHandler(error);
         if (err?.code === 11000) error = DuplicateErrorHandler(error);
-        if (err?._message)
-            if (err._message.match(/validation failed/)) error = ValidationErrorHandler(error);
         if (err?.name === 'JsonWebTokenError') error = JWTErrorHandler(error, 'invalid');
         if (err?.name === 'TokenExpiredError') error = JWTErrorHandler(error, 'expired');
         if (err?.isJoi) error = JoiErrorHandler(error);

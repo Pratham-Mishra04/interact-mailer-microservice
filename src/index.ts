@@ -5,13 +5,10 @@ import helmet from 'helmet';
 import * as morgan from 'morgan';
 import * as path from 'path';
 import CORS from './config/cors';
-import connectToDB from './config/db';
 import { ENV, configENV } from './config/env';
-import { connectToCache } from './config/redis';
 import ErrorController from './controllers/error';
 import AppError from './helpers/app_error';
-import authRouter from './routes/auth';
-import userRouter from './routes/user';
+import Router from './routes/mailer';
 
 const app: Express = express();
 
@@ -26,16 +23,12 @@ if (ENV.NODE_ENV === 'development') app.use(morgan('dev'));
 
 app.use(express.static(path.join(__dirname, '../public')));
 
-connectToDB();
-connectToCache();
-
 app.use((req: Request, res: Response, next: NextFunction) => {
     req.requestedAt = new Date().toISOString();
     next();
 });
 
-app.use('/', authRouter);
-app.use('/users', userRouter);
+app.use('/', Router);
 
 app.all('*', (req: Request, res: Response, next: NextFunction) => {
     next(new AppError(`Cannot find ${req.originalUrl}`, 404));

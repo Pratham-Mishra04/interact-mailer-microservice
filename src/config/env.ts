@@ -9,15 +9,7 @@ interface ENV_struct {
     PORT: number;
     FRONTEND_URL: string;
     JWT_KEY: string;
-    //mongo config
-    LOCAL_MONGO_URL: string;
-    MONGO_URL: string;
-    MONGO_PASSWORD: string;
-    USE_REMOTE_DB: boolean;
-    //redis config
-    REDIS_HOST: string;
-    REDIS_PORT: number;
-    REDIS_PASSWORD: string;
+    API_TOKEN: string;
     //nodemailer config
     EMAIL_HOST: string;
     EMAIL_PORT: string;
@@ -30,14 +22,8 @@ const ENV: ENV_struct = {
     NODE_ENV: 'development',
     PORT: 8000,
     FRONTEND_URL: 'http://127.0.0.1:3000',
-    LOCAL_MONGO_URL: 'mongodb://127.0.0.1:27017',
-    MONGO_URL: 'remote_mongo_url',
-    MONGO_PASSWORD: 'password',
-    USE_REMOTE_DB: false,
     JWT_KEY: 'secret',
-    REDIS_HOST: 'localhost:6379',
-    REDIS_PORT: 6379,
-    REDIS_PASSWORD: 'password',
+    API_TOKEN: 'token',
     EMAIL_HOST: '',
     EMAIL_PORT: '',
     EMAIL_USER: '',
