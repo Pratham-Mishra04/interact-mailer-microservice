@@ -16,6 +16,9 @@ interface ENV_struct {
     EMAIL_USER: string;
     EMAIL_USERNAME: string;
     EMAIL_PASS: string;
+    LOGGER_URL: string;
+    LOGGER_SECRET: string;
+    LOGGER_TOKEN: string;
 }
 
 const ENV: ENV_struct = {
@@ -29,6 +32,9 @@ const ENV: ENV_struct = {
     EMAIL_USER: '',
     EMAIL_USERNAME: '',
     EMAIL_PASS: '',
+    LOGGER_URL: '',
+    LOGGER_SECRET: '',
+    LOGGER_TOKEN: '',
 };
 
 const configENV = () => {
