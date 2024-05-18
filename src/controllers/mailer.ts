@@ -3,6 +3,7 @@ import { AttachmentLike } from 'nodemailer/lib/mailer';
 import { Readable } from 'nodemailer/lib/xoauth2';
 import catchAsync from '../helpers/catch_async';
 import Nodemailer from '../mailers/nodemailer';
+import { Announcement, Comment, Event, Opening, Poll, Post, Project, User } from '../types/index';
 
 const getTemplateNameFromType = (type: number) => {
     return `${type}.html`;
@@ -17,15 +18,16 @@ const getParamFuncFromReq = (
 ): ((
     html: string | Readable | Buffer | AttachmentLike | undefined
 ) => string | Readable | Buffer | AttachmentLike | undefined) => {
-    const user = req.body.user;
-    const secondaryUser = req.body.secondaryUser;
+    const user: User = req.body.user;
+    const secondaryUser: User | undefined = req.body.secondaryUser;
 
-    const comment = req.body.comment;
-    const post = req.body.post;
-    const project = req.body.project;
-    const event = req.body.event;
-    const announcement = req.body.announcement;
-    const poll = req.body.poll;
+    const comment: Comment | undefined = req.body.comment;
+    const post: Post | undefined = req.body.post;
+    const project: Project | undefined = req.body.project;
+    const opening: Opening | undefined = req.body.opening;
+    const event: Event | undefined = req.body.event;
+    const announcement: Announcement | undefined = req.body.announcement;
+    const poll: Poll | undefined = req.body.poll;
 
     const type = Number(req.body.type || -1);
 
@@ -37,7 +39,10 @@ const getParamFuncFromReq = (
 
         switch (type) {
             case 10:
-                return parameterizedHTML?.replace('{{SecondaryUser.Name}}', secondaryUser.name);
+                return parameterizedHTML?.replace(
+                    '{{SecondaryUser.Name}}',
+                    secondaryUser?.name || ''
+                );
             default:
                 return parameterizedHTML;
         }

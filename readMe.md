@@ -22,15 +22,17 @@ Types:
 50:Flagged Comment
 51:Flagged Post
 52:Flagged Project
-53:Flagged Event
-54:Flagged Announcement
-55:Flagged Poll
+53:Flagged Opening
+54:Flagged Event
+55:Flagged Announcement
+56:Flagged Poll
 
 
 70-80 -> Flags Revoked
 70:Revoked Comment Flag
 71:Revoked Post Flag
 72:Revoked Project Flag
-73:Revoked Event Flag
-74:Revoked Announcement Flag
-75:Revoked Poll Flag
+73:Revoked Opening Flag
+74:Revoked Event Flag
+75:Revoked Announcement Flag
+67:Revoked Poll Flag
