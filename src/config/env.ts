@@ -19,6 +19,11 @@ interface ENV_struct {
     LOGGER_URL: string;
     LOGGER_SECRET: string;
     LOGGER_TOKEN: string;
+
+    BACKEND_TOKEN: string;
+    BACKEND_SECRET: string;
+    ADMIN_TOKEN: string;
+    ADMIN_SECRET: string;
 }
 
 const ENV: ENV_struct = {
@@ -35,6 +40,10 @@ const ENV: ENV_struct = {
     LOGGER_URL: '',
     LOGGER_SECRET: '',
     LOGGER_TOKEN: '',
+    ADMIN_SECRET: '',
+    ADMIN_TOKEN: '',
+    BACKEND_SECRET: '',
+    BACKEND_TOKEN: '',
 };
 
 const configENV = () => {

@@ -23,11 +23,6 @@ if (ENV.NODE_ENV === 'development') app.use(morgan('dev'));
 
 app.use(express.static(path.join(__dirname, '../public')));
 
-app.use((req: Request, res: Response, next: NextFunction) => {
-    req.requestedAt = new Date().toISOString();
-    next();
-});
-
 app.use('/', Router);
 
 app.all('*', (req: Request, res: Response, next: NextFunction) => {

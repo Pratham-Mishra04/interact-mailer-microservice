@@ -19,20 +19,47 @@ const jwtVerifyPromisified = (
     });
 };
 
+export const verifyToken = async (
+    tokenString: string,
+    SECRET: string,
+    resource: string
+): Promise<AppError | null> => {
+    if (!tokenString) return new AppError('Authorization Token Not Found.', 401);
+
+    const decoded: jwt.JwtPayload | undefined = await jwtVerifyPromisified(tokenString, SECRET);
+
+    if (decoded?.sub != resource) return new AppError('Invalid TOKEN', 403);
+
+    if (new Date() > new Date(decoded?.exp || new Date()))
+        return new AppError('Token Expired, Please Login again', 403);
+
+    return null;
+};
+
 export const protect = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
     let token: string | undefined;
 
     if (req.headers.authorization && req.headers.authorization.startsWith('Bearer'))
         token = req.headers.authorization.split(' ')[1];
 
-    if (!token) return next(new AppError('Authorization Token Not Found.', 401));
+    if (!token) return next(new AppError('Not Authorized to use this API.', 401));
 
-    const decoded: jwt.JwtPayload | undefined = await jwtVerifyPromisified(token, ENV.JWT_KEY);
+    const API_TOKEN = req.headers['API_TOKEN'] as string;
+    if (!API_TOKEN) return next(new AppError('Not Authorized to use this API.', 401));
 
-    if (decoded?.sub != ENV.API_TOKEN) return next(new AppError('Invalid TOKEN', 403));
+    let error: AppError | null;
 
-    if (new Date() > new Date(decoded?.exp || new Date()))
-        return next(new AppError('Token Expired, Please Login again', 403));
+    switch (API_TOKEN) {
+        case ENV.BACKEND_TOKEN:
+            error = await verifyToken(token, ENV.BACKEND_SECRET, 'backend');
+            break;
+        case ENV.ADMIN_TOKEN:
+            error = await verifyToken(token, ENV.ADMIN_SECRET, 'admin');
+            break;
+        default:
+            error = new AppError('Not authorized to use this api, Invalid API token', 403);
+    }
 
+    if (error) next(error);
     next();
 });

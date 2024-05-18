@@ -35,4 +35,4 @@ Types:
 73:Revoked Opening Flag
 74:Revoked Event Flag
 75:Revoked Announcement Flag
-67:Revoked Poll Flag
+76:Revoked Poll Flag
