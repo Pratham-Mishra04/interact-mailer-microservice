@@ -1,13 +1,17 @@
 import * as fs from 'fs';
 import * as nodemailer from 'nodemailer';
+import { AttachmentLike } from 'nodemailer/lib/mailer';
+import { Readable } from 'nodemailer/lib/xoauth2';
 import * as path from 'path';
 import { ENV } from '../config/env';
 
 interface NodemailerConfig {
     email: string;
     subject: string;
-    body: string;
     templateName: string;
+    paramFunc: (
+        html: string | Buffer | Readable | AttachmentLike | undefined
+    ) => string | Buffer | Readable | AttachmentLike | undefined;
 }
 
 const templatePath = '/templates/';
@@ -29,7 +33,7 @@ const Nodemailer = async (config: NodemailerConfig): Promise<void> => {
         html: fs.readFileSync(path.resolve(__dirname, templatePath + config.templateName), 'utf8'),
     };
 
-    // mailOptions.html = mailOptions.html.replace('{{name}}', 'John Doe');
+    mailOptions.html = config.paramFunc(mailOptions.html);
 
     await transporter.sendMail(mailOptions);
 };
