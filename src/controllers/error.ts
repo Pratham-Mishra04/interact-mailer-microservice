@@ -1,5 +1,5 @@
 /* eslint-disable no-underscore-dangle */
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import { ENV } from '../config/env';
 import AppError from '../helpers/app_error';
 import logger from '../utils/logger';
@@ -34,7 +34,7 @@ interface ExtendedError extends AppError {
     code?: number;
 }
 
-const ErrorController = (error: Error, req: Request, res: Response) => {
+const ErrorController = (error: Error, req: Request, res: Response, next: NextFunction) => {
     const err = error as ExtendedError;
 
     err.statusCode = err.statusCode || 500;

@@ -29,9 +29,9 @@ const infoLogger = createLog('info', 'info');
 const warnLogger = createLog('warn', 'warn');
 
 const logger = {
-    info: (message: string, path: string, error: Error) => {
+    info: (message: string, path: string, error: Error | null) => {
         infoLogger.info(message, path, error);
-        logToAdminLogger('info', message, error.message, path);
+        logToAdminLogger('info', message, error?.message, path);
     },
     error: (message: string, path: string, error: Error) => {
         errorLogger.error(message, path, error);

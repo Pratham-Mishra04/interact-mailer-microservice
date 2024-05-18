@@ -4,6 +4,7 @@ import { AttachmentLike } from 'nodemailer/lib/mailer';
 import { Readable } from 'nodemailer/lib/xoauth2';
 import * as path from 'path';
 import { ENV } from '../config/env';
+import logger from '../utils/logger';
 
 interface NodemailerConfig {
     email: string;
@@ -14,28 +15,42 @@ interface NodemailerConfig {
     ) => string | Buffer | Readable | AttachmentLike | undefined;
 }
 
-const templatePath = '/templates/';
+const templatePath = 'templates/';
 
 const Nodemailer = async (config: NodemailerConfig): Promise<void> => {
     const transporter = nodemailer.createTransport({
-        host: ENV.EMAIL_HOST,
-        port: Number(ENV.EMAIL_PORT),
+        service: 'Gmail',
+        host: 'smtp.gmail.com',
+        secure: true,
         auth: {
-            user: ENV.EMAIL_USERNAME,
-            pass: ENV.EMAIL_PASS,
+            user: ENV.MAIL_USER,
+            pass: ENV.MAIL_KEY,
         },
     });
 
     const mailOptions: nodemailer.SendMailOptions = {
-        from: ENV.EMAIL_USER,
+        from: {
+            name: 'Interact',
+            address: ENV.MAIL_USER,
+        },
         to: config.email,
         subject: config.subject,
-        html: fs.readFileSync(path.resolve(__dirname, templatePath + config.templateName), 'utf8'),
+        html: fs.readFileSync(
+            path.resolve(__dirname, '../' + templatePath + config.templateName),
+            'utf8'
+        ),
     };
 
     mailOptions.html = config.paramFunc(mailOptions.html);
 
-    await transporter.sendMail(mailOptions);
+    transporter
+        .sendMail(mailOptions)
+        .then(() => {
+            //TODO log mail request from which service and other details
+        })
+        .catch(err => {
+            logger.error('Error while sending mail', 'Nodemailer', err);
+        });
 };
 
 export default Nodemailer;

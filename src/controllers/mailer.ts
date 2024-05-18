@@ -1,6 +1,7 @@
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import { AttachmentLike } from 'nodemailer/lib/mailer';
 import { Readable } from 'nodemailer/lib/xoauth2';
+import AppError from '../helpers/app_error';
 import catchAsync from '../helpers/catch_async';
 import Nodemailer from '../mailers/nodemailer';
 import { Announcement, Comment, Event, Opening, Poll, Post, Project, User } from '../types/index';
@@ -105,7 +106,10 @@ const getParamFuncFromReq = (
     };
 };
 
-export const sendMail = catchAsync(async (req: Request, res: Response) => {
+export const sendMail = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
+    if (!req.body.type) return next(new AppError('Email Type Not Defined', 400));
+    if (!req.body.email) return next(new AppError('Email Destination Not Defined', 400));
+
     await Nodemailer({
         email: req.body.email,
         subject: getSubjectFromType(req.body.type),

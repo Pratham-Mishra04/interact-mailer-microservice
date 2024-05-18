@@ -7,15 +7,10 @@ type NODE_ENV = 'development' | 'production';
 interface ENV_struct {
     NODE_ENV: NODE_ENV;
     PORT: number;
-    FRONTEND_URL: string;
     JWT_KEY: string;
-    API_TOKEN: string;
     //nodemailer config
-    EMAIL_HOST: string;
-    EMAIL_PORT: string;
-    EMAIL_USER: string;
-    EMAIL_USERNAME: string;
-    EMAIL_PASS: string;
+    MAIL_USER: string;
+    MAIL_KEY: string;
     LOGGER_URL: string;
     LOGGER_SECRET: string;
     LOGGER_TOKEN: string;
@@ -29,14 +24,9 @@ interface ENV_struct {
 const ENV: ENV_struct = {
     NODE_ENV: 'development',
     PORT: 8000,
-    FRONTEND_URL: 'http://127.0.0.1:3000',
     JWT_KEY: 'secret',
-    API_TOKEN: 'token',
-    EMAIL_HOST: '',
-    EMAIL_PORT: '',
-    EMAIL_USER: '',
-    EMAIL_USERNAME: '',
-    EMAIL_PASS: '',
+    MAIL_USER: '',
+    MAIL_KEY: '',
     LOGGER_URL: '',
     LOGGER_SECRET: '',
     LOGGER_TOKEN: '',

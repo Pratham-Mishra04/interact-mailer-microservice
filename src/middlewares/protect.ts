@@ -30,8 +30,8 @@ export const verifyToken = async (
 
     if (decoded?.sub != resource) return new AppError('Invalid TOKEN', 403);
 
-    if (new Date() > new Date(decoded?.exp || new Date()))
-        return new AppError('Token Expired, Please Login again', 403);
+    // if (new Date() > new Date(decoded?.exp || new Date()))
+    //     return new AppError('Token Expired, Please Login again', 403);
 
     return null;
 };
@@ -44,7 +44,7 @@ export const protect = catchAsync(async (req: Request, res: Response, next: Next
 
     if (!token) return next(new AppError('Not Authorized to use this API.', 401));
 
-    const API_TOKEN = req.headers['API_TOKEN'] as string;
+    const API_TOKEN = req.headers['api_token'] as string;
     if (!API_TOKEN) return next(new AppError('Not Authorized to use this API.', 401));
 
     let error: AppError | null;
