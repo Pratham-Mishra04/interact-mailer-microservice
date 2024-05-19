@@ -73,6 +73,7 @@ const getSubjectFromType = (type: number): string => {
 const getParamFuncFromReq = (
     req: Request
 ): ((
+    // eslint-disable-next-line no-unused-vars
     html: string | Readable | Buffer | AttachmentLike | undefined
 ) => string | Readable | Buffer | AttachmentLike | undefined) => {
     const user: User = req.body.user;
@@ -85,6 +86,7 @@ const getParamFuncFromReq = (
     const event: Event | undefined = req.body.event;
     const announcement: Announcement | undefined = req.body.announcement;
     const poll: Poll | undefined = req.body.poll;
+    const otp: string | undefined = req.body.otp;
 
     const type = req.body.type || -1;
 
@@ -95,6 +97,11 @@ const getParamFuncFromReq = (
             .replace('{{User.Username}}', user.username);
 
         switch (type) {
+            case 0:
+            case 2:
+            case 3:
+            case 4:
+                return parameterizedHTML?.replace('{{OTP}}', otp || '');
             case 10:
                 return parameterizedHTML?.replace(
                     '{{SecondaryUser.Name}}',
@@ -115,8 +122,13 @@ export const sendMail = catchAsync(async (req: Request, res: Response, next: Nex
         subject: getSubjectFromType(req.body.type),
         templateName: getTemplateNameFromType(req.body.type),
         paramFunc: getParamFuncFromReq(req),
-    });
-    res.status(200).json({
-        status: 'success',
-    });
+    })
+        .then(() => {
+            res.status(200).json({
+                status: 'success',
+            });
+        })
+        .catch(err => {
+            next(err);
+        });
 });

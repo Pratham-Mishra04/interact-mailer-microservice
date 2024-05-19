@@ -44,7 +44,8 @@ export const protect = catchAsync(async (req: Request, res: Response, next: Next
 
     if (!token) return next(new AppError('Not Authorized to use this API.', 401));
 
-    const API_TOKEN = req.headers['api_token'] as string;
+    const API_TOKEN = req.headers['api-token'] as string;
+
     if (!API_TOKEN) return next(new AppError('Not Authorized to use this API.', 401));
 
     let error: AppError | null;
@@ -60,6 +61,12 @@ export const protect = catchAsync(async (req: Request, res: Response, next: Next
             error = new AppError('Not authorized to use this api, Invalid API token', 403);
     }
 
-    if (error) next(error);
+    if (error) return next(error);
+    next();
+});
+
+export const blockProd = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
+    if (ENV.NODE_ENV != 'development')
+        return next(new AppError('This route is not available.', 403));
     next();
 });

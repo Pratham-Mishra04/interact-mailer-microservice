@@ -43,7 +43,7 @@ const Nodemailer = async (config: NodemailerConfig): Promise<void> => {
 
     mailOptions.html = config.paramFunc(mailOptions.html);
 
-    transporter
+    await transporter
         .sendMail(mailOptions)
         .then(() => {
             //TODO log mail request from which service and other details

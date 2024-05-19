@@ -43,7 +43,7 @@ const logger = {
     },
 };
 
-export const createAdminJWT = () => {
+const createAdminJWT = () => {
     const token = jwt.sign(
         { sub: 'mailer', crt: new Date(), exp: new Date(Date.now() + JWT.SHORT_ACCESS_TOKEN_TTL) },
         ENV.JWT_KEY,

@@ -2,10 +2,11 @@ Types:
 
 1-10 -> Sides
 -1:Early Access
-0:Account Verification
+0:Account Verification (OTP)
 1:Welcome
-2:OTP Verification
-3:Account Deactivating OTP
+2:OTP Verification (OTP)
+3:Account Deactivating OTP (OTP)
+4:Forgot Password (OTP)
 
 
 10-30 -> Main
