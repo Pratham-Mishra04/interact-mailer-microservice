@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable no-unused-vars */
 import { NextFunction, Request, Response } from 'express';
 import { AttachmentLike } from 'nodemailer/lib/mailer';
 import { Readable } from 'nodemailer/lib/xoauth2';
@@ -73,7 +75,6 @@ const getSubjectFromType = (type: number): string => {
 const getParamFuncFromReq = (
     req: Request
 ): ((
-    // eslint-disable-next-line no-unused-vars
     html: string | Readable | Buffer | AttachmentLike | undefined
 ) => string | Readable | Buffer | AttachmentLike | undefined) => {
     const user: User = req.body.user;
@@ -122,13 +123,9 @@ export const sendMail = catchAsync(async (req: Request, res: Response, next: Nex
         subject: getSubjectFromType(req.body.type),
         templateName: getTemplateNameFromType(req.body.type),
         paramFunc: getParamFuncFromReq(req),
-    })
-        .then(() => {
-            res.status(200).json({
-                status: 'success',
-            });
-        })
-        .catch(err => {
-            next(err);
-        });
+    });
+
+    res.status(200).json({
+        status: 'success',
+    });
 });

@@ -4,6 +4,7 @@ import { AttachmentLike } from 'nodemailer/lib/mailer';
 import { Readable } from 'nodemailer/lib/xoauth2';
 import * as path from 'path';
 import { ENV } from '../config/env';
+import * as MAILER_CONFIG from '../config/mailer';
 import logger from '../utils/logger';
 
 interface NodemailerConfig {
@@ -11,16 +12,15 @@ interface NodemailerConfig {
     subject: string;
     templateName: string;
     paramFunc: (
+        // eslint-disable-next-line no-unused-vars
         html: string | Buffer | Readable | AttachmentLike | undefined
     ) => string | Buffer | Readable | AttachmentLike | undefined;
 }
 
-const templatePath = 'templates/';
-
 const Nodemailer = async (config: NodemailerConfig): Promise<void> => {
     const transporter = nodemailer.createTransport({
-        service: 'Gmail',
-        host: 'smtp.gmail.com',
+        service: MAILER_CONFIG.SERVICE,
+        host: MAILER_CONFIG.HOST,
         secure: true,
         auth: {
             user: ENV.MAIL_USER,
@@ -30,13 +30,13 @@ const Nodemailer = async (config: NodemailerConfig): Promise<void> => {
 
     const mailOptions: nodemailer.SendMailOptions = {
         from: {
-            name: 'Interact',
+            name: MAILER_CONFIG.SENDER_NAME,
             address: ENV.MAIL_USER,
         },
         to: config.email,
         subject: config.subject,
         html: fs.readFileSync(
-            path.resolve(__dirname, '../' + templatePath + config.templateName),
+            path.resolve(__dirname, '../' + MAILER_CONFIG.TEMPLATE_PATH + config.templateName),
             'utf8'
         ),
     };
