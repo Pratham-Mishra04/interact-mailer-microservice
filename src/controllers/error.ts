@@ -56,7 +56,6 @@ const ErrorController = (error: Error, req: Request, res: Response, next: NextFu
         if (err?.isJoi) error = JoiErrorHandler(error);
 
         if (error.isOperationError) {
-            console.log(error);
             res.status(error.statusCode).json({
                 status: error.status,
                 message: error.message,
