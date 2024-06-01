@@ -115,7 +115,8 @@ const getParamFuncFromReq = (
 };
 
 export const sendMail = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
-    if (!req.body.type) return next(new AppError('Email Type Not Defined', 400));
+    const emailType: number | undefined = req.body.type;
+    if (emailType == undefined) return next(new AppError('Email Type Not Defined', 400));
     if (!req.body.email) return next(new AppError('Email Destination Not Defined', 400));
 
     await Nodemailer({
