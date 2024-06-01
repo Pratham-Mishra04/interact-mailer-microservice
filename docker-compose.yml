@@ -9,8 +9,6 @@ services:
     restart: always
     ports:
       - 8008:${PORT}
-    depends_on:
-      - mongo
     env_file:
       - .env
     volumes:

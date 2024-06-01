@@ -23,6 +23,6 @@ COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/package*.json ./
 COPY --from=builder /app/dist ./dist
 
-EXPOSE 8000
+EXPOSE 8008
 
 CMD [ "npm", "run", "start" ]
