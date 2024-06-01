@@ -48,7 +48,7 @@ const ErrorController = (error: Error, req: Request, res: Response, next: NextFu
             stack: err.stack,
         });
     } else if (ENV.NODE_ENV === 'production') {
-        let error = { ...err };
+        let error = { ...err, message: err.message, name: err.name };
         if (err?.name === 'CastError') error = CastErrorHandler(error);
         if (err?.code === 11000) error = DuplicateErrorHandler(error);
         if (err?.name === 'JsonWebTokenError') error = JWTErrorHandler(error, 'invalid');
@@ -56,12 +56,13 @@ const ErrorController = (error: Error, req: Request, res: Response, next: NextFu
         if (err?.isJoi) error = JoiErrorHandler(error);
 
         if (error.isOperationError) {
+            console.log(error);
             res.status(error.statusCode).json({
                 status: error.status,
                 message: error.message,
             });
         } else {
-            logger.error(error.message, req.path, err);
+            logger.error(error.message, req.path, error);
             res.status(500).json({
                 status: 'error',
                 message: 'Internal Server Error',

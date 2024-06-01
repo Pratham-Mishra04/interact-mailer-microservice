@@ -37,3 +37,9 @@ Types:
 74:Revoked Event Flag
 75:Revoked Announcement Flag
 76:Revoked Poll Flag
+
+
+
+TODOs:
+
+Successfully applied for an opening
