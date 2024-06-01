@@ -89,7 +89,7 @@ const getParamFuncFromReq = (
     const poll: Poll | undefined = req.body.poll;
     const otp: string | undefined = req.body.otp;
 
-    const type = req.body.type || -1;
+    const type: number = req.body.type;
 
     return html => {
         const parameterizedHTML = html
