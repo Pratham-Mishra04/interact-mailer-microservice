@@ -53,9 +53,11 @@ export const protect = catchAsync(async (req: Request, res: Response, next: Next
     switch (API_TOKEN) {
         case ENV.BACKEND_TOKEN:
             error = await verifyToken(token, ENV.BACKEND_SECRET, 'backend');
+            req.service = 'backend';
             break;
         case ENV.ADMIN_TOKEN:
             error = await verifyToken(token, ENV.ADMIN_SECRET, 'admin');
+            req.service = 'admin';
             break;
         default:
             error = new AppError('Not authorized to use this api, Invalid API token', 403);

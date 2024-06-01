@@ -1,7 +1,6 @@
 import * as jwt from 'jsonwebtoken';
 import * as winston from 'winston';
 import { ENV } from '../config/env';
-import JWT from '../config/jwt';
 
 const formatConfig = winston.format.combine(
     winston.format.timestamp({
@@ -29,9 +28,9 @@ const infoLogger = createLog('info', 'info');
 const warnLogger = createLog('warn', 'warn');
 
 const logger = {
-    info: (message: string, path: string, error: Error | null) => {
+    info: (message: string, path: string, description?: string, error?: Error) => {
         infoLogger.info(message, path, error);
-        logToAdminLogger('info', message, error?.message, path);
+        logToAdminLogger('info', message, description || error?.message || '', path);
     },
     error: (message: string, path: string, error: Error) => {
         errorLogger.error(message, path, error);
@@ -45,11 +44,12 @@ const logger = {
 
 const createAdminJWT = () => {
     const token = jwt.sign(
-        { sub: 'mailer', crt: new Date(), exp: new Date(Date.now() + JWT.SHORT_ACCESS_TOKEN_TTL) },
-        ENV.JWT_KEY,
         {
-            expiresIn: JWT.SHORT_ACCESS_TOKEN_TTL,
-        }
+            sub: 'mailer',
+            crt: new Date(),
+        },
+        ENV.LOGGER_SECRET,
+        { expiresIn: '1 min' }
     );
     return token;
 };
@@ -68,16 +68,25 @@ const logToAdminLogger = (level: string, title: string, description: string, pat
     const headers = {
         'Content-Type': 'application/json',
         Authorization: 'Bearer ' + jwt,
-        'API-TOKEN': ENV.LOGGER_TOKEN,
+        'api-token': ENV.LOGGER_TOKEN,
     };
 
     fetch(ENV.LOGGER_URL, {
         method: 'POST',
         body: JSON.stringify(logEntry),
         headers,
-    }).catch(err => {
-        errorLogger.error('Error Adding to Admin Logger', 'LogToAdminLogger', err);
-    });
+    })
+        .then(res => {
+            if (res.status != 200)
+                errorLogger.error(
+                    'Error Adding to Admin Logger',
+                    'LogToAdminLogger',
+                    res.statusText
+                );
+        })
+        .catch(err => {
+            errorLogger.error('Error Adding to Admin Logger', 'LogToAdminLogger', err);
+        });
 };
 
 export default logger;

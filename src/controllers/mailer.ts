@@ -123,6 +123,7 @@ export const sendMail = catchAsync(async (req: Request, res: Response, next: Nex
         subject: getSubjectFromType(req.body.type),
         templateName: getTemplateNameFromType(req.body.type),
         paramFunc: getParamFuncFromReq(req),
+        service: req.service,
     });
 
     res.status(200).json({

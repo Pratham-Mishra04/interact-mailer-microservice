@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import * as fs from 'fs';
 import * as nodemailer from 'nodemailer';
 import { AttachmentLike } from 'nodemailer/lib/mailer';
@@ -12,9 +13,9 @@ interface NodemailerConfig {
     subject: string;
     templateName: string;
     paramFunc: (
-        // eslint-disable-next-line no-unused-vars
         html: string | Buffer | Readable | AttachmentLike | undefined
     ) => string | Buffer | Readable | AttachmentLike | undefined;
+    service: string;
 }
 
 const Nodemailer = async (config: NodemailerConfig): Promise<void> => {
@@ -45,12 +46,9 @@ const Nodemailer = async (config: NodemailerConfig): Promise<void> => {
 
     await transporter
         .sendMail(mailOptions)
-        .then(() => {
-            //TODO log mail request from which service and other details
-        })
-        .catch(err => {
-            logger.error('Error while sending mail', 'Nodemailer', err);
-        });
+        .then(() =>
+            logger.info(`mailer triggered by ${config.service}`, 'node_mailer', config.subject)
+        );
 };
 
 export default Nodemailer;
