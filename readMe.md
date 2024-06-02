@@ -1,7 +1,7 @@
 Types:
 
 1-10 -> Sides
--1:Early Access
+-1:Early Access 
 0:Account Verification (OTP)
 1:Welcome
 2:OTP Verification (OTP)
