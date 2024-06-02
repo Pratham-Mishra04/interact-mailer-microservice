@@ -109,48 +109,52 @@ const getParamFuncFromReq = (
                 return parameterizedHTML?.replace(
                     '{{SecondaryUser.Name}}',
                     secondaryUser?.name || ''
+                );
             case 20:
             case 21:
             case 22:
             case 50:
                 return parameterizedHTML
                     ?.replace('{{Comment.Content}}', comment.content || '')
-                    .replace('{{Comment.Id}}', comment.id || '')
+                    .replace('{{Comment.Id}}', comment.id || '');
             case 51:
                 return parameterizedHTML?.replace('{{Post.Title}}', post.content || '');
             case 52:
                 return parameterizedHTML?.replace('{{Project.Name}}', project.title || '');
             case 53:
-                return parameterizedHTML?.replace('{{Opening.Title}}', opening.title || '')
+                return parameterizedHTML
+                    ?.replace('{{Opening.Title}}', opening.title || '')
                     .replace('{{Opening.Description}}', opening.description || '');
             case 54:
-                return parameterizedHTML?.replace('{{Event.Title}}', event.title || '')
+                return parameterizedHTML
+                    ?.replace('{{Event.Title}}', event.title || '')
                     .replace('{{Event.Description}}', event.description || '');
             case 55:
-                return parameterizedHTML?.replace('{{Announcement.Title}}', announcement.title || '')
-                    .replace('{{Announcement.Content}}', announcement.content || '');    
+                return parameterizedHTML
+                    ?.replace('{{Announcement.Title}}', announcement.title || '')
+                    .replace('{{Announcement.Content}}', announcement.content || '');
             case 56:
                 return parameterizedHTML?.replace('{{Poll.Title}}', poll.title || '');
             case 70:
-                return parameterizedHTML?.replace('{{Comment.Content}}', comment.content || '')
+                return parameterizedHTML?.replace('{{Comment.Content}}', comment.content || '');
             case 71:
-                return parameterizedHTML?.replace('{{Post.Content}}', post.content || '')
+                return parameterizedHTML?.replace('{{Post.Content}}', post.content || '');
             case 72:
-                return parameterizedHTML?.replace('{{Project.Title}}', project.title || '')
+                return parameterizedHTML?.replace('{{Project.Title}}', project.title || '');
             case 73:
                 return parameterizedHTML
                     ?.replace('{{Opening.Title}}', opening.title || '')
-                    .replace('{{Opening.Description}}', opening.description || '')
+                    .replace('{{Opening.Description}}', opening.description || '');
             case 74:
                 return parameterizedHTML
                     ?.replace('{{Event.Title}}', event.title || '')
-                    .replace('{{Event.Description}}', event.description || '')
+                    .replace('{{Event.Description}}', event.description || '');
             case 75:
                 return parameterizedHTML
                     ?.replace('{{Announcement.Title}}', announcement.title || '')
-                    .replace('{{Announcement.Content}}', announcement.content || '')
+                    .replace('{{Announcement.Content}}', announcement.content || '');
             case 76:
-                return parameterizedHTML.replace('{{Poll.Title}}', poll.title || '')
+                return parameterizedHTML.replace('{{Poll.Title}}', poll.title || '');
             default:
                 return parameterizedHTML;
         }
