@@ -46,5 +46,13 @@ Types:
 76:Revoked Poll Flag
 
 
+100-120 -> Flagged Items Deleted
+70:Deleted Flagged Comment
+71:Deleted Flagged Post
+72:Deleted Flagged Project
+73:Deleted Flagged Opening
+74:Deleted Flagged Event
+75:Deleted Flagged Announcement
+76:Deleted Flagged Flag
 
 TODOs:
