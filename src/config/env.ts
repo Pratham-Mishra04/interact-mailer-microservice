@@ -40,7 +40,7 @@ const configENV = () => {
     Object.keys(ENV).forEach(envKey => {
         const key = envKey;
         const val = process.env[key];
-
+        
         if (val === undefined) {
             console.error(`Fatal Error: Missing required environment variable: ${key}`);
             process.exit();

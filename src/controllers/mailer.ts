@@ -24,6 +24,8 @@ const getSubjectFromType = (type: number): string => {
             return 'Your One-Time Password (OTP) for Interact';
         case 3:
             return 'Confirm Account Deactivation on Interact';
+        case 4:
+            return 'Your One-Time Password (OTP) for Password Reset on Interact';
         case 10:
             return 'New Chat Request on Interact';
 
@@ -107,23 +109,48 @@ const getParamFuncFromReq = (
                 return parameterizedHTML?.replace(
                     '{{SecondaryUser.Name}}',
                     secondaryUser?.name || ''
-                );
-                case 50:
-                case 51:
-                    return parameterizedHTML?.replace('{{Post.Title}}', post.content || '');
-                case 52:
-                    return parameterizedHTML?.replace('{{Project.Name}}', project.title || '');
-                case 53:
-                    return parameterizedHTML?.replace('{{Opening.Title}}', opening.title || '')
+            case 20:
+            case 21:
+            case 22:
+            case 50:
+                return parameterizedHTML
+                    ?.replace('{{Comment.Content}}', comment.content || '')
+                    .replace('{{Comment.Id}}', comment.id || '')
+            case 51:
+                return parameterizedHTML?.replace('{{Post.Title}}', post.content || '');
+            case 52:
+                return parameterizedHTML?.replace('{{Project.Name}}', project.title || '');
+            case 53:
+                return parameterizedHTML?.replace('{{Opening.Title}}', opening.title || '')
                     .replace('{{Opening.Description}}', opening.description || '');
-                case 54:
-                    return parameterizedHTML?.replace('{{Event.Title}}', event.title || '')
+            case 54:
+                return parameterizedHTML?.replace('{{Event.Title}}', event.title || '')
                     .replace('{{Event.Description}}', event.description || '');
-                case 55:
-                    return parameterizedHTML?.replace('{{Announcement.Title}}', announcement.title || '')
+            case 55:
+                return parameterizedHTML?.replace('{{Announcement.Title}}', announcement.title || '')
                     .replace('{{Announcement.Content}}', announcement.content || '');    
-                case 56:
-                    return parameterizedHTML?.replace('{{Poll.Title}}', poll.title || '');
+            case 56:
+                return parameterizedHTML?.replace('{{Poll.Title}}', poll.title || '');
+            case 70:
+                return parameterizedHTML?.replace('{{Comment.Content}}', comment.content || '')
+            case 71:
+                return parameterizedHTML?.replace('{{Post.Content}}', post.content || '')
+            case 72:
+                return parameterizedHTML?.replace('{{Project.Title}}', project.title || '')
+            case 73:
+                return parameterizedHTML
+                    ?.replace('{{Opening.Title}}', opening.title || '')
+                    .replace('{{Opening.Description}}', opening.description || '')
+            case 74:
+                return parameterizedHTML
+                    ?.replace('{{Event.Title}}', event.title || '')
+                    .replace('{{Event.Description}}', event.description || '')
+            case 75:
+                return parameterizedHTML
+                    ?.replace('{{Announcement.Title}}', announcement.title || '')
+                    .replace('{{Announcement.Content}}', announcement.content || '')
+            case 76:
+                return parameterizedHTML.replace('{{Poll.Title}}', poll.title || '')
             default:
                 return parameterizedHTML;
         }
