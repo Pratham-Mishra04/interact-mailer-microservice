@@ -108,6 +108,22 @@ const getParamFuncFromReq = (
                     '{{SecondaryUser.Name}}',
                     secondaryUser?.name || ''
                 );
+                case 50:
+                case 51:
+                    return parameterizedHTML?.replace('{{Post.Title}}', post.content || '');
+                case 52:
+                    return parameterizedHTML?.replace('{{Project.Name}}', project.title || '');
+                case 53:
+                    return parameterizedHTML?.replace('{{Opening.Title}}', opening.title || '')
+                    .replace('{{Opening.Description}}', opening.description || '');
+                case 54:
+                    return parameterizedHTML?.replace('{{Event.Title}}', event.title || '')
+                    .replace('{{Event.Description}}', event.description || '');
+                case 55:
+                    return parameterizedHTML?.replace('{{Announcement.Title}}', announcement.title || '')
+                    .replace('{{Announcement.Content}}', announcement.content || '');        
+                case 56:
+                    return parameterizedHTML?.replace('{{Poll.Title}}', poll.title || '');
             default:
                 return parameterizedHTML;
         }
