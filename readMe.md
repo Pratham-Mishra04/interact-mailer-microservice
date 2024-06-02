@@ -11,6 +11,13 @@ Types:
 
 10-30 -> Main
 10:New Chat Request (SecondaryUser.Name)
+11:You have x impressions on your post/project/event! (x is a variable)
+12:Successfully Submitted Application for Opening
+13:Opening Application got Accepted!
+14:Opening Application got Rejected!
+15:You have a new Project Invitation
+16:You have a new Organisation Invitation
+17:You have a new Group Chat Invitation
 
 
 30-40 -> Engagement
@@ -29,7 +36,7 @@ Types:
 56:Flagged Poll
 
 
-70-80 -> Flags Revoked
+70-90 -> Flags Revoked
 70:Revoked Comment Flag
 71:Revoked Post Flag
 72:Revoked Project Flag
@@ -41,5 +48,3 @@ Types:
 
 
 TODOs:
-
-Successfully applied for an opening
