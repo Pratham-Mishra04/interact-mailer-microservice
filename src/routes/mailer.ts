@@ -8,4 +8,4 @@ const Router = express.Router();
 Router.post('/api', protect, sendMail);
 Router.get('/token', blockProd, createSendToken);
 
-export default Router
+export default Router;
