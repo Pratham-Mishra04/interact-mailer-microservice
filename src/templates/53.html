@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⚠️ Your Account Requires Attention | Interact</title>
+</head>
+<body style="font-family: 'Arial', sans-serif; line-height: 1.6; color: #333; background-color: #f4f4f4; margin: 0; padding: 48px;">
+    <div style="max-width: 720px; margin: 20px auto; padding: 20px; background-color: #fff; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+        <h1 style="color: #333;">⚠️ Your Account Requires Attention</h1>
+        <h3 style="margin-bottom: 20px;">Hello {{User.Name}},</h3>
+        <p style="margin-bottom: 20px;">We've detected some unusual activity on your Interact account and require your attention to ensure its security.</p>
+        <div style="padding: 15px; background-color: #f4f4f4; border-radius: 5px; margin-bottom: 20px;">
+            <h2 style="color: #333; font-size: 16px;">Flagged Opening:</h2>
+            <p style="font-weight: bold;">{{Opening.Title}}</p>
+            <p style="font-weight: bold;">{{Opening.Description}}</p>
+        </div>
+        <p style="margin-bottom: 20px;">**What to do:**</p>
+        <ul style="margin-bottom: 20px; list-style: disc; padding-left: 15px;">
+            <li>**Review your recent login activity:**  Check your account settings to see a record of recent logins. If you see any unrecognized locations or devices, it's important to take action.</li>
+            <li>**Change your password:**  We highly recommend creating a strong, unique password for your Interact account. A strong password is at least 12 characters long and includes a combination of uppercase and lowercase letters, numbers, and symbols.</li>
+        </ul>
+        <p style="margin-bottom: 20px;">We take the security of your account very seriously. By taking these steps, you can help keep your information safe.</p>
+        <div style="margin-top: 20px;">
+            <div>Best regards,</div>
+            <div>The Interact Team</div>
+        </div>
+    </div>
+</body>
+</html>
