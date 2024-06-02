@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flagged Comment Notification | Interact</title>
+</head>
+<body style="font-family: 'Arial', sans-serif; line-height: 1.6; color: #333; background-color: #f4f4f4; margin: 0; padding: 48px;">
+    <div style="max-width: 720px; margin: 20px auto; padding: 20px; background-color: #fff; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+        <h1 style="color: #333;">🚩 Your Comment Has Been Flagged</h1>
+        <h3 style="margin-bottom: 20px;">Hello {{User.Name}},</h3>
+        <p style="margin-bottom: 20px;">We wanted to inform you that one of your comments has been flagged by a member of the Interact community.</p>
+        
+        <div style="padding: 15px; background-color: #f4f4f4; border-radius: 5px; margin-bottom: 20px;">
+            <h2 style="color: #333; font-size: 16px;">Flagged Comment:</h2>
+            <p style="font-style: italic; color: #555;">"{{Comment.Content}}"</p>
+        </div>
+
+        <p style="margin-bottom: 20px;">Our moderation team will review this comment to determine if it violates our community guidelines.</p>
+        <p style="margin-bottom: 20px;">If you believe this flag was a mistake, please click the button below to appeal:</p>
+        
+        <a href="https://interactnow.in/appeal?comment={{Comment.Id}}" style="width: 50%; text-decoration: none; text-align: center; margin: auto; display: flex; padding: 1em; gap: 0.4rem; border: none; font-weight: bolder; border-radius: 10px; text-shadow: 2px 2px 3px rgb(136 0 136 / 50%); background: linear-gradient(15deg, #880088, #aa2068, #cc3f47, #de6f3d, #f09f33, #de6f3d, #cc3f47, #aa2068, #880088) no-repeat; background-size: 300%; background-position: left center; transition: background .3s ease; color: #fff;" class="button"
+        onmouseover="this.style.backgroundSize='320%'; this.style.backgroundPosition='right center';"
+        onmouseout="this.style.backgroundSize='300%'; this.style.backgroundPosition='left center';"
+        >
+            Appeal Comment Flag
+        </a>
+
+        <p style="margin-bottom: 20px;">We take community guidelines seriously to ensure a safe and respectful environment for all members.</p>
+        <p style="margin-bottom: 20px;">If you have any questions or need assistance, feel free to reply to this email.</p>
+        
+        <div style="margin-top: 20px;">
+            <div>Best regards,</div>
+            <div>The Interact Team</div>
+        </div>
+    </div>
+</body>
+</html>

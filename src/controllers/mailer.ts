@@ -24,6 +24,8 @@ const getSubjectFromType = (type: number): string => {
             return 'Your One-Time Password (OTP) for Interact';
         case 3:
             return 'Confirm Account Deactivation on Interact';
+        case 4:
+            return 'Your One-Time Password (OTP) for Password Reset on Interact';
         case 10:
             return 'New Chat Request on Interact';
 
@@ -108,6 +110,40 @@ const getParamFuncFromReq = (
                     '{{SecondaryUser.Name}}',
                     secondaryUser?.name || ''
                 );
+
+            case 20:
+            case 21:
+            case 22:
+            case 50:
+                return parameterizedHTML
+                    ?.replace('{{Comment.Content}}', comment.content || '')
+                    .replace('{{Comment.Id}}', comment.id || '')
+            case 51:
+            case 52:
+            case 53:
+            case 54:
+            case 55:
+            case 56:
+            case 70:
+                return parameterizedHTML?.replace('{{Comment.Content}}', comment.content || '')
+            case 71:
+                return parameterizedHTML?.replace('{{Post.Content}}', post.content || '')
+            case 72:
+                return parameterizedHTML?.replace('{{Project.Title}}', project.title || '')
+            case 73:
+                return parameterizedHTML
+                    ?.replace('{{Opening.Title}}', opening.title || '')
+                    .replace('{{Opening.Description}}', opening.description || '')
+            case 74:
+                return parameterizedHTML
+                    ?.replace('{{Event.Title}}', event.title || '')
+                    .replace('{{Event.Description}}', event.description || '')
+            case 75:
+                return parameterizedHTML
+                    ?.replace('{{Announcement.Title}}', announcement.title || '')
+                    .replace('{{Announcement.Content}}', announcement.content || '')
+            case 76:
+                return parameterizedHTML.replace('{{Poll.Title}}', poll.title || '')
             default:
                 return parameterizedHTML;
         }
