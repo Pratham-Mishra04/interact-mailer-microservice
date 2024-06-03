@@ -6,7 +6,7 @@ import { Readable } from 'nodemailer/lib/xoauth2';
 import AppError from '../helpers/app_error';
 import catchAsync from '../helpers/catch_async';
 import Nodemailer from '../mailers/nodemailer';
-import { Announcement, Comment, Event, Opening, Poll, Post, Project, User } from '../types/index';
+import { Announcement, Comment, Event, GroupChat, Opening, Organization, Poll, Post, Project, User, } from '../types/index';
 
 const getTemplateNameFromType = (type: number): string => {
     return `${type}.html`;
@@ -28,6 +28,20 @@ const getSubjectFromType = (type: number): string => {
             return 'Your One-Time Password (OTP) for Password Reset on Interact';
         case 10:
             return 'New Chat Request on Interact';
+        case 11:
+                return 'Impressions on your post/project/event';
+        case 12:
+                return 'Successfully Submitted Application for Opening';
+        case 13:
+                return 'Opening Application got Accepted';
+        case 14:
+                return 'Opening Application got Rejected';
+        case 15:
+                return 'You have a new Project Invitation';
+        case 16:
+                return 'You have a new Organisation Invitation ';
+        case 17:
+                return 'You have a new Group Chat Invitation';
 
         // Engagement Section (20-22)
         case 20:
@@ -81,7 +95,8 @@ const getParamFuncFromReq = (
 ) => string | Readable | Buffer | AttachmentLike | undefined) => {
     const user: User = req.body.user;
     const secondaryUser: User | undefined = req.body.secondaryUser;
-
+    const organization: Organization | undefined = req.body.organization;
+    const groupchat: GroupChat | undefined = req.body.groupchat;
     const comment: Comment | undefined = req.body.comment;
     const post: Post | undefined = req.body.post;
     const project: Project | undefined = req.body.project;
@@ -110,6 +125,33 @@ const getParamFuncFromReq = (
                     '{{SecondaryUser.Name}}',
                     secondaryUser?.name || ''
                 );
+            case 11:
+                return parameterizedHTML
+                    ?.replace('{{User.noImpressions}}', `${user.noImpressions || 0}`)  
+                    ?.replace('{{Post.noImpressions}}', `${post.noImpressions || 0}`)
+                    ?.replace('{{Project.noImpressions}}', `${project.noImpressions || 0}`)
+                    ?.replace('{{Opening.noImpressions}}', `${opening.noImpressions || 0}`)
+                    ?.replace('{{Event.noImpressions}}', `${event.noImpressions || 0}`);
+
+            case 12:
+            case 13:
+            case 14:
+            case 15:
+                return parameterizedHTML?.replace(
+                    '{{SecondaryUser.Name}}',
+                    secondaryUser?.name || '')
+                    .replace('{{Project.Description}}', project.description || '');
+
+            case 16:
+                return parameterizedHTML?.replace(
+                    '{{Organization.title}}',
+                    organization.title || '');
+            case 17:
+                return parameterizedHTML?.replace(
+                    '{{GroupChat.title}}',
+                    groupchat.title || '')
+                    .replace('{{GroupChat.description}}', groupchat.description || '');
+
             case 20:
             case 21:
             case 22:

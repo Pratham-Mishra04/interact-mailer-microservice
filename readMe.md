@@ -11,13 +11,13 @@ Types:
 
 10-30 -> Main
 10:New Chat Request (SecondaryUser.Name)
-11:You have x impressions on your post/project/event! (x is a variable)
-12:Successfully Submitted Application for Opening
+11:You have x impressions on your post/project/event! (User.noImpressions, Post.noImpressions, Project.noImpressions, Opening.noImpressions, Event.noImpressions)
+12:Successfully Submitted Application for Opening 
 13:Opening Application got Accepted!
 14:Opening Application got Rejected!
-15:You have a new Project Invitation
-16:You have a new Organisation Invitation
-17:You have a new Group Chat Invitation
+15:You have a new Project Invitation (SecondaryUser.Name), (Project.Description)
+16:You have a new Organisation Invitation (Organization.title)
+17:You have a new Group Chat Invitation (GroupChat.title)
 
 
 30-40 -> Engagement
@@ -28,12 +28,12 @@ Types:
 
 50-70 -> Flags
 50:Flagged Comment
-51:Flagged Post
-52:Flagged Project
-53:Flagged Opening
-54:Flagged Event
-55:Flagged Announcement
-56:Flagged Poll
+51:Flagged Post (Post.Title)
+52:Flagged Project (Project.Name)
+53:Flagged Opening (Opening.Title), (Opening.Description)
+54:Flagged Event (Event.Title)
+55:Flagged Announcement (Announcement.Title)
+56:Flagged Poll (Poll.Title)
 
 
 70-90 -> Flags Revoked
