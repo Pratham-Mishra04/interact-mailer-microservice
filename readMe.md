@@ -47,12 +47,12 @@ Types:
 
 
 100-120 -> Flagged Items Deleted
-70:Deleted Flagged Comment
-71:Deleted Flagged Post
-72:Deleted Flagged Project
-73:Deleted Flagged Opening
-74:Deleted Flagged Event
-75:Deleted Flagged Announcement
-76:Deleted Flagged Flag
+100:Deleted Flagged Comment
+101:Deleted Flagged Post
+102:Deleted Flagged Project
+103:Deleted Flagged Opening
+104:Deleted Flagged Event
+105:Deleted Flagged Announcement
+106:Deleted Flagged Flag
 
 TODOs:
