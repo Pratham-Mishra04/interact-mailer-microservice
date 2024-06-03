@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flagged Event Deleted | Interact</title>
+</head>
+<body style="font-family: 'Arial', sans-serif; line-height: 1.6; color: #333; background-color: #f4f4f4; margin: 0; padding: 48px;">
+    <div style="max-width: 720px; margin: 20px auto; padding: 20px; background-color: #fff; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+        <h1 style="color: #333;">🚩 Event Deleted</h1>
+        <h3 style="margin-bottom: 20px;">Hello {{User.Name}},</h3>
+        <p style="margin-bottom: 20px;">We wanted to inform you that your event has been reviewed and deleted for violating our community guidelines.</p>
+        
+        <div style="padding: 15px; background-color: #f4f4f4; border-radius: 5px; margin-bottom: 20px;">
+            <h2 style="color: #333; font-size: 16px;">Deleted Event:</h2>
+            <p style="font-style: italic; color: #555;">Event Title: {{Event.Title}}</p>
+            <p style="color: #555;">Description: {{Event.Description}}</p>
+        </div>
+
+        <p style="margin-bottom: 20px;">Please ensure that future events adhere to our community guidelines to avoid further actions.</p>
+        <p style="margin-bottom: 20px;">If you have any questions or need further clarification, please feel free to reply to this email.</p>
+        
+        <div style="margin-top: 20px;">
+            <div>Best regards,</div>
+            <div>The Interact Team</div>
+        </div>
+    </div>
+</body>
+</html>

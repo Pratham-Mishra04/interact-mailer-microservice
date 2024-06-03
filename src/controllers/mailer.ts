@@ -68,6 +68,20 @@ const getSubjectFromType = (type: number): string => {
             return 'Announcement Flag Resolved on Interact';
         case 76:
             return 'Poll Flag Resolved on Interact';
+        case 100:
+            return 'Flagged Comment Deleted on Interact';
+        case 101:
+            return 'Flagged Post Deleted on Interact';
+        case 102:
+            return 'Flagged Project Deleted on Interact';
+        case 103:
+            return 'Flagged Opening Deleted on Interact';
+        case 104:
+            return 'Flagged Event Deleted on Interact';
+        case 105:
+            return 'Flagged Announcement Deleted on Interact';
+        case 106:
+            return 'Flagged Flag Deleted on Interact'
 
         default:
             return '';
@@ -154,7 +168,27 @@ const getParamFuncFromReq = (
                     ?.replace('{{Announcement.Title}}', announcement.title || '')
                     .replace('{{Announcement.Content}}', announcement.content || '');
             case 76:
-                return parameterizedHTML.replace('{{Poll.Title}}', poll.title || '');
+                return parameterizedHTML?.replace('{{Poll.Title}}', poll.title || '');
+            case 100:
+                return parameterizedHTML?.replace('{{Comment.Content}}', comment.content);
+            case 101:
+                return parameterizedHTML?.replace('{{Post.Content}}', post.content || '');
+            case 102:
+                return parameterizedHTML?.replace('{{Project.Title}}', project.title || '');
+            case 103:
+                return parameterizedHTML
+                    ?.replace('{{Opeing.Title}}', opening.title || '')
+                    .replace('{{Opening.Description}}', opening.description || '');
+            case 104:
+                return parameterizedHTML
+                    ?.replace('{{Event.Title}}', event.title || '')
+                    .replace('{{Event.Description}}', event.description || '');
+            case 105:
+                return parameterizedHTML
+                    ?.replace('{{Announcement.Title}}', announcement.title || '')
+                    .replace('{{Announcement.Content}}', announcement.content || '');
+            case 106:
+                return parameterizedHTML?.replace('{{Poll.Title}}', poll.title || '');
             default:
                 return parameterizedHTML;
         }
