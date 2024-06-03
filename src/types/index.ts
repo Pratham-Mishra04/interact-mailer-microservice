@@ -155,3 +155,47 @@ export interface Poll {
     totalVotes: number;
     createdAt: Date;
 }
+
+export interface GroupChat {
+    id: string;
+    title: string;
+    description: string;
+    coverPic: string;
+    adminOnly: boolean;
+    userID: string;
+    user: User;
+    organizationID: string;
+    organization: Organization;
+    projectID: string;
+    project: Project;
+    invitations: Invitation[];
+    createdAt: Date;
+  }
+
+  export interface Organization {
+    id: string;
+    userID: string;
+    user: User;
+    title: string;
+    invitations: Invitation[];
+    createdAt: Date;
+  }
+
+  export interface Invitation {
+    id: string;
+    userID: string;
+    user: User;
+    projectID: string;
+    project: Project;
+    organizationID: string;
+    organization: Organization;
+    chatID: string;
+    chat: GroupChat;
+    eventID: string;
+    event: Event | null;
+    title: string;
+    status: number;
+    isRead: boolean;
+    createdAt: Date;
+  }
+  
