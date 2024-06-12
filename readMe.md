@@ -18,6 +18,11 @@ Types:
 15:You have a new Project Invitation (SecondaryUser.Name), (Project.Description)
 16:You have a new Organisation Invitation (Organization.title)
 17:You have a new Group Chat Invitation (GroupChat.title)
+18:User accepted your Project Invitation
+19:User accepted your Organisation Invitation
+20:User accepted your Group Chat Invitation
+21:You have been assigned a new task
+22:Task has been completed. (will be sent to project/org managers{multiple} when a task is completed.)
 
 
 30-40 -> Engagement
