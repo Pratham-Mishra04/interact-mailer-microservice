@@ -22,13 +22,13 @@ Types:
 19:User accepted your Organisation Invitation
 20:User accepted your Group Chat Invitation
 21:You have been assigned a new task
-22:Task has been completed. (will be sent to project/org managers{multiple} when a task is completed.)
+22:Task has been completed. (will be sent to project/org managers{multiple} when a task is completed.)  
 
 
 30-40 -> Engagement
-20:New Activities
-21:Long time so see
-22:News Letter
+30:New Activities
+31:Long time so see
+32:News Letter
 
 
 50-70 -> Flags
