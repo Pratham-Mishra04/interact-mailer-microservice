@@ -3,37 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Latest News and Updates from Interact</title>
+    <title>Task Completed | Interact</title>
 </head>
 <body style="font-family: 'Arial', sans-serif; line-height: 1.6; color: #333; background-color: #f4f4f4; margin: 0; padding: 48px;">
     <div style="max-width: 720px; margin: 20px auto; padding: 20px; background-color: #fff; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
-        <h1 style="color: #333;">📬 Interact Newsletter - June 2024</h1>
+        <h1 style="color: #333;">Task Completed</h1>
         <h3 style="margin-bottom: 20px;">Hello {{User.Name}},</h3>
-        <p style="margin-bottom: 20px;">We're excited to bring you the latest news and updates from Interact! Here's what's new this month:</p>
-        
-        <h2 style="color: #333; margin-bottom: 10px;">🔹 New Features</h2>
-        <p style="margin-bottom: 20px;">Discover our latest features designed to enhance your collaboration experience. From improved messaging capabilities to new project management tools, there's a lot to explore.</p>
-
-        <h2 style="color: #333; margin-bottom: 10px;">🔹 Community Highlights</h2>
-        <p style="margin-bottom: 20px;">Read about inspiring stories and successful collaborations within the Interact community. See how users like you are making the most of our platform.</p>
-
-        <h2 style="color: #333; margin-bottom: 10px;">🔹 Upcoming Events</h2>
-        <p style="margin-bottom: 20px;">Mark your calendar for our upcoming webinars, workshops, and community events. Connect with experts and fellow users to learn and grow together.</p>
-
-        <p style="margin-bottom: 20px;">Click the button below to read the full newsletter:</p>
-        
-        <a href="https://interactnow.in/newsletter" style="width: 50%; text-decoration: none; text-align: center; margin: auto; display: flex; padding: 1em; gap: 0.4rem; border: none; font-weight: bolder; border-radius: 10px; text-shadow: 2px 2px 3px rgb(136 0 136 / 50%); background: linear-gradient(15deg, #880088, #aa2068, #cc3f47, #de6f3d, #f09f33, #de6f3d, #cc3f47, #aa2068, #880088) no-repeat; background-size: 300%; background-position: left center; transition: background .3s ease; color: #fff;" class="button"
-        onmouseover="this.style.backgroundSize='320%'; this.style.backgroundPosition='right center';"
-        onmouseout="this.style.backgroundSize='300%'; this.style.backgroundPosition='left center';"
-        >
-            Read Newsletter
-        </a>
-        
-        <p style="margin-bottom: 20px;">Stay tuned for more updates and don't forget to check out the newsletter for all the details.</p>
-        <p style="margin-bottom: 20px;">If you have any questions or need assistance, feel free to reply to this email.</p>
+        <p style="margin-bottom: 20px;">We are pleased to inform you that the following task has been successfully completed:</p>
+        <p style="margin-bottom: 20px;">
+            <strong>Task Title:</strong> {{Task.Title}}<br>
+            <strong>Completed By:</strong> {{SecondaryUser.Name}}<br>
+        </p>
+        <p style="margin-bottom: 20px;">You can view the details and any related updates by logging into your Interact account.</p>
         <div style="margin-top: 20px;">
             <div>Best regards,</div>
-            <div>The Interact Team</div>
         </div>
     </div>
 </body>

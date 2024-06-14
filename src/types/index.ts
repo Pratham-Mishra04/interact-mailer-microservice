@@ -198,4 +198,13 @@ export interface GroupChat {
     isRead: boolean;
     createdAt: Date;
   }
+
+  export interface Task {
+    id: string;
+    title: string;
+    description: string;
+    createdAt: Date;
+    tags: string[];
+    users: User[];
+  }
   
