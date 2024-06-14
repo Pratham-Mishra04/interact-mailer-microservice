@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organisation Invitation Accepted | Interact</title>
+</head>
+<body style="font-family: 'Arial', sans-serif; line-height: 1.6; color: #333; background-color: #f4f4f4; margin: 0; padding: 48px;">
+    <div style="max-width: 720px; margin: 20px auto; padding: 20px; background-color: #fff; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+        <h1 style="color: #333;">Welcome aboard, {{User.Name}}!</h1>
+        <h3 style="margin-bottom: 20px;">Hi {{User.Name}},</h3>
+        <p style="margin-bottom: 20px;">This email confirms that you've accepted the invitation to join the Organisation<strong> {{Organisation.Title}}</strong>.</p>
+        <p style="margin-bottom: 20px;">We're thrilled to have you on board! You can now access the project workspace and collaborate with the team.</p>
+        <p style="margin-bottom: 20px;">{{SecondaryUser.Name}} invited you to join this Organisation.</p>
+        <p style="margin-bottom: 20px;">If you have any questions or need help finding your way around, feel free to reach out to {{SecondaryUser.Name}}.</p>
+        <div style="margin-top: 20px;">
+            <div>Best regards,</div>
+            <div>Interact</div>
+        </div>
+    </div>
+</body>
+</html>
