@@ -164,7 +164,7 @@ const getParamFuncFromReq = (
                     '{{Organization.title}}',
                     organization.title || '');
             case 17:
-                return parameterizedHTML?.replace(
+                parameterizedHTML?.replace(
                     '{{GroupChat.title}}',
                     groupchat.title || ''
                 )
