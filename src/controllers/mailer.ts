@@ -7,6 +7,7 @@ import AppError from '../helpers/app_error';
 import catchAsync from '../helpers/catch_async';
 import Nodemailer from '../mailers/nodemailer';
 import { Announcement, Comment, Event, GroupChat, Opening, Organization, Poll, Post, Project, Task, User, } from '../types/index';
+import logger from '../utils/logger';
 
 const getTemplateNameFromType = (type: number): string => {
     return `${type}.html`;
@@ -106,11 +107,12 @@ const getSubjectFromType = (type: number): string => {
 };
 
 const getParamFuncFromReq = (
-    req: Request
+    req: Request,
+    recipient: User
 ): ((
     html: string | Readable | Buffer | AttachmentLike | undefined
 ) => string | Readable | Buffer | AttachmentLike | undefined) => {
-    const user: User = req.body.user;
+    const user: User = recipient
     const secondaryUser: User | undefined = req.body.secondaryUser;
     const organization: Organization | undefined = req.body.organization;
     const groupchat: GroupChat | undefined = req.body.groupchat;
@@ -250,6 +252,11 @@ const getParamFuncFromReq = (
     };
 };
 
+interface Recipient {
+    email: string,
+    user: User  
+}
+
 export const sendMail = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
     const emailType: number | undefined = req.body.type;
     if (emailType == undefined) return next(new AppError('Email Type Not Defined', 400));
@@ -259,10 +266,40 @@ export const sendMail = catchAsync(async (req: Request, res: Response, next: Nex
         email: req.body.email,
         subject: getSubjectFromType(req.body.type),
         templateName: getTemplateNameFromType(req.body.type),
-        paramFunc: getParamFuncFromReq(req),
+        paramFunc: getParamFuncFromReq(req, req.body.user),
         service: req.service,
     });
 
+    res.status(200).json({
+        status: 'success',
+    });
+});
+
+export const sendMultipleMail = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
+    const emailType: number | undefined = req.body.type;
+    const recipients: Recipient[] | undefined = req.body.recipients;
+    if (emailType == undefined) return next(new AppError('Email Type Not Defined', 400));
+    if (!req.body.recipients) return next(new AppError('Recipients not defined', 400));
+
+    for (const recipient of recipients) {
+        if (!recipient.email) {
+            logger.info("Recipient email not found", "sendMultipleMail")
+            continue
+        }
+        if (!recipient.user) logger.info("Recipient not found", "sendMultipleMail")
+
+        try {
+            Nodemailer({
+                email: recipient.email,
+                subject: getSubjectFromType(emailType),
+                templateName: getTemplateNameFromType(emailType),
+                paramFunc: getParamFuncFromReq(req, recipient.user),
+                service: req.service,
+            });
+        } catch (error) {
+            logger.error(`Error sending email to ${recipient}:`, "sendMultipleMail",error);
+        }
+    }
     res.status(200).json({
         status: 'success',
     });
