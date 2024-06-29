@@ -6,7 +6,7 @@ import { Readable } from 'nodemailer/lib/xoauth2';
 import AppError from '../helpers/app_error';
 import catchAsync from '../helpers/catch_async';
 import Nodemailer from '../mailers/nodemailer';
-import { Announcement, Comment, Event, GroupChat, Opening, Organization, Poll, Post, Project, User, } from '../types/index';
+import { Announcement, Comment, Event, GroupChat, Opening, Organization, Poll, Post, Project, Task, User, } from '../types/index';
 
 const getTemplateNameFromType = (type: number): string => {
     return `${type}.html`;
@@ -42,13 +42,16 @@ const getSubjectFromType = (type: number): string => {
                 return 'You have a new Organisation Invitation ';
         case 17:
                 return 'You have a new Group Chat Invitation';
-
-        // Engagement Section (20-22)
-        case 20:
-            return "Check Out What's New on Interact!";
         case 21:
-            return 'We Miss You on Interact!';
+            return 'You have been assigned a new task';
         case 22:
+            return 'Task has been completed';
+        // Engagement Section (30-40)
+        case 30:
+            return "Check Out What's New on Interact!";
+        case 31:
+            return 'We Miss You on Interact!';
+        case 32:
             return 'Our Latest News: Stay Informed on Interact!';
 
         // Flags Section (50-56)
@@ -82,6 +85,20 @@ const getSubjectFromType = (type: number): string => {
             return 'Announcement Flag Resolved on Interact';
         case 76:
             return 'Poll Flag Resolved on Interact';
+        case 100:
+            return 'Flagged Comment Deleted on Interact';
+        case 101:
+            return 'Flagged Post Deleted on Interact';
+        case 102:
+            return 'Flagged Project Deleted on Interact';
+        case 103:
+            return 'Flagged Opening Deleted on Interact';
+        case 104:
+            return 'Flagged Event Deleted on Interact';
+        case 105:
+            return 'Flagged Announcement Deleted on Interact';
+        case 106:
+            return 'Flagged Flag Deleted on Interact'
 
         default:
             return '';
@@ -105,7 +122,7 @@ const getParamFuncFromReq = (
     const announcement: Announcement | undefined = req.body.announcement;
     const poll: Poll | undefined = req.body.poll;
     const otp: string | undefined = req.body.otp;
-
+    const task: Task | undefined = req.body.task
     const type: number = req.body.type;
 
     return html => {
@@ -172,7 +189,17 @@ const getParamFuncFromReq = (
                     .replace('{{GroupChat.description}}', groupchat.description || '');
 
             case 21:
+                return parameterizedHTML
+                ?.replace('{{Task.Title}}', task.title)
+                .replace('{{Task.Description}}', task.description);
             case 22:
+                return parameterizedHTML?.replace('{{Task.Title}}', task.title || '')
+                .replace('{{SecondaryUser.Name}}', secondaryUser.name || '');
+            case 30:
+            case 31:
+                return parameterizedHTML.replace('{{User.Name}}', user.name || '');
+            case 32:
+                return parameterizedHTML
             case 50:
                 return parameterizedHTML
                     ?.replace('{{Comment.Content}}', comment.content || '')
@@ -214,7 +241,27 @@ const getParamFuncFromReq = (
                     ?.replace('{{Announcement.Title}}', announcement.title || '')
                     .replace('{{Announcement.Content}}', announcement.content || '');
             case 76:
-                return parameterizedHTML.replace('{{Poll.Title}}', poll.title || '');
+                return parameterizedHTML?.replace('{{Poll.Title}}', poll.title || '');
+            case 100:
+                return parameterizedHTML?.replace('{{Comment.Content}}', comment.content);
+            case 101:
+                return parameterizedHTML?.replace('{{Post.Content}}', post.content || '');
+            case 102:
+                return parameterizedHTML?.replace('{{Project.Title}}', project.title || '');
+            case 103:
+                return parameterizedHTML
+                    ?.replace('{{Opeing.Title}}', opening.title || '')
+                    .replace('{{Opening.Description}}', opening.description || '');
+            case 104:
+                return parameterizedHTML
+                    ?.replace('{{Event.Title}}', event.title || '')
+                    .replace('{{Event.Description}}', event.description || '');
+            case 105:
+                return parameterizedHTML
+                    ?.replace('{{Announcement.Title}}', announcement.title || '')
+                    .replace('{{Announcement.Content}}', announcement.content || '');
+            case 106:
+                return parameterizedHTML?.replace('{{Poll.Title}}', poll.title || '');
             default:
                 return parameterizedHTML;
         }

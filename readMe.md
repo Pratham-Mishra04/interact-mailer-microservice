@@ -21,6 +21,10 @@ Types:
 18:User accepted your Project Invitation (SecondaryUser.Name),(Project.Tilte), (Project.Description)
 19:User accepted your Organisation Invitation (SecondaryUser.Name),(Organisation.Tilte)
 20:User accepting your Group Chat Invitation (SecondaryUser.Name), (GroupChat.title), (GroupChat.Description)
+17:You have a new Group Chat Invitation (GroupChat.title),(GroupChat.description)
+18:User accepted your Project Invitation (SecondaryUser.Name),(Project.Tilte), (Project.Description)
+19:User accepted your Organisation Invitation (SecondaryUser.Name),(Organisation.Tilte)
+20:User accepting your Group Chat Invitation (SecondaryUser.Name), (GroupChat.title), (GroupChat.Description)
 
 
 30-40 -> Engagement
