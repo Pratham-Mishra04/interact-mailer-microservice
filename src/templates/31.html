@@ -3,20 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>You have been assigned a new task | Interact</title>
+    <title>We Miss You at Interact!</title>
 </head>
 <body style="font-family: 'Arial', sans-serif; line-height: 1.6; color: #333; background-color: #f4f4f4; margin: 0; padding: 48px;">
     <div style="max-width: 720px; margin: 20px auto; padding: 20px; background-color: #fff; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
-        <h1 style="color: #333;">New Task Assigned</h1>
+        <h1 style="color: #333;">It's Been a While, {{User.Name}}!</h1>
         <h3 style="margin-bottom: 20px;">Hello {{User.Name}},</h3>
-        <p style="margin-bottom: 20px;">A new task has been assigned to you on Interact. Please find the task details below:</p>
-        <p style="margin-bottom: 20px;">
-            <strong>Task Title:</strong> {{Task.Title}}<br>
-            <strong>Description:</strong> {{Task.Description}}
-        </p>
-        <p style="margin-bottom: 20px;">You can view and manage this task by logging into your Interact account. Please ensure that you review the task details and complete it by the specified due date.</p>
+        <p style="margin-bottom: 20px;">We've missed you at Interact and wanted to reach out to let you know about some exciting new features and opportunities waiting for you.</p>
+        <p style="margin-bottom: 20px;">Interact has grown and evolved, and we're excited to have you back. Connect with new collaborators, explore fresh ideas, and get your projects back on track.</p>
+        <p style="margin-bottom: 20px;">Click the button below to log in and see what's new:</p>
+        
+        <a href="https://interactnow.in/login" style="width: 50%; text-decoration: none; text-align: center; margin: auto; display: flex; padding: 1em; gap: 0.4rem; border: none; font-weight: bolder; border-radius: 10px; text-shadow: 2px 2px 3px rgb(136 0 136 / 50%); background: linear-gradient(15deg, #880088, #aa2068, #cc3f47, #de6f3d, #f09f33, #de6f3d, #cc3f47, #aa2068, #880088) no-repeat; background-size: 300%; background-position: left center; transition: background .3s ease; color: #fff;" class="button"
+        onmouseover="this.style.backgroundSize='320%'; this.style.backgroundPosition='right center';"
+        onmouseout="this.style.backgroundSize='300%'; this.style.backgroundPosition='left center';"
+        >
+            Log In Now
+        </a>
+        
+        <p style="margin-bottom: 20px;">Don't miss out on the latest updates and opportunities to collaborate with like-minded individuals. We can't wait to see you back on Interact!</p>
+        <p style="margin-bottom: 20px;">If you have any questions or need assistance, feel free to reply to this email.</p>
         <div style="margin-top: 20px;">
             <div>Best regards,</div>
+            <div>The Interact Team</div>
         </div>
     </div>
 </body>
