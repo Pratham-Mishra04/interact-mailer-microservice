@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Completed | Interact</title>
+</head>
+<body style="font-family: 'Arial', sans-serif; line-height: 1.6; color: #333; background-color: #f4f4f4; margin: 0; padding: 48px;">
+    <div style="max-width: 720px; margin: 20px auto; padding: 20px; background-color: #fff; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+        <h1 style="color: #333;">Task Completed</h1>
+        <h3 style="margin-bottom: 20px;">Hello {{User.Name}},</h3>
+        <p style="margin-bottom: 20px;">We are pleased to inform you that the following task has been successfully completed:</p>
+        <p style="margin-bottom: 20px;">
+            <strong>Task Title:</strong> {{Task.Title}}<br>
+            <strong>Completed By:</strong> {{SecondaryUser.Name}}<br>
+        </p>
+        <p style="margin-bottom: 20px;">You can view the details and any related updates by logging into your Interact account.</p>
+        <div style="margin-top: 20px;">
+            <div>Best regards,</div>
+        </div>
+    </div>
+</body>
+</html>
