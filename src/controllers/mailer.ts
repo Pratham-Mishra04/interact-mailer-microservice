@@ -6,7 +6,19 @@ import { Readable } from 'nodemailer/lib/xoauth2';
 import AppError from '../helpers/app_error';
 import catchAsync from '../helpers/catch_async';
 import Nodemailer from '../mailers/nodemailer';
-import { Announcement, Comment, Event, GroupChat, Opening, Organization, Poll, Post, Project, Task, User, } from '../types/index';
+import {
+    Announcement,
+    Comment,
+    Event,
+    GroupChat,
+    Opening,
+    Organization,
+    Poll,
+    Post,
+    Project,
+    Task,
+    User,
+} from '../types/index';
 import logger from '../utils/logger';
 
 const getTemplateNameFromType = (type: number): string => {
@@ -30,19 +42,19 @@ const getSubjectFromType = (type: number): string => {
         case 10:
             return 'New Chat Request on Interact';
         case 11:
-                return 'Impressions on your post/project/event';
+            return 'Impressions on your post/project/event';
         case 12:
-                return 'Successfully Submitted Application for Opening';
+            return 'Successfully Submitted Application for Opening';
         case 13:
-                return 'Opening Application got Accepted';
+            return 'Opening Application got Accepted';
         case 14:
-                return 'Opening Application got Rejected';
+            return 'Opening Application got Rejected';
         case 15:
-                return 'You have a new Project Invitation';
+            return 'You have a new Project Invitation';
         case 16:
-                return 'You have a new Organisation Invitation ';
+            return 'You have a new Organisation Invitation ';
         case 17:
-                return 'You have a new Group Chat Invitation';
+            return 'You have a new Group Chat Invitation';
         case 21:
             return 'You have been assigned a new task';
         case 22:
@@ -99,7 +111,7 @@ const getSubjectFromType = (type: number): string => {
         case 105:
             return 'Flagged Announcement Deleted on Interact';
         case 106:
-            return 'Flagged Flag Deleted on Interact'
+            return 'Flagged Flag Deleted on Interact';
 
         default:
             return '';
@@ -112,7 +124,7 @@ const getParamFuncFromReq = (
 ): ((
     html: string | Readable | Buffer | AttachmentLike | undefined
 ) => string | Readable | Buffer | AttachmentLike | undefined) => {
-    const user: User = recipient
+    const user: User = recipient;
     const secondaryUser: User | undefined = req.body.secondaryUser;
     const organization: Organization | undefined = req.body.organization;
     const groupchat: GroupChat | undefined = req.body.groupchat;
@@ -124,7 +136,7 @@ const getParamFuncFromReq = (
     const announcement: Announcement | undefined = req.body.announcement;
     const poll: Poll | undefined = req.body.poll;
     const otp: string | undefined = req.body.otp;
-    const task: Task | undefined = req.body.task
+    const task: Task | undefined = req.body.task;
     const type: number = req.body.type;
 
     return html => {
@@ -146,7 +158,7 @@ const getParamFuncFromReq = (
                 );
             case 11:
                 return parameterizedHTML
-                    ?.replace('{{User.noImpressions}}', `${user.noImpressions || 0}`)  
+                    ?.replace('{{User.noImpressions}}', `${user.noImpressions || 0}`)
                     ?.replace('{{Post.noImpressions}}', `${post.noImpressions || 0}`)
                     ?.replace('{{Project.noImpressions}}', `${project.noImpressions || 0}`)
                     ?.replace('{{Opening.noImpressions}}', `${opening.noImpressions || 0}`)
@@ -156,34 +168,34 @@ const getParamFuncFromReq = (
             case 13:
             case 14:
             case 15:
-                return parameterizedHTML?.replace(
-                    '{{SecondaryUser.Name}}',
-                    secondaryUser?.name || '')
+                return parameterizedHTML
+                    ?.replace('{{SecondaryUser.Name}}', secondaryUser?.name || '')
                     .replace('{{Project.Description}}', project.description || '');
 
             case 16:
                 return parameterizedHTML?.replace(
                     '{{Organization.title}}',
-                    organization.title || '');
+                    organization.title || ''
+                );
             case 17:
-                return parameterizedHTML?.replace(
-                    '{{GroupChat.title}}',
-                    groupchat.title || '')
+                return parameterizedHTML
+                    ?.replace('{{GroupChat.title}}', groupchat.title || '')
                     .replace('{{GroupChat.description}}', groupchat.description || '');
 
             case 20:
             case 21:
                 return parameterizedHTML
-                ?.replace('{{Task.Title}}', task.title)
-                .replace('{{Task.Description}}', task.description);
+                    ?.replace('{{Task.Title}}', task.title)
+                    .replace('{{Task.Description}}', task.description);
             case 22:
-                return parameterizedHTML?.replace('{{Task.Title}}', task.title || '')
-                .replace('{{SecondaryUser.Name}}', secondaryUser.name || '');
+                return parameterizedHTML
+                    ?.replace('{{Task.Title}}', task.title || '')
+                    .replace('{{SecondaryUser.Name}}', secondaryUser.name || '');
             case 30:
             case 31:
                 return parameterizedHTML.replace('{{User.Name}}', user.name || '');
             case 32:
-                return parameterizedHTML
+                return parameterizedHTML;
             case 50:
                 return parameterizedHTML
                     ?.replace('{{Comment.Content}}', comment.content || '')
@@ -253,8 +265,8 @@ const getParamFuncFromReq = (
 };
 
 interface Recipient {
-    email: string,
-    user: User  
+    email: string;
+    user: User;
 }
 
 export const sendMail = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
@@ -275,32 +287,34 @@ export const sendMail = catchAsync(async (req: Request, res: Response, next: Nex
     });
 });
 
-export const sendMultipleMail = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
-    const emailType: number | undefined = req.body.type;
-    const recipients: Recipient[] | undefined = req.body.recipients;
-    if (emailType == undefined) return next(new AppError('Email Type Not Defined', 400));
-    if (!req.body.recipients) return next(new AppError('Recipients not defined', 400));
+export const sendMultipleMail = catchAsync(
+    async (req: Request, res: Response, next: NextFunction) => {
+        const emailType: number | undefined = req.body.type;
+        const recipients: Recipient[] | undefined = req.body.recipients;
+        if (emailType == undefined) return next(new AppError('Email Type Not Defined', 400));
+        if (!req.body.recipients) return next(new AppError('Recipients not defined', 400));
 
-    for (const recipient of recipients) {
-        if (!recipient.email) {
-            logger.info("Recipient email not found", "sendMultipleMail")
-            continue
-        }
-        if (!recipient.user) logger.info("Recipient not found", "sendMultipleMail")
+        for (const recipient of recipients) {
+            if (!recipient.email) {
+                logger.info('Recipient email not found', 'sendMultipleMail');
+                continue;
+            }
+            if (!recipient.user) logger.info('Recipient not found', 'sendMultipleMail');
 
-        try {
-            Nodemailer({
-                email: recipient.email,
-                subject: getSubjectFromType(emailType),
-                templateName: getTemplateNameFromType(emailType),
-                paramFunc: getParamFuncFromReq(req, recipient.user),
-                service: req.service,
-            });
-        } catch (error) {
-            logger.error(`Error sending email to ${recipient}:`, "sendMultipleMail",error);
+            try {
+                Nodemailer({
+                    email: recipient.email,
+                    subject: getSubjectFromType(emailType),
+                    templateName: getTemplateNameFromType(emailType),
+                    paramFunc: getParamFuncFromReq(req, recipient.user),
+                    service: req.service,
+                });
+            } catch (error) {
+                logger.error(`Error sending email to ${recipient}:`, 'sendMultipleMail', error);
+            }
         }
+        res.status(200).json({
+            status: 'success',
+        });
     }
-    res.status(200).json({
-        status: 'success',
-    });
-});
+);
