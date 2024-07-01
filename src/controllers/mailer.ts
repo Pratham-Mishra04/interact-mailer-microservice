@@ -170,6 +170,7 @@ const getParamFuncFromReq = (
             case 15:
                 return parameterizedHTML
                     ?.replace('{{SecondaryUser.Name}}', secondaryUser?.name || '')
+                    .replace('{{Project.Title}}', project.title || '')
                     .replace('{{Project.Description}}', project.description || '');
 
             case 16:
@@ -179,10 +180,24 @@ const getParamFuncFromReq = (
                 );
             case 17:
                 return parameterizedHTML
-                    ?.replace('{{GroupChat.title}}', groupchat.title || '')
+                    ?.replace('{{SecondaryUser.Name}}', secondaryUser?.name || '')
+                    .replace('{{GroupChat.title}}', groupchat.title || '')
                     .replace('{{GroupChat.description}}', groupchat.description || '');
-
+            case 18:
+                return parameterizedHTML
+                    ?.replace('{{SecondaryUser.Name}}', secondaryUser?.name || '')
+                    .replace('{{Project.Title}}', project.title || '')
+                    .replace('{{Project.Description}}', project.description || '');
+            case 19:
+                return parameterizedHTML?.replace(
+                    '{{Organization.title}}',
+                    organization.title || ''
+                );
             case 20:
+                return parameterizedHTML
+                    ?.replace('{{SecondaryUser.Name}}', secondaryUser?.name || '')
+                    .replace('{{GroupChat.title}}', groupchat.title || '')
+                    .replace('{{GroupChat.description}}', groupchat.description || '');
             case 21:
                 return parameterizedHTML
                     ?.replace('{{Task.Title}}', task.title)
