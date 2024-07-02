@@ -18,6 +18,7 @@ import {
     Project,
     Task,
     User,
+    Meeting,
 } from '../types/index';
 import logger from '../utils/logger';
 
@@ -138,6 +139,7 @@ const getParamFuncFromReq = (
     const otp: string | undefined = req.body.otp;
     const task: Task | undefined = req.body.task;
     const type: number = req.body.type;
+    const meeting: Meeting | undefined = req.body.meeting;
 
     return html => {
         const parameterizedHTML = html
@@ -207,10 +209,26 @@ const getParamFuncFromReq = (
                     ?.replace('{{Task.Title}}', task.title || '')
                     .replace('{{SecondaryUser.Name}}', secondaryUser.name || '');
             case 30:
+                return parameterizedHTML;
             case 31:
                 return parameterizedHTML.replace('{{User.Name}}', user.name || '');
             case 32:
                 return parameterizedHTML;
+            case 33:
+                return parameterizedHTML
+                    ?.replace('{{Task.Title}}', task.title)
+                    .replace('{{Task.Description}}', task.description);
+
+                    case 34:
+                        return parameterizedHTML
+                          .replace('{{Meeting.Title}}', meeting.title || '')
+                          .replace('{{Meeting.Description}}', meeting.description || '')
+                          .replace('{{Meeting.StartTime}}', meeting.startTime ? meeting.startTime.toString() : '0')
+                          .replace('{{Meeting.EndTime}}', meeting.endTime ? meeting.endTime.toString() : '0')
+                          .replace('{{Meeting.Day}}', meeting.day || '')
+                          .replace('{{Meeting.Date}}', meeting.date ? meeting.date.toString() : '')
+                          .replace('{{Meeting.Organization.Name}}', meeting.organization ? meeting.organization.toString() : '');
+
             case 50:
                 return parameterizedHTML
                     ?.replace('{{Comment.Content}}', comment.content || '')
