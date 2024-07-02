@@ -29,6 +29,8 @@ Types:
 30:New Activities
 31:Long time so see
 32:News Letter
+33:Task due today remainder
+34:Meeting due today remainder
 
 
 50-70 -> Flags
