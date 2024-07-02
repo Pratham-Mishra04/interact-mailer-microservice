@@ -31,6 +31,7 @@ Types:
 32:News Letter
 33:Task due today remainder
 34:Meeting due today remainder
+35: Meeting Scheduled
 
 
 50-70 -> Flags
