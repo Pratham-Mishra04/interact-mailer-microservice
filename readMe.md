@@ -23,6 +23,8 @@ Types:
 20:User accepted your Group Chat Invitation
 21:You have been assigned a new task
 22:Task has been completed. (will be sent to project/org managers{multiple} when a task is completed.)  
+23: Meeting Scheduled
+
 
 
 30-40 -> Engagement
@@ -31,8 +33,6 @@ Types:
 32:News Letter
 33:Task due today remainder
 34:Meeting due today remainder
-35: Meeting Scheduled
-
 
 50-70 -> Flags
 50:Flagged Comment
