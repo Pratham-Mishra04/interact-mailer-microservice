@@ -60,6 +60,8 @@ const getSubjectFromType = (type: number): string => {
             return 'You have been assigned a new task';
         case 22:
             return 'Task has been completed';
+        case 23:
+            return 'New meeting scheduled on Interact';
         // Engagement Section (30-40)
         case 30:
             return "Check Out What's New on Interact!";
@@ -67,6 +69,10 @@ const getSubjectFromType = (type: number): string => {
             return 'We Miss You on Interact!';
         case 32:
             return 'Our Latest News: Stay Informed on Interact!';
+        case 33:
+            return 'Task due Today!'
+        case 34:
+            return 'Meeting due Today'
 
         // Flags Section (50-56)
         case 50:
@@ -208,6 +214,15 @@ const getParamFuncFromReq = (
                 return parameterizedHTML
                     ?.replace('{{Task.Title}}', task.title || '')
                     .replace('{{SecondaryUser.Name}}', secondaryUser.name || '');
+            case 23:
+                return parameterizedHTML
+                    .replace('{{Meeting.Title}}', meeting.title || '')
+                    .replace('{{Meeting.Description}}', meeting.description || '')
+                    .replace('{{Meeting.StartTime}}', meeting.startTime ? meeting.startTime.toString() : '0')
+                    .replace('{{Meeting.EndTime}}', meeting.endTime ? meeting.endTime.toString() : '0')
+                    .replace('{{Meeting.Day}}', meeting.day || '')
+                    .replace('{{Meeting.Date}}', meeting.date ? meeting.date.toString() : '')
+                    .replace('{{Meeting.Organization.Name}}', meeting.organization ? meeting.organization.toString() : '');
             case 30:
                 return parameterizedHTML;
             case 31:
@@ -219,15 +234,15 @@ const getParamFuncFromReq = (
                     ?.replace('{{Task.Title}}', task.title)
                     .replace('{{Task.Description}}', task.description);
 
-                    case 34:
-                        return parameterizedHTML
-                          .replace('{{Meeting.Title}}', meeting.title || '')
-                          .replace('{{Meeting.Description}}', meeting.description || '')
-                          .replace('{{Meeting.StartTime}}', meeting.startTime ? meeting.startTime.toString() : '0')
-                          .replace('{{Meeting.EndTime}}', meeting.endTime ? meeting.endTime.toString() : '0')
-                          .replace('{{Meeting.Day}}', meeting.day || '')
-                          .replace('{{Meeting.Date}}', meeting.date ? meeting.date.toString() : '')
-                          .replace('{{Meeting.Organization.Name}}', meeting.organization ? meeting.organization.toString() : '');
+            case 34:
+                return parameterizedHTML
+                    .replace('{{Meeting.Title}}', meeting.title || '')
+                    .replace('{{Meeting.Description}}', meeting.description || '')
+                    .replace('{{Meeting.StartTime}}', meeting.startTime ? meeting.startTime.toString() : '0')
+                    .replace('{{Meeting.EndTime}}', meeting.endTime ? meeting.endTime.toString() : '0')
+                    .replace('{{Meeting.Day}}', meeting.day || '')
+                    .replace('{{Meeting.Date}}', meeting.date ? meeting.date.toString() : '')
+                    .replace('{{Meeting.Organization.Name}}', meeting.organization ? meeting.organization.toString() : '');
 
             case 50:
                 return parameterizedHTML
