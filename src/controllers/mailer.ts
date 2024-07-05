@@ -209,6 +209,15 @@ const getParamFuncFromReq = (
                 return parameterizedHTML
                     ?.replace('{{Task.Title}}', task.title || '')
                     .replace('{{SecondaryUser.Name}}', secondaryUser.name || '');
+            case 23:
+                return parameterizedHTML
+                .replace('{{Meeting.Title}}', meeting.title || '')
+                .replace('{{Meeting.Description}}', meeting.description || '')
+                .replace('{{Meeting.StartTime}}', meeting.startTime ? meeting.startTime.toString() : '0')
+                .replace('{{Meeting.EndTime}}', meeting.endTime ? meeting.endTime.toString() : '0')
+                .replace('{{Meeting.Day}}', meeting.day || '')
+                .replace('{{Meeting.Date}}', meeting.date ? meeting.date.toString() : '')
+                .replace('{{Meeting.Organization.Name}}', meeting.organization ? meeting.organization.toString() : '');
             case 30:
                 return parameterizedHTML;
             case 31:
