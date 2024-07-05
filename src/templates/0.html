@@ -1,23 +1,49 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="ltr" lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    <meta name="x-apple-disable-message-reformatting" />
     <title>One-Time Password (OTP) for Verification | Interact</title>
 </head>
-<body style="font-family: 'Arial', sans-serif; line-height: 1.6; color: #333; background-color: #f4f4f4; margin: 0; padding: 48px;">
-    <div style="max-width: 720px; margin: 20px auto; padding: 20px; background-color: #fff; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
-        <h1 style="color: #333;">Your One-Time Password (OTP) for Verification</h1>
-        <h3 style="margin-bottom: 20px;">Hello {{User.Name}},</h3>
-        <p style="margin-bottom: 20px;">Thank you for signing up with Interact. To complete the registration process and verify your email address, please use the following One-Time Password (OTP):</p>
-        <p style="margin-bottom: 20px;">Your OTP is: <b>{{OTP}}</b></p>
-        <p style="margin-bottom: 20px;">This OTP is valid for the next 10 minutes. Please enter this code on the verification page to verify your email address and activate your account.</p>
-        <p style="margin-bottom: 20px;">For your security, do not share this OTP with anyone. If you did not sign up for an account with us, please ignore this email or contact our support team immediately.</p>
-        <p style="margin-bottom: 20px;"><b>Thank you for joining Interact!</b></p>
-        <div style="margin-top: 20px;">
-            <div>Best regards,</div>
-            <div>Interact</div>
-        </div>
-    </div>
+
+<body style="background-color:#f4f4f4;color:#333;font-family:Arial,sans-serif;line-height:1.6;margin:0;padding:48px;">
+    <table align="center" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="max-width:720px;margin:20px auto;padding:20px;background-color:#fff;border-radius:8px;box-shadow:0 0 10px rgba(0,0,0,0.1);">
+        <tbody>
+            <tr>
+                <td style="padding:20px;">
+                    <table align="center" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="margin-top:32px;">
+                        <tbody>
+                            <tr>
+                                <td style="text-align:center;">
+                                    <img alt="Interact" height="50" src="/public /logo.svg" style="display:block;margin:0 auto;" width="170" />
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <h1 style="color:#333;font-size:24px;font-weight:400;text-align:center;margin:30px 0;">Enter the following code to complete your registration.</h1>
+                    <p style="font-size:15px;line-height:23px;margin:0;color:#444;letter-spacing:0;padding:0 40px;text-align:left;margin-top:4px;">Thank you for signing up with Interact. To complete the registration process and verify your email address, please use the following One-Time Password (OTP):</p>
+                    <table align="center" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background:rgba(0,0,0,.05);border-radius:4px;margin:16px auto 14px;vertical-align:middle;width:280px;">
+                        <tbody>
+                            <tr>
+                                <td style="text-align:center;">
+                                    <p style="border-radius:0.25rem;background-color:#1E88E5;font-size:32px;line-height:40px;margin:0 auto;color:#fff;display:inline-block;font-weight:700;letter-spacing:6px;padding-bottom:8px;padding-top:8px;width:100%;text-align:center;">{{OTP}}</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p style="font-size:15px;line-height:23px;margin:0;color:#444;letter-spacing:0;padding:0 40px;text-align:left;margin-bottom:20px;"><b>This OTP is valid for the next 10 minutes.</b></p>
+                    <p style="font-size:15px;line-height:23px;margin:0;color:#444;letter-spacing:0;padding:0 40px;text-align:left;margin-bottom:20px;">Please enter this code on the verification page to verify your email address and activate your account.</p>
+                    <p style="font-size:15px;line-height:23px;margin:0;color:#444;letter-spacing:0;padding:0 40px;text-align:left;margin-bottom:20px;">For your security, do not share this OTP with anyone.</p>
+                    <p style="font-size:15px;line-height:23px;margin:0;color:#444;letter-spacing:0;padding:0 40px;text-align:left;margin-bottom:20px;">Thank you for joining Interact!</p>
+                    <p style="font-size:15px;line-height:23px;margin:0;color:#444;letter-spacing:0;padding:0 40px;text-align:left;margin-bottom:20px;">Best regards,<br>Interact</p>
+                    <hr style="width:100%;border:none;border-top:1px solid #eaeaea;margin:26px 0;">
+                    <p style="font-size:13px;line-height:24px;margin:0;color:#333;letter-spacing:0;padding:0 40px;text-align:center;">If you did not sign up for an account with us, please ignore this email or contact our support team immediately.</p>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </body>
+
 </html>
+
