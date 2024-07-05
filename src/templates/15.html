@@ -1,24 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="ltr" lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    <meta name="x-apple-disable-message-reformatting" />
     <title>New Project Invitation | Interact</title>
 </head>
-<body style="font-family: 'Arial', sans-serif; line-height: 1.6; color: #333; background-color: #f4f4f4; margin: 0; padding: 48px;">
-    <div style="max-width: 720px; margin: 20px auto; padding: 20px; background-color: #fff; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
-        <h1 style="color: #333;"> You're Invited to a New Project!</h1>
-        <h3 style="margin-bottom: 20px;">Hello {{User.Name}},</h3>
-        <p style="margin-bottom: 20px;">You've been invited to join a new project on Interact! It's time to collaborate, share ideas, and bring your skills to the table.</p>
-        <p style="margin-bottom: 20px;">{{SecondaryUser.Name}} has invited you to participate in the project titled:<strong> {{Project.Title}}</strong></p>
-        <p style="margin-bottom: 20px;">{{SecondaryUser.Name}} believes your expertise would be valuable to the project. Here's a brief description:</p>
-        <p style="margin-bottom: 20px;"><i>{{Project.Description}}</i></p>
-        <p style="margin-bottom: 20px;">Don't miss out on this exciting opportunity to collaborate and bring your skills to life. We look forward to having you on board!</p>
-        <p style="margin-bottom: 20px;">If you have any questions about the project or your invitation, feel free to reply to this email.</p>
-        <div style="margin-top: 20px;">
-            <div>Best regards,</div>
-            <div>The Interact Team</div>
-        </div>
-    </div>
+
+<body style="background-color: #f4f4f4; font-family: Arial, sans-serif; margin: 0; padding: 48px;">
+    <table align="center" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="max-width: 465px; margin: 40px auto; padding: 20px; background-color: #fff; border: 1px solid #eaeaea; border-radius: 0.25rem;">
+        <tbody>
+            <tr>
+                <td>
+                    <table align="center" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="margin-top: 32px;">
+                        <tbody>
+                            <tr>
+                                <td><img alt="Interact" height="50" src="/public /logo.svg" style="display: block; margin: 0 auto;" width="170" /></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <h1 style="color: #333; font-size: 24px; font-weight: 400; text-align: center; margin: 30px 0;">You're Invited to a New Project!</h1>
+                    <p style="font-size: 14px; line-height: 24px; margin: 16px 0; color: #000;">Hello {{User.Name}},</p>
+                    <p style="font-size: 14px; line-height: 24px; margin: 16px 0; color: #000;">{{SecondaryUser.Name}} has invited you to participate in the project titled: <strong>{{Project.Title}}</strong></p>
+                    <p style="font-size: 14px; line-height: 24px; margin: 16px 0; color: #000;">{{SecondaryUser.Name}} believes your expertise would be valuable to the project. Here's a brief description:</p>
+                    <p style="font-size: 14px; line-height: 24px; margin: 16px 0; color: #000; font-style: italic;">{{Project.Description}}</p>
+                    <p style="font-size: 14px; line-height: 24px; margin: 16px 0; color: #000;">Don't miss out on this exciting opportunity to collaborate and bring your skills to life. We look forward to having you on board!</p>
+                    <p style="font-size: 14px; line-height: 24px; margin: 16px 0; color: #000;">If you have any questions about the project or your invitation, feel free to reply to this email.</p>
+                    <table align="center" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="text-align: center; margin: 32px 0;">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <a href="{{Project.Link}}" style="display: inline-block; padding: 12px 20px; font-size: 14px; font-weight: 600; color: #fff; background-color: #1E88E5; border-radius: 0.25rem; text-decoration: none;">Join the Project</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <hr style="border: none; border-top: 1px solid #eaeaea; margin: 26px 0;" />
+                    <p style="font-size: 12px; line-height: 24px; color: #666; margin: 16px 0;">This invitation was intended for {{User.Name}}. If you were not expecting this invitation, you can ignore this email. If you are concerned about your account's safety, please reply to this email to get in touch with us.</p>
+                    <p style="font-size: 12px; line-height: 24px; color: #666; margin: 16px 0;">Best regards,<br />The Interact Team</p>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </body>
+
 </html>
