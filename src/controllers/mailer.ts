@@ -11,6 +11,7 @@ import {
     Comment,
     Event,
     GroupChat,
+    Meeting,
     Opening,
     Organization,
     Poll,
@@ -18,9 +19,9 @@ import {
     Project,
     Task,
     User,
-    Meeting,
 } from '../types/index';
 import logger from '../utils/logger';
+import { getNextSessionTime } from '../utils/session';
 
 const getTemplateNameFromType = (type: number): string => {
     return `${type}.html`;
@@ -70,9 +71,9 @@ const getSubjectFromType = (type: number): string => {
         case 32:
             return 'Our Latest News: Stay Informed on Interact!';
         case 33:
-            return 'Task due Today!'
+            return 'Task due Today!';
         case 34:
-            return 'Meeting due Today'
+            return 'Meeting due Today';
 
         // Flags Section (50-56)
         case 50:
@@ -218,11 +219,22 @@ const getParamFuncFromReq = (
                 return parameterizedHTML
                     .replace('{{Meeting.Title}}', meeting.title || '')
                     .replace('{{Meeting.Description}}', meeting.description || '')
-                    .replace('{{Meeting.StartTime}}', meeting.startTime ? meeting.startTime.toString() : '0')
-                    .replace('{{Meeting.EndTime}}', meeting.endTime ? meeting.endTime.toString() : '0')
-                    .replace('{{Meeting.Day}}', meeting.day || '')
-                    .replace('{{Meeting.Date}}', meeting.date ? meeting.date.toString() : '')
-                    .replace('{{Meeting.Organization.Name}}', meeting.organization ? meeting.organization.toString() : '');
+                    .replace(
+                        '{{Meeting.Time}}',
+                        meeting.startTime ? getNextSessionTime(meeting) : '-'
+                    )
+                    .replace(
+                        '{{Meeting.Frequency}}',
+                        meeting.frequency
+                            ? meeting.frequency == 'none'
+                                ? 'One Time'
+                                : meeting.frequency
+                            : '-'
+                    )
+                    .replace(
+                        '{{Meeting.Organization.Name}}',
+                        meeting.organization.title ? meeting.organization.title : ''
+                    );
             case 30:
                 return parameterizedHTML;
             case 31:
@@ -238,11 +250,22 @@ const getParamFuncFromReq = (
                 return parameterizedHTML
                     .replace('{{Meeting.Title}}', meeting.title || '')
                     .replace('{{Meeting.Description}}', meeting.description || '')
-                    .replace('{{Meeting.StartTime}}', meeting.startTime ? meeting.startTime.toString() : '0')
-                    .replace('{{Meeting.EndTime}}', meeting.endTime ? meeting.endTime.toString() : '0')
-                    .replace('{{Meeting.Day}}', meeting.day || '')
-                    .replace('{{Meeting.Date}}', meeting.date ? meeting.date.toString() : '')
-                    .replace('{{Meeting.Organization.Name}}', meeting.organization ? meeting.organization.toString() : '');
+                    .replace(
+                        '{{Meeting.Time}}',
+                        meeting.startTime ? getNextSessionTime(meeting) : '-'
+                    )
+                    .replace(
+                        '{{Meeting.Frequency}}',
+                        meeting.frequency
+                            ? meeting.frequency == 'none'
+                                ? 'One Time'
+                                : meeting.frequency
+                            : '-'
+                    )
+                    .replace(
+                        '{{Meeting.Organization.Name}}',
+                        meeting.organization.title ? meeting.organization.title : ''
+                    );
 
             case 50:
                 return parameterizedHTML
