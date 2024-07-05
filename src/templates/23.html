@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html dir="ltr" lang="en">
 
@@ -54,4 +55,32 @@
     </table>
 </body>
 
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meeting Scheduled | Interact</title>
+</head>
+<body style="font-family: 'Arial', sans-serif; line-height: 1.6; color: #333; background-color: #f4f4f4; margin: 0; padding: 48px;">
+    <div style="max-width: 720px; margin: 20px auto; padding: 20px; background-color: #fff; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+        <h1 style="color: #333;">Meeting Scheduled</h1>
+        <h3 style="margin-bottom: 20px;">Hello {{User.Name}},</h3>
+        <p style="margin-bottom: 20px;">We are pleased to inform you that a new meeting has been scheduled. Please find the meeting details below:</p>
+        <p style="margin-bottom: 20px;">
+            <strong>Meeting Title:</strong> {{Meeting.Title}}<br>
+            <strong>Description:</strong> {{Meeting.Description}}<br>
+            <strong>Time:</strong> {{Meeting.Time}}<br>
+            <strong>Frequency:</strong> {{Meeting.Frequency}}<br>
+            <strong>Organization:</strong> {{Meeting.Organization.Name}}
+        </p>
+        <p style="margin-bottom: 20px;">Please ensure that you join the meeting on time. You can view and manage this meeting by logging into your Interact account.</p>
+        <div style="margin-top: 20px;">
+            <div>Best regards,</div>
+            <div>The Interact Team</div>
+        </div>
+    </div>
+</body>
+>>>>>>> upstream/dev
 </html>

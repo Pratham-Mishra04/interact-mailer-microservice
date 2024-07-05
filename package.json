@@ -37,6 +37,7 @@
         "joi": "^17.11.0",
         "jsonwebtoken": "^9.0.2",
         "libphonenumber-js": "^1.10.51",
+        "moment": "^2.30.1",
         "morgan": "^1.10.0",
         "nodemailer": "^6.9.7",
         "slugify": "^1.6.6",
