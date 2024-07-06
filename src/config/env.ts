@@ -9,6 +9,7 @@ interface ENV_struct {
     PORT: number;
     JWT_KEY: string;
     FRONTEND_URL: string;
+    MAILER_URL: string;
 
     //nodemailer config
     MAIL_USER: string;
@@ -30,6 +31,7 @@ const ENV: ENV_struct = {
     MAIL_USER: '',
     MAIL_KEY: '',
     FRONTEND_URL: '',
+    MAILER_URL: '',
     LOGGER_URL: '',
     LOGGER_SECRET: '',
     LOGGER_TOKEN: '',
