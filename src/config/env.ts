@@ -8,6 +8,8 @@ interface ENV_struct {
     NODE_ENV: NODE_ENV;
     PORT: number;
     JWT_KEY: string;
+    FRONTEND_URL: string;
+
     //nodemailer config
     MAIL_USER: string;
     MAIL_KEY: string;
@@ -27,6 +29,7 @@ const ENV: ENV_struct = {
     JWT_KEY: 'secret',
     MAIL_USER: '',
     MAIL_KEY: '',
+    FRONTEND_URL: '',
     LOGGER_URL: '',
     LOGGER_SECRET: '',
     LOGGER_TOKEN: '',
@@ -40,7 +43,7 @@ const configENV = () => {
     Object.keys(ENV).forEach(envKey => {
         const key = envKey;
         const val = process.env[key];
-        
+
         if (val === undefined) {
             console.error(`Fatal Error: Missing required environment variable: ${key}`);
             process.exit();

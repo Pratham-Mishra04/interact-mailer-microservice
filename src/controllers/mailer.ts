@@ -3,6 +3,7 @@
 import { NextFunction, Request, Response } from 'express';
 import { AttachmentLike } from 'nodemailer/lib/mailer';
 import { Readable } from 'nodemailer/lib/xoauth2';
+import { ENV } from '../config/env';
 import AppError from '../helpers/app_error';
 import catchAsync from '../helpers/catch_async';
 import Nodemailer from '../mailers/nodemailer';
@@ -235,6 +236,10 @@ const getParamFuncFromReq = (
                     .replace(
                         '{{Meeting.Organization.Name}}',
                         meeting.organization.title ? meeting.organization.title : ''
+                    )
+                    .replace(
+                        '{{Meeting.URL}}',
+                        `${ENV.FRONTEND_URL}/organisations?oid=${meeting.organizationID}&redirect_url=/meetings/${meeting.id}`
                     );
             case 30:
                 return parameterizedHTML;
@@ -266,6 +271,10 @@ const getParamFuncFromReq = (
                     .replace(
                         '{{Meeting.Organization.Name}}',
                         meeting.organization.title ? meeting.organization.title : ''
+                    )
+                    .replace(
+                        '{{Meeting.URL}}',
+                        `${ENV.FRONTEND_URL}/organisations?oid=${meeting.organizationID}&redirect_url=/meetings/${meeting.id}`
                     );
 
             case 50:
