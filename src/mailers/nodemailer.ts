@@ -40,6 +40,13 @@ const Nodemailer = async (config: NodemailerConfig): Promise<void> => {
             path.resolve(__dirname, '../' + MAILER_CONFIG.TEMPLATE_PATH + config.templateName),
             'utf8'
         ),
+        attachments: [
+            {
+                filename: 'logo.png',
+                path: path.resolve(__dirname, '../../public/logo.png'),
+                cid: 'logo',
+            },
+        ],
     };
 
     mailOptions.html = config.paramFunc(mailOptions.html);
