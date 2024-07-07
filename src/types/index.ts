@@ -206,6 +206,8 @@ export interface GroupChat {
     createdAt: Date;
     tags: string[];
     users: User[];
+    organizationID: string;
+    project: Project;
   }
   
   export interface Meeting {
