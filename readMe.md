@@ -11,7 +11,7 @@ Types:
 
 10-30 -> Main
 10:New Chat Request (SecondaryUser.Name)
-11:You have x impressions on your post/project/event! (User.noImpressions, Post.noImpressions, Project.noImpressions, Opening.noImpressions, Event.noImpressions)
+11:You have x impressions on your post! (User.noImpressions, Post.noImpressions, Project.noImpressions, Opening.noImpressions, Event.noImpressions)
 12:Successfully Submitted Application for Opening 
 13:Opening Application got Accepted!
 14:Opening Application got Rejected!
@@ -25,6 +25,9 @@ Types:
 22:Task has been completed. (will be sent to project/org managers{multiple} when a task is completed.)  
 23: Meeting Scheduled
 24: Meeting Rescheduled
+25:You have x impressions on your project!
+26:You have x impressions on your event!
+27:You have x impressions on your opening!
 
 
 

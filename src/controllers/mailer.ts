@@ -185,10 +185,12 @@ const getParamFuncFromReq = (
                     .replaceAll('{{Project.Description}}', project.description || '');
 
             case 16:
-                return parameterizedHTML?.replaceAll(
-                    '{{Organization.title}}',
-                    organization.title || ''
-                );
+                return parameterizedHTML
+                    ?.replaceAll('{{Organization.title}}', organization.title || '')
+                    .replaceAll(
+                        '{{Organization.Link}}',
+                        `${ENV.FRONTEND_URL}/invitations?tab=organisations`
+                    );
             case 17:
                 return parameterizedHTML
                     ?.replaceAll('{{SecondaryUser.Name}}', secondaryUser?.name || '')
@@ -220,7 +222,7 @@ const getParamFuncFromReq = (
             case 22:
                 return parameterizedHTML
                     ?.replaceAll('{{Task.Title}}', task.title || '')
-                    .replaceAll('{{SecondaryUser.Name}}', secondaryUser.name || '')
+                    .replaceAll('{{Task.Description}}',task.description || '')
                     .replaceAll(
                         '{{Task.URL}}', 
                         `${ENV.FRONTEND_URL}/organisations?oid=${task.organizationID}&redirect_url=/tasks?tid=${task.id}`
@@ -273,7 +275,18 @@ const getParamFuncFromReq = (
                         '{{Meeting.URL}}',
                         `${ENV.FRONTEND_URL}/organisations?oid=${meeting.organizationID}&redirect_url=/meetings/${meeting.id}`
                     );
-
+            case 25:
+                return parameterizedHTML
+                    ?.replaceAll('{{User.noImpressions}}', `${user.noImpressions || 0}`)
+                    ?.replaceAll('{{Project.noImpressions}}', `${project.noImpressions || 0}`);
+            case 26:
+                return parameterizedHTML
+                    ?.replaceAll('{{User.noImpressions}}', `${user.noImpressions || 0}`)
+                    ?.replaceAll('{{Event.noImpressions}}', `${event.noImpressions || 0}`);
+            case 27:
+                return parameterizedHTML
+                    ?.replaceAll('{{User.noImpressions}}', `${user.noImpressions || 0}`)
+                    ?.replaceAll('{{Opening.noImpressions}}', `${opening.noImpressions || 0}`);
             case 30:
                 return parameterizedHTML;
             case 31:

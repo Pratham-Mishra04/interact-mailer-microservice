@@ -6,7 +6,6 @@ import { Readable } from 'nodemailer/lib/xoauth2';
 import * as path from 'path';
 import { ENV } from '../config/env';
 import * as MAILER_CONFIG from '../config/mailer';
-import logger from '../utils/logger';
 
 interface NodemailerConfig {
     email: string;
@@ -51,11 +50,7 @@ const Nodemailer = async (config: NodemailerConfig): Promise<void> => {
 
     mailOptions.html = config.paramFunc(mailOptions.html);
 
-    await transporter
-        .sendMail(mailOptions)
-        .then(() =>
-            logger.info(`mailer triggered by ${config.service}`, 'node_mailer', config.subject)
-        );
+    await transporter.sendMail(mailOptions);
 };
 
 export default Nodemailer;
