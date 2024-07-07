@@ -153,8 +153,7 @@ const getParamFuncFromReq = (
         const parameterizedHTML = html
             ?.toString()
             .replaceAll('{{User.Name}}', user.name)
-            .replaceAll('{{User.Username}}', user.username)
-            .replaceAll('{{LogoURL}}', `"${ENV.MAILER_URL}/logo.svg"`);
+            .replaceAll('{{User.Username}}', user.username);
 
         switch (type) {
             case 0:
