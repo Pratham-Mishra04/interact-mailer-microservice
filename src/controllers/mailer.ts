@@ -212,7 +212,12 @@ const getParamFuncFromReq = (
             case 21:
                 return parameterizedHTML
                     ?.replaceAll('{{Task.Title}}', task.title)
-                    .replaceAll('{{Task.Description}}', task.description);
+                    .replaceAll('{{Task.Description}}', task.description)
+                    .replaceAll(
+                        '{{Task.URL}}', task.organizationID != ''
+                              ? `organisations?oid=${task.organizationID}&redirect_url=/tasks?tid=${task.id}`
+                              : `workspace/tasks/${task.project?.title}?tid=${task.id}`
+                    );
             case 22:
                 return parameterizedHTML
                     ?.replaceAll('{{Task.Title}}', task.title || '')
@@ -241,6 +246,31 @@ const getParamFuncFromReq = (
                         '{{Meeting.URL}}',
                         `${ENV.FRONTEND_URL}/organisations?oid=${meeting.organizationID}&redirect_url=/meetings/${meeting.id}`
                     );
+            case 24: 
+                return parameterizedHTML
+                    .replaceAll('{{Meeting.Title}}', meeting.title || '')
+                    .replaceAll('{{Meeting.Description}}', meeting.description || '')
+                    .replaceAll(
+                        '{{Meeting.Time}}',
+                        meeting.startTime ? getNextSessionTime(meeting) : '-'
+                    )
+                    .replaceAll(
+                        '{{Meeting.Frequency}}',
+                        meeting.frequency
+                            ? meeting.frequency == 'none'
+                                ? 'One Time'
+                                : meeting.frequency
+                            : '-'
+                    )
+                    .replaceAll(
+                        '{{Meeting.Organization.Name}}',
+                        meeting.organization.title ? meeting.organization.title : ''
+                    )
+                    .replaceAll(
+                        '{{Meeting.URL}}',
+                        `${ENV.FRONTEND_URL}/organisations?oid=${meeting.organizationID}&redirect_url=/meetings/${meeting.id}`
+                    );
+
             case 30:
                 return parameterizedHTML;
             case 31:
@@ -276,6 +306,11 @@ const getParamFuncFromReq = (
                         '{{Meeting.URL}}',
                         `${ENV.FRONTEND_URL}/organisations?oid=${meeting.organizationID}&redirect_url=/meetings/${meeting.id}`
                     );
+
+            case 35:
+                return parameterizedHTML
+                    ?.replaceAll('{{SecondaryUser.Name}}', secondaryUser?.name || '')
+                    .replaceAll('{{Comment.Content}}', comment.content || '');
 
             case 50:
                 return parameterizedHTML
