@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tagged you in a comment | Interact</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 48px;
+        }
+        .container {
+            max-width: 720px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+        }
+        h3 {
+            margin-bottom: 20px;
+        }
+        p {
+            margin-bottom: 20px;
+        }
+        .button {
+            width: 50%;
+            text-decoration: none;
+            text-align: center;
+            margin: auto;
+            display: flex;
+            padding: 1em;
+            gap: 0.4rem;
+            border: none;
+            font-weight: bolder;
+            border-radius: 10px;
+            background: #1E88E5;
+            background-size: 300%;
+            background-position: left center;
+            color: #fff;
+        }
+        .button:hover {
+            background-size: 320%;
+            background-position: right center;
+        }
+        .comment-box {
+            padding: 15px;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            margin-bottom: 20px;
+        }
+        .comment-box p {
+            margin: 0;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img class="logo" src="cid:logo" crossorigin="anonymous" alt="Interact" width="170" height="50">
+        </div>
+        <h1>Tagged you in a comment</h1>
+        <h3>Hello {{User.Name}},</h3>
+        <p>You've got a new chat from {{SecondaryUser.Name}} waiting for you on Interact! Connect with your potential collaborators, discuss ideas, and make your projects come to life.</p>
+        
+        <div class="comment-box">
+            <p>{{Comment.Content}}</p>
+        </div>     
+        <p>Don't miss out on exciting collaborations and discussions. Head to your inbox now!</p>
+        <p>If you have any questions or need assistance, feel free to reply to this email.</p>
+        <div>
+            <div>Best regards,</div>
+            <div>Interact</div>
+        </div>
+        <hr style="width:100%;border:none;border-top:1px solid #eaeaea;margin:26px 0;">
+        <p style="font-size:13px;line-height:24px;margin:0;color:#333;letter-spacing:0;padding:0 40px;text-align:center;">If you did not sign up for an account with us, please ignore this email or contact our support team immediately.</p>
+    </div>
+</body>
+</html>

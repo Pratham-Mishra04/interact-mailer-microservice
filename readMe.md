@@ -24,6 +24,7 @@ Types:
 21:You have been assigned a new task
 22:Task has been completed. (will be sent to project/org managers{multiple} when a task is completed.)  
 23: Meeting Scheduled
+24: Meeting Rescheduled
 
 
 
@@ -33,6 +34,7 @@ Types:
 32:News Letter
 33:Task due today remainder
 34:Meeting due today remainder
+35:Tagged you in comment 
 
 50-70 -> Flags
 50:Flagged Comment
