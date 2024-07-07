@@ -152,9 +152,9 @@ const getParamFuncFromReq = (
     return html => {
         const parameterizedHTML = html
             ?.toString()
-            .replace('{{User.Name}}', user.name)
-            .replace('{{User.Username}}', user.username)
-            .replace('{{LogoURL}}', `${ENV.MAILER_URL}/logo.svg`);
+            .replaceAll('{{User.Name}}', user.name)
+            .replaceAll('{{User.Username}}', user.username)
+            .replaceAll('{{LogoURL}}', `"${ENV.MAILER_URL}/logo.svg"`);
 
         switch (type) {
             case 0:
@@ -162,71 +162,71 @@ const getParamFuncFromReq = (
             case 2:
             case 3:
             case 4:
-                return parameterizedHTML?.replace('{{OTP}}', otp || '');
+                return parameterizedHTML?.replaceAll('{{OTP}}', otp || '');
             case 10:
-                return parameterizedHTML?.replace(
+                return parameterizedHTML?.replaceAll(
                     '{{SecondaryUser.Name}}',
                     secondaryUser?.name || ''
                 );
             case 11:
                 return parameterizedHTML
-                    ?.replace('{{User.noImpressions}}', `${user.noImpressions || 0}`)
-                    ?.replace('{{Post.noImpressions}}', `${post.noImpressions || 0}`)
-                    ?.replace('{{Project.noImpressions}}', `${project.noImpressions || 0}`)
-                    ?.replace('{{Opening.noImpressions}}', `${opening.noImpressions || 0}`)
-                    ?.replace('{{Event.noImpressions}}', `${event.noImpressions || 0}`);
+                    ?.replaceAll('{{User.noImpressions}}', `${user.noImpressions || 0}`)
+                    ?.replaceAll('{{Post.noImpressions}}', `${post.noImpressions || 0}`)
+                    ?.replaceAll('{{Project.noImpressions}}', `${project.noImpressions || 0}`)
+                    ?.replaceAll('{{Opening.noImpressions}}', `${opening.noImpressions || 0}`)
+                    ?.replaceAll('{{Event.noImpressions}}', `${event.noImpressions || 0}`);
 
             case 12:
             case 13:
             case 14:
             case 15:
                 return parameterizedHTML
-                    ?.replace('{{SecondaryUser.Name}}', secondaryUser?.name || '')
-                    .replace('{{Project.Title}}', project.title || '')
-                    .replace('{{Project.Description}}', project.description || '');
+                    ?.replaceAll('{{SecondaryUser.Name}}', secondaryUser?.name || '')
+                    .replaceAll('{{Project.Title}}', project.title || '')
+                    .replaceAll('{{Project.Description}}', project.description || '');
 
             case 16:
-                return parameterizedHTML?.replace(
+                return parameterizedHTML?.replaceAll(
                     '{{Organization.title}}',
                     organization.title || ''
                 );
             case 17:
                 return parameterizedHTML
-                    ?.replace('{{SecondaryUser.Name}}', secondaryUser?.name || '')
-                    .replace('{{GroupChat.title}}', groupchat.title || '')
-                    .replace('{{GroupChat.description}}', groupchat.description || '');
+                    ?.replaceAll('{{SecondaryUser.Name}}', secondaryUser?.name || '')
+                    .replaceAll('{{GroupChat.title}}', groupchat.title || '')
+                    .replaceAll('{{GroupChat.description}}', groupchat.description || '');
             case 18:
                 return parameterizedHTML
-                    ?.replace('{{SecondaryUser.Name}}', secondaryUser?.name || '')
-                    .replace('{{Project.Title}}', project.title || '')
-                    .replace('{{Project.Description}}', project.description || '');
+                    ?.replaceAll('{{SecondaryUser.Name}}', secondaryUser?.name || '')
+                    .replaceAll('{{Project.Title}}', project.title || '')
+                    .replaceAll('{{Project.Description}}', project.description || '');
             case 19:
-                return parameterizedHTML?.replace(
+                return parameterizedHTML?.replaceAll(
                     '{{Organization.title}}',
                     organization.title || ''
                 );
             case 20:
                 return parameterizedHTML
-                    ?.replace('{{SecondaryUser.Name}}', secondaryUser?.name || '')
-                    .replace('{{GroupChat.title}}', groupchat.title || '')
-                    .replace('{{GroupChat.description}}', groupchat.description || '');
+                    ?.replaceAll('{{SecondaryUser.Name}}', secondaryUser?.name || '')
+                    .replaceAll('{{GroupChat.title}}', groupchat.title || '')
+                    .replaceAll('{{GroupChat.description}}', groupchat.description || '');
             case 21:
                 return parameterizedHTML
-                    ?.replace('{{Task.Title}}', task.title)
-                    .replace('{{Task.Description}}', task.description);
+                    ?.replaceAll('{{Task.Title}}', task.title)
+                    .replaceAll('{{Task.Description}}', task.description);
             case 22:
                 return parameterizedHTML
-                    ?.replace('{{Task.Title}}', task.title || '')
-                    .replace('{{SecondaryUser.Name}}', secondaryUser.name || '');
+                    ?.replaceAll('{{Task.Title}}', task.title || '')
+                    .replaceAll('{{SecondaryUser.Name}}', secondaryUser.name || '');
             case 23:
                 return parameterizedHTML
-                    .replace('{{Meeting.Title}}', meeting.title || '')
-                    .replace('{{Meeting.Description}}', meeting.description || '')
-                    .replace(
+                    .replaceAll('{{Meeting.Title}}', meeting.title || '')
+                    .replaceAll('{{Meeting.Description}}', meeting.description || '')
+                    .replaceAll(
                         '{{Meeting.Time}}',
                         meeting.startTime ? getNextSessionTime(meeting) : '-'
                     )
-                    .replace(
+                    .replaceAll(
                         '{{Meeting.Frequency}}',
                         meeting.frequency
                             ? meeting.frequency == 'none'
@@ -234,34 +234,34 @@ const getParamFuncFromReq = (
                                 : meeting.frequency
                             : '-'
                     )
-                    .replace(
+                    .replaceAll(
                         '{{Meeting.Organization.Name}}',
                         meeting.organization.title ? meeting.organization.title : ''
                     )
-                    .replace(
+                    .replaceAll(
                         '{{Meeting.URL}}',
                         `${ENV.FRONTEND_URL}/organisations?oid=${meeting.organizationID}&redirect_url=/meetings/${meeting.id}`
                     );
             case 30:
                 return parameterizedHTML;
             case 31:
-                return parameterizedHTML.replace('{{User.Name}}', user.name || '');
+                return parameterizedHTML.replaceAll('{{User.Name}}', user.name || '');
             case 32:
                 return parameterizedHTML;
             case 33:
                 return parameterizedHTML
-                    ?.replace('{{Task.Title}}', task.title)
-                    .replace('{{Task.Description}}', task.description);
+                    ?.replaceAll('{{Task.Title}}', task.title)
+                    .replaceAll('{{Task.Description}}', task.description);
 
             case 34:
                 return parameterizedHTML
-                    .replace('{{Meeting.Title}}', meeting.title || '')
-                    .replace('{{Meeting.Description}}', meeting.description || '')
-                    .replace(
+                    .replaceAll('{{Meeting.Title}}', meeting.title || '')
+                    .replaceAll('{{Meeting.Description}}', meeting.description || '')
+                    .replaceAll(
                         '{{Meeting.Time}}',
                         meeting.startTime ? getNextSessionTime(meeting) : '-'
                     )
-                    .replace(
+                    .replaceAll(
                         '{{Meeting.Frequency}}',
                         meeting.frequency
                             ? meeting.frequency == 'none'
@@ -269,77 +269,77 @@ const getParamFuncFromReq = (
                                 : meeting.frequency
                             : '-'
                     )
-                    .replace(
+                    .replaceAll(
                         '{{Meeting.Organization.Name}}',
                         meeting.organization.title ? meeting.organization.title : ''
                     )
-                    .replace(
+                    .replaceAll(
                         '{{Meeting.URL}}',
                         `${ENV.FRONTEND_URL}/organisations?oid=${meeting.organizationID}&redirect_url=/meetings/${meeting.id}`
                     );
 
             case 50:
                 return parameterizedHTML
-                    ?.replace('{{Comment.Content}}', comment.content || '')
-                    .replace('{{Comment.Id}}', comment.id || '');
+                    ?.replaceAll('{{Comment.Content}}', comment.content || '')
+                    .replaceAll('{{Comment.Id}}', comment.id || '');
             case 51:
-                return parameterizedHTML?.replace('{{Post.Title}}', post.content || '');
+                return parameterizedHTML?.replaceAll('{{Post.Title}}', post.content || '');
             case 52:
-                return parameterizedHTML?.replace('{{Project.Name}}', project.title || '');
+                return parameterizedHTML?.replaceAll('{{Project.Name}}', project.title || '');
             case 53:
                 return parameterizedHTML
-                    ?.replace('{{Opening.Title}}', opening.title || '')
-                    .replace('{{Opening.Description}}', opening.description || '');
+                    ?.replaceAll('{{Opening.Title}}', opening.title || '')
+                    .replaceAll('{{Opening.Description}}', opening.description || '');
             case 54:
                 return parameterizedHTML
-                    ?.replace('{{Event.Title}}', event.title || '')
-                    .replace('{{Event.Description}}', event.description || '');
+                    ?.replaceAll('{{Event.Title}}', event.title || '')
+                    .replaceAll('{{Event.Description}}', event.description || '');
             case 55:
                 return parameterizedHTML
-                    ?.replace('{{Announcement.Title}}', announcement.title || '')
-                    .replace('{{Announcement.Content}}', announcement.content || '');
+                    ?.replaceAll('{{Announcement.Title}}', announcement.title || '')
+                    .replaceAll('{{Announcement.Content}}', announcement.content || '');
             case 56:
-                return parameterizedHTML?.replace('{{Poll.Title}}', poll.title || '');
+                return parameterizedHTML?.replaceAll('{{Poll.Title}}', poll.title || '');
             case 70:
-                return parameterizedHTML?.replace('{{Comment.Content}}', comment.content || '');
+                return parameterizedHTML?.replaceAll('{{Comment.Content}}', comment.content || '');
             case 71:
-                return parameterizedHTML?.replace('{{Post.Content}}', post.content || '');
+                return parameterizedHTML?.replaceAll('{{Post.Content}}', post.content || '');
             case 72:
-                return parameterizedHTML?.replace('{{Project.Title}}', project.title || '');
+                return parameterizedHTML?.replaceAll('{{Project.Title}}', project.title || '');
             case 73:
                 return parameterizedHTML
-                    ?.replace('{{Opening.Title}}', opening.title || '')
-                    .replace('{{Opening.Description}}', opening.description || '');
+                    ?.replaceAll('{{Opening.Title}}', opening.title || '')
+                    .replaceAll('{{Opening.Description}}', opening.description || '');
             case 74:
                 return parameterizedHTML
-                    ?.replace('{{Event.Title}}', event.title || '')
-                    .replace('{{Event.Description}}', event.description || '');
+                    ?.replaceAll('{{Event.Title}}', event.title || '')
+                    .replaceAll('{{Event.Description}}', event.description || '');
             case 75:
                 return parameterizedHTML
-                    ?.replace('{{Announcement.Title}}', announcement.title || '')
-                    .replace('{{Announcement.Content}}', announcement.content || '');
+                    ?.replaceAll('{{Announcement.Title}}', announcement.title || '')
+                    .replaceAll('{{Announcement.Content}}', announcement.content || '');
             case 76:
-                return parameterizedHTML?.replace('{{Poll.Title}}', poll.title || '');
+                return parameterizedHTML?.replaceAll('{{Poll.Title}}', poll.title || '');
             case 100:
-                return parameterizedHTML?.replace('{{Comment.Content}}', comment.content);
+                return parameterizedHTML?.replaceAll('{{Comment.Content}}', comment.content);
             case 101:
-                return parameterizedHTML?.replace('{{Post.Content}}', post.content || '');
+                return parameterizedHTML?.replaceAll('{{Post.Content}}', post.content || '');
             case 102:
-                return parameterizedHTML?.replace('{{Project.Title}}', project.title || '');
+                return parameterizedHTML?.replaceAll('{{Project.Title}}', project.title || '');
             case 103:
                 return parameterizedHTML
-                    ?.replace('{{Opeing.Title}}', opening.title || '')
-                    .replace('{{Opening.Description}}', opening.description || '');
+                    ?.replaceAll('{{Opeing.Title}}', opening.title || '')
+                    .replaceAll('{{Opening.Description}}', opening.description || '');
             case 104:
                 return parameterizedHTML
-                    ?.replace('{{Event.Title}}', event.title || '')
-                    .replace('{{Event.Description}}', event.description || '');
+                    ?.replaceAll('{{Event.Title}}', event.title || '')
+                    .replaceAll('{{Event.Description}}', event.description || '');
             case 105:
                 return parameterizedHTML
-                    ?.replace('{{Announcement.Title}}', announcement.title || '')
-                    .replace('{{Announcement.Content}}', announcement.content || '');
+                    ?.replaceAll('{{Announcement.Title}}', announcement.title || '')
+                    .replaceAll('{{Announcement.Content}}', announcement.content || '');
             case 106:
-                return parameterizedHTML?.replace('{{Poll.Title}}', poll.title || '');
+                return parameterizedHTML?.replaceAll('{{Poll.Title}}', poll.title || '');
             default:
                 return parameterizedHTML;
         }
