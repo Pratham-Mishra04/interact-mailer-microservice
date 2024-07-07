@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Meeting Rescheduled | Interact</title>
+    <style>
+        body {
+            background-color: #f4f4f4;
+            color: #333;
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 48px;
+        }
+
+        .container {
+            max-width: 720px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            display: block;
+            margin: 0 auto;
+        }
+
+        .content {
+            padding: 25px 35px;
+        }
+
+        .footer {
+            margin-top: 20px;
+            text-align: center;
+            border-top: 1px solid #eaeaea;
+            padding-top: 26px;
+        }
+
+        .footer p {
+            font-size: 12px;
+            line-height: 24px;
+            color: #333;
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <img class="logo" src="cid:logo" crossorigin="anonymous" alt="Interact" width="170" height="50">
+        </div>
+        <div class="content">
+            <h1 style="color: #333; font-size: 24px; font-weight: 400; text-align: center; margin: 30px 0;">Meeting Rescheduled</h1>
+            <h3>Hello {{User.Name}},</h3>
+            <p>We are writing to inform you that the meeting has been rescheduled. Please find the updated meeting details below:</p>
+            <p>
+                <strong>Meeting Title:</strong> {{Meeting.Title}}<br>
+                <strong>Description:</strong> {{Meeting.Description}}<br>
+                <strong>Time:</strong> {{Meeting.Time}}<br>
+                <strong>Frequency:</strong> {{Meeting.Frequency}}<br>
+                <strong>Organization:</strong> {{Meeting.Organization.Name}}
+            </p>
+            <p>Please ensure that you join the meeting at the new scheduled time. You can view and manage this meeting by logging into your Interact account or you can directly go to the meeting page by clicking on the button below!</p>
+            <a href={{Meeting.URL}} style="line-height:100%;text-decoration:none;display:block;max-width:100%;background-color:#478EE1;border-radius:3px;font-weight:600;color:#fff;font-size:15px;text-align:center;padding:11px 23px 11px 23px" target="_blank">
+            <span style="max-width:100%;display:inline-block;line-height:120%">Join the Meeting!</span>
+            </a>
+            <p>Best regards,</p>
+            <p>The Interact Team</p>
+        </div>
+            <hr style="width:100%;border:none;border-top:1px solid #eaeaea;margin:26px 0;">
+            <p style="font-size: small;">This message was produced and distributed by Interact. If you were not expecting this email, you can ignore it. For any concerns, please contact support.</p>
+        </div>
+    </div>
+</body>
+
+</html>

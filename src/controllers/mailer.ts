@@ -214,7 +214,11 @@ const getParamFuncFromReq = (
             case 21:
                 return parameterizedHTML
                     ?.replaceAll('{{Task.Title}}', task.title)
-                    .replaceAll('{{Task.Description}}', task.description);
+                    .replaceAll('{{Task.Description}}', task.description)
+                    .replaceAll(
+                        '{{Task.URL}}', 
+                        `${ENV.FRONTEND_URL}/organisations?oid=${task.organizationID}&redirect_url=/tasks?tid=${task.id}`
+                    );
             case 22:
                 return parameterizedHTML
                     ?.replaceAll('{{Task.Title}}', task.title || '')

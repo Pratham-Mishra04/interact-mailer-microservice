@@ -3,21 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task Completed | Interact</title>
+    <title>Task Due Today | Interact</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 48px;
+        }
+        .container {
+            max-width: 720px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+        }
+        h3 {
+            margin-bottom: 20px;
+        }
+        p {
+            margin-bottom: 20px;
+        }
+        .button {
+            line-height: 100%;
+            text-decoration: none;
+            display: block;
+            max-width: 100%;
+            background-color: #478EE1;
+            border-radius: 3px;
+            font-weight: 600;
+            color: #fff;
+            font-size: 15px;
+            text-align: center;
+            padding: 11px 23px;
+            margin: auto;
+        }
+        .button span {
+            max-width: 100%;
+            display: inline-block;
+            line-height: 120%;
+        }
+    </style>
 </head>
-<body style="font-family: 'Arial', sans-serif; line-height: 1.6; color: #333; background-color: #f4f4f4; margin: 0; padding: 48px;">
-    <div style="max-width: 720px; margin: 20px auto; padding: 20px; background-color: #fff; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
-        <h1 style="color: #333;">Task Completed</h1>
-        <h3 style="margin-bottom: 20px;">Hello {{User.Name}},</h3>
-        <p style="margin-bottom: 20px;">We are pleased to inform you that the following task has been successfully completed:</p>
-        <p style="margin-bottom: 20px;">
-            <strong>Task Title:</strong> {{Task.Title}}<br>
-            <strong>Completed By:</strong> {{SecondaryUser.Name}}<br>
-        </p>
-        <p style="margin-bottom: 20px;">You can view the details and any related updates by logging into your Interact account.</p>
-        <div style="margin-top: 20px;">
-            <div>Best regards,</div>
+<body>
+    <div class="container">
+        <div class="header">
+            <img class="logo" src="cid:logo" crossorigin="anonymous" alt="Interact" width="170" height="50">
         </div>
+        <h1>Task Due Today</h1>
+        <h3>Hello {{User.Name}},</h3>
+        <p>This is a reminder that you have a task due today on Interact. Please find the task details below:</p>
+        <p>
+            <strong>Task Title:</strong> {{Task.Title}}<br>
+            <strong>Description:</strong> {{Task.Description}}<br>
+        </p>
+        <p>Please ensure that you review and complete this task by the end of the day. You can view and manage this task by logging into your Interact account or by clicking the button below:</p>
+        <a href={{Task.URL}} class="button" target="_blank">
+            <span>View Task</span>
+        </a>
+        <p>Best regards,</p>
+        <p>The Interact Team</p>
+        <hr style="width:100%;border:none;border-top:1px solid #eaeaea;margin:26px 0;">
+        <p style="font-size: small;">This message was produced and distributed by Interact. If you were not expecting this email, you can ignore it. For any concerns, please contact support.</p>
     </div>
 </body>
 </html>
+
