@@ -1,7 +1,9 @@
 import * as moment from 'moment';
+import { ENV } from '../config/env';
 import { Meeting } from '../types';
 
 const FORMAT = 'hh:mm A, ddd MMM DD';
+const IST_OFFSET = ENV.NODE_ENV === 'development' ? '+00:00' : '+05:30';
 
 export const getNextSessionTime = (
     meeting: Meeting,
@@ -15,7 +17,7 @@ export const getNextSessionTime = (
 
     switch (meeting.frequency.toLowerCase()) {
         case 'none':
-            return time.format(format);
+            return time.utcOffset(IST_OFFSET).format(format);
         case 'daily':
             nextSessionTime = time.clone().set({
                 hour: time.hour(),
@@ -51,8 +53,8 @@ export const getNextSessionTime = (
             }
             break;
         default:
-            return time.format(format);
+            return time.utcOffset(IST_OFFSET).format(format);
     }
 
-    return nextSessionTime.format(format);
+    return nextSessionTime.utcOffset(IST_OFFSET).format(format);
 };
