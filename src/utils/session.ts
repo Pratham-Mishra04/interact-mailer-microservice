@@ -3,7 +3,6 @@ import { ENV } from '../config/env';
 import { Meeting } from '../types';
 
 const FORMAT = 'hh:mm A, ddd MMM DD';
-const IST_OFFSET = ENV.NODE_ENV === 'development' ? '+00:00' : '+05:30';
 
 export const getNextSessionTime = (
     meeting: Meeting,
@@ -12,6 +11,8 @@ export const getNextSessionTime = (
 ): string => {
     const now = moment();
     const time = end ? moment(meeting.endTime) : moment(meeting.startTime);
+
+    const IST_OFFSET = ENV.NODE_ENV === 'development' ? '+00:00' : '+05:30';
 
     let nextSessionTime: moment.Moment;
 
