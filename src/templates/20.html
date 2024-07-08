@@ -1,24 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Group Chat Invitation Accepted | Interact</title>
-</head>
-<body style="font-family: 'Arial', sans-serif; line-height: 1.6; color: #333; background-color: #f4f4f4; margin: 0; padding: 48px;">
-    <div style="max-width: 720px; margin: 20px auto; padding: 20px; background-color: #fff; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
-        <h1 style="color: #333;">Your Invitation Has Been Accepted!</h1>
-        <h3 style="margin-bottom: 20px;">Hello {{User.Name}},</h3>
-        <p style="margin-bottom: 20px;">Good news! {{SecondaryUser.Name}} has accepted your invitation to join the group chat on Interact.</p>
-        <p style="margin-bottom: 20px;">The group chat is named: <strong>{{GroupChat.title}}</strong></p>
-        <p style="margin-bottom: 20px;"><i>{{GroupChat.Description}}</i></p>
-        <p style="margin-bottom: 20px;">{{SecondaryUser.Name}} is excited to join the conversation and start collaborating with you and other members.</p>
-        <p style="margin-bottom: 20px;">Don't miss out on the engaging discussions and collaborative opportunities that lie ahead. Jump back into the chat and start interacting!</p>
-        <p style="margin-bottom: 20px;">If you have any questions or need assistance, feel free to reply to this email.</p>
-        <div style="margin-top: 20px;">
-            <div>Best regards,</div>
-            <div>Interact</div>
-        </div>
+  </head>
+  <body
+    style="
+      font-family: 'Arial', sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 48px;
+    "
+  >
+    <div
+      style="
+        max-width: 720px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      "
+    >
+      <h1 style="color: #333">Your Invitation Has Been Accepted!</h1>
+      <h3 style="margin-bottom: 20px">Hello {{User.Name}},</h3>
+      <p style="margin-bottom: 20px">
+        Good news! {{SecondaryUser.Name}} has accepted your invitation to join the group chat on
+        Interact.
+      </p>
+      <p style="margin-bottom: 20px">
+        The group chat is named: <strong>{{GroupChat.title}}</strong>
+      </p>
+      <p style="margin-bottom: 20px"><i>{{GroupChat.Description}}</i></p>
+      <p style="margin-bottom: 20px">
+        {{SecondaryUser.Name}} is excited to join the conversation and start collaborating with you
+        and other members.
+      </p>
+      <p style="margin-bottom: 20px">
+        Don't miss out on the engaging discussions and collaborative opportunities that lie ahead.
+        Jump back into the chat and start interacting!
+      </p>
+      <p style="margin-bottom: 20px">
+        If you have any questions or need assistance, feel free to reply to this email.
+      </p>
+      <div style="margin-top: 20px">
+        <div>Best regards,</div>
+        <div>Interact</div>
+      </div>
     </div>
-</body>
+  </body>
 </html>

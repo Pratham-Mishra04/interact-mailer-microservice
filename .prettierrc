@@ -4,5 +4,13 @@
     "singleQuote": true,
     "endOfLine": "auto",
     "arrowParens": "avoid",
-    "printWidth": 100
+    "printWidth": 100,
+    "overrides": [
+        {
+            "files": "*.html",
+            "options": {
+                "tabWidth": 2
+            }
+        }
+    ]
 }

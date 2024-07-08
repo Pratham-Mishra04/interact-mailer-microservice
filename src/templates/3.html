@@ -1,24 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>One-Time Password (OTP) for Verification | Interact</title>
-</head>
-<body style="font-family: 'Arial', sans-serif; line-height: 1.6; color: #333; background-color: #f4f4f4; margin: 0; padding: 48px;">
-    <div style="max-width: 720px; margin: 20px auto; padding: 20px; background-color: #fff; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
-        <h1 style="color: #333;">Your One-Time Password (OTP) for Verification</h1>
-        <h3 style="margin-bottom: 20px;">Hello {{User.Name}},</h3>
-        <p style="margin-bottom: 20px;">We're bummed to see you go, but totally understand. Before you deactivate your Interact account, let's just double-check it's you with this one-time code (OTP):</p>
-        <p style="margin-bottom: 20px;">Your OTP is: <b>{{OTP}}</b></p>
-        <p style="margin-bottom: 20px;">This OTP is valid for the next 10 minutes. Please enter this code to complete the account deactivation process.</p>
-        <p style="margin-bottom: 20px;">Think of it as a secret handshake saying goodbye. Enter the code on the deactivation page, and that's it – your account will be off on its next adventure.</p>
-        <p style="margin-bottom: 20px;">For your security, do not share this OTP with anyone. If you did not sign up for an account with us, please ignore this email or contact our support team immediately.</p>
-        <p style="margin-bottom: 20px;"><b>Second thoughts? No worries!</b>Interact is always here for you if you change your mind.</p>
-        <div style="margin-top: 20px;">
-            <div>Best regards,</div>
-            <div>Interact</div>
-        </div>
+  </head>
+  <body
+    style="
+      font-family: 'Arial', sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 48px;
+    "
+  >
+    <div
+      style="
+        max-width: 720px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      "
+    >
+      <h1 style="color: #333">Your One-Time Password (OTP) for Verification</h1>
+      <h3 style="margin-bottom: 20px">Hello {{User.Name}},</h3>
+      <p style="margin-bottom: 20px">
+        We're bummed to see you go, but totally understand. Before you deactivate your Interact
+        account, let's just double-check it's you with this one-time code (OTP):
+      </p>
+      <p style="margin-bottom: 20px">Your OTP is: <b>{{OTP}}</b></p>
+      <p style="margin-bottom: 20px">
+        This OTP is valid for the next 10 minutes. Please enter this code to complete the account
+        deactivation process.
+      </p>
+      <p style="margin-bottom: 20px">
+        Think of it as a secret handshake saying goodbye. Enter the code on the deactivation page,
+        and that's it – your account will be off on its next adventure.
+      </p>
+      <p style="margin-bottom: 20px">
+        For your security, do not share this OTP with anyone. If you did not sign up for an account
+        with us, please ignore this email or contact our support team immediately.
+      </p>
+      <p style="margin-bottom: 20px">
+        <b>Second thoughts? No worries!</b>Interact is always here for you if you change your mind.
+      </p>
+      <div style="margin-top: 20px">
+        <div>Best regards,</div>
+        <div>Interact</div>
+      </div>
     </div>
-</body>
+  </body>
 </html>

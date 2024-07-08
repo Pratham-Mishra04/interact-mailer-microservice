@@ -1,32 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Flagged Comment Notification | Interact</title>
-</head>
-<body style="font-family: 'Arial', sans-serif; line-height: 1.6; color: #333; background-color: #f4f4f4; margin: 0; padding: 48px;">
-    <div style="max-width: 720px; margin: 20px auto; padding: 20px; background-color: #fff; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
-        <h1 style="color: #333;">🚩 Your Comment Has Been Flagged</h1>
-        <h3 style="margin-bottom: 20px;">Hello {{User.Name}},</h3>
-        <p style="margin-bottom: 20px;">We wanted to inform you that one of your comments has been flagged by a member of the Interact community.</p>
-        
-        <div style="padding: 15px; background-color: #f4f4f4; border-radius: 5px; margin-bottom: 20px;">
-            <h2 style="color: #333; font-size: 16px;">Flagged Comment:</h2>
-            <p style="font-style: italic; color: #555;">"{{Comment.Content}}"</p>
-        </div>
+  </head>
+  <body
+    style="
+      font-family: 'Arial', sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 48px;
+    "
+  >
+    <div
+      style="
+        max-width: 720px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      "
+    >
+      <h1 style="color: #333">🚩 Your Comment Has Been Flagged</h1>
+      <h3 style="margin-bottom: 20px">Hello {{User.Name}},</h3>
+      <p style="margin-bottom: 20px">
+        We wanted to inform you that one of your comments has been flagged by a member of the
+        Interact community.
+      </p>
 
-        <p style="margin-bottom: 20px;">Our moderation team will review this comment to determine if it violates our community guidelines.</p>
+      <div
+        style="padding: 15px; background-color: #f4f4f4; border-radius: 5px; margin-bottom: 20px"
+      >
+        <h2 style="color: #333; font-size: 16px">Flagged Comment:</h2>
+        <p style="font-style: italic; color: #555">"{{Comment.Content}}"</p>
+      </div>
 
-        <p style="margin-bottom: 20px;">Note: You cannot directly appeal flagged announcements. However, if you believe this flag was a mistake, you can reply to this email to share your concerns. We'll investigate further and take appropriate action.</p>
+      <p style="margin-bottom: 20px">
+        Our moderation team will review this comment to determine if it violates our community
+        guidelines.
+      </p>
 
-        <p style="margin-bottom: 20px;">We take community guidelines seriously to ensure a safe and respectful environment for all members.</p>
-        <p style="margin-bottom: 20px;">If you have any questions or need assistance, feel free to reply to this email.</p>
-        
-        <div style="margin-top: 20px;">
-            <div>Best regards,</div>
-            <div>The Interact Team</div>
-        </div>
+      <p style="margin-bottom: 20px">
+        Note: You cannot directly appeal flagged announcements. However, if you believe this flag
+        was a mistake, you can reply to this email to share your concerns. We'll investigate further
+        and take appropriate action.
+      </p>
+
+      <p style="margin-bottom: 20px">
+        We take community guidelines seriously to ensure a safe and respectful environment for all
+        members.
+      </p>
+      <p style="margin-bottom: 20px">
+        If you have any questions or need assistance, feel free to reply to this email.
+      </p>
+
+      <div style="margin-top: 20px">
+        <div>Best regards,</div>
+        <div>The Interact Team</div>
+      </div>
     </div>
-</body>
+  </body>
 </html>
