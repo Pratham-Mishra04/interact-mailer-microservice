@@ -21,9 +21,15 @@
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
+        .logo-container {
+            background-color: #fff; 
+            padding: 10px; 
+            text-align: center;
+        }
         .logo {
             display: block;
             margin: 0 auto 20px;
+            height: 50px;
         }
         h1 {
             color: #333;
@@ -61,7 +67,9 @@
 </head>
 <body>
     <div class="container">
-        <img src="cid:logo" crossorigin="anonymous" alt="Logo" height="50" class="logo" />
+        <div class="logo-container">
+            <img src="cid:logo" crossorigin="anonymous" alt="Logo" class="logo" />
+        </div>
         <h1>Welcome to Interact!</h1>
         <p>Hi {{User.Name}},</p>
         <p>Welcome to Interact, the connecting platform that helps you find right projects for your niche and helps organisations to collaborate effectively.</p>

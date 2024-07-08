@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task Due Today | Interact</title>
+    <title>Task Completed Notification | Interact</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -49,29 +49,34 @@
             display: inline-block;
             line-height: 120%;
         }
+        hr {
+            width: 100%;
+            border: none;
+            border-top: 1px solid #eaeaea;
+            margin: 26px 0;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <img class="logo" src="cid:logo" crossorigin="anonymous" alt="Interact" width="170" height="50">
+            <img class="logo" src={{LogoURL}} crossorigin="anonymous" alt="Interact" width="170" height="50">
         </div>
-        <h1>Task Due Today</h1>
+        <h1>Task Completed Notification</h1>
         <h3>Hello {{User.Name}},</h3>
-        <p>This is a reminder that you have a task due today on Interact. Please find the task details below:</p>
+        <p>The following task has been completed by {{User.Name}}:</p>
         <p>
             <strong>Task Title:</strong> {{Task.Title}}<br>
-            <strong>Description:</strong> {{Task.Description}}<br>
+            <strong>Description:</strong> {{Task.Description}}
         </p>
-        <p>Please ensure that you review and complete this task by the end of the day. You can view and manage this task by logging into your Interact account or by clicking the button below:</p>
+        <p>You can view the details of this completed task by logging into your Interact account.</p>
         <a href={{Task.URL}} class="button" target="_blank">
             <span>View Task</span>
         </a>
         <p>Best regards,</p>
         <p>The Interact Team</p>
-        <hr style="width:100%;border:none;border-top:1px solid #eaeaea;margin:26px 0;">
-        <p style="font-size: small;">This message was produced and distributed by Interact. If you were not expecting this email, you can ignore it. For any concerns, please contact support.</p>
+        <hr>
+        <p style="font-size: small;">This message was produced and distributed by Interact. If you have any questions or concerns, please contact support.</p>
     </div>
 </body>
 </html>
-
