@@ -471,9 +471,7 @@ export const sendMultipleMail = catchAsync(
                 logger.error(`Error sending email to ${recipient}:`, 'sendMultipleMail', error);
             }
             count++;
-            if (count%5 === 0) {
-                await delay(4000);
-            }
+            if (count % 5 === 0) await delay(5000);
         }
         res.status(200).json({
             status: 'success',
