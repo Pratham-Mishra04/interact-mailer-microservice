@@ -472,7 +472,7 @@ export const sendMultipleMail = catchAsync(
             }
             count++;
             if (count%5 === 0) {
-                await delay(2000);
+                await delay(4000);
             }
         }
         res.status(200).json({
