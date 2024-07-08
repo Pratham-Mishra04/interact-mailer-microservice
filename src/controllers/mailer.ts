@@ -450,7 +450,7 @@ export const sendMultipleMail = catchAsync(
         if (!req.body.recipients) return next(new AppError('Recipients not defined', 400));
 
         const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
-        
+
         let count = 0;
         for (const recipient of recipients) {
             if (!recipient.email) {
@@ -472,7 +472,7 @@ export const sendMultipleMail = catchAsync(
             }
             count++;
             if (count%5 === 0) {
-                await delay(5000);
+                await delay(2000);
             }
         }
         res.status(200).json({
