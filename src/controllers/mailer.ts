@@ -449,6 +449,9 @@ export const sendMultipleMail = catchAsync(
         if (emailType == undefined) return next(new AppError('Email Type Not Defined', 400));
         if (!req.body.recipients) return next(new AppError('Recipients not defined', 400));
 
+        const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+        
+        let count = 0;
         for (const recipient of recipients) {
             if (!recipient.email) {
                 logger.info('Recipient email not found', 'sendMultipleMail');
@@ -466,6 +469,10 @@ export const sendMultipleMail = catchAsync(
                 });
             } catch (error) {
                 logger.error(`Error sending email to ${recipient}:`, 'sendMultipleMail', error);
+            }
+            count++;
+            if (count%5 === 0) {
+                await delay(5000);
             }
         }
         res.status(200).json({
