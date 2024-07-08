@@ -42,6 +42,7 @@ const getSubjectFromType = (type: number): string => {
             return 'Confirm Account Deactivation on Interact';
         case 4:
             return 'Your One-Time Password (OTP) for Password Reset on Interact';
+
         case 10:
             return 'New Chat Request on Interact';
         case 11:
@@ -55,15 +56,30 @@ const getSubjectFromType = (type: number): string => {
         case 15:
             return 'You have a new Project Invitation';
         case 16:
-            return 'You have a new Organisation Invitation ';
+            return 'You have a new Organisation Invitation';
         case 17:
             return 'You have a new Group Chat Invitation';
+        case 18:
+            return 'User accepted your Project Invitation';
+        case 19:
+            return 'User accepted your Organisation Invitation';
+        case 20:
+            return 'User accepted your Group Chat Invitation';
         case 21:
             return 'You have been assigned a new task';
         case 22:
             return 'Task has been completed';
         case 23:
             return 'New meeting scheduled on Interact';
+        case 24:
+            return 'Meeting Rescheduled';
+        case 25:
+            return 'You have impressions on your project!';
+        case 26:
+            return 'You have impressions on your event!';
+        case 27:
+            return 'You have impressions on your opening!';
+
         // Engagement Section (30-40)
         case 30:
             return "Check Out What's New on Interact!";
@@ -75,6 +91,8 @@ const getSubjectFromType = (type: number): string => {
             return 'Task due Today!';
         case 34:
             return 'Meeting due Today';
+        case 35:
+            return 'You were tagged in a comment';
 
         // Flags Section (50-56)
         case 50:
@@ -107,6 +125,8 @@ const getSubjectFromType = (type: number): string => {
             return 'Announcement Flag Resolved on Interact';
         case 76:
             return 'Poll Flag Resolved on Interact';
+
+        // Flagged Items Deleted Section (100-106)
         case 100:
             return 'Flagged Comment Deleted on Interact';
         case 101:
@@ -120,7 +140,7 @@ const getSubjectFromType = (type: number): string => {
         case 105:
             return 'Flagged Announcement Deleted on Interact';
         case 106:
-            return 'Flagged Flag Deleted on Interact';
+            return 'Flagged Poll Deleted on Interact';
 
         default:
             return '';
@@ -216,15 +236,15 @@ const getParamFuncFromReq = (
                     ?.replaceAll('{{Task.Title}}', task.title)
                     .replaceAll('{{Task.Description}}', task.description)
                     .replaceAll(
-                        '{{Task.URL}}', 
+                        '{{Task.URL}}',
                         `${ENV.FRONTEND_URL}/organisations?oid=${task.organizationID}&redirect_url=/tasks?tid=${task.id}`
                     );
             case 22:
                 return parameterizedHTML
                     ?.replaceAll('{{Task.Title}}', task.title || '')
-                    .replaceAll('{{Task.Description}}',task.description || '')
+                    .replaceAll('{{Task.Description}}', task.description || '')
                     .replaceAll(
-                        '{{Task.URL}}', 
+                        '{{Task.URL}}',
                         `${ENV.FRONTEND_URL}/organisations?oid=${task.organizationID}&redirect_url=/tasks?tid=${task.id}`
                     );
             case 23:
@@ -298,7 +318,7 @@ const getParamFuncFromReq = (
                     ?.replaceAll('{{Task.Title}}', task.title)
                     .replaceAll('{{Task.Description}}', task.description)
                     .replaceAll(
-                        '{{Task.URL}}', 
+                        '{{Task.URL}}',
                         `${ENV.FRONTEND_URL}/organisations?oid=${task.organizationID}&redirect_url=/tasks?tid=${task.id}`
                     );
 
@@ -326,7 +346,7 @@ const getParamFuncFromReq = (
                         '{{Meeting.URL}}',
                         `${ENV.FRONTEND_URL}/organisations?oid=${meeting.organizationID}&redirect_url=/meetings/${meeting.id}`
                     );
-            case 35: 
+            case 35:
                 return parameterizedHTML
                     ?.replaceAll('{{SecondaryUser.Name}}', secondaryUser?.name || '')
                     .replaceAll('{{Comment.Content}}', comment.content || '');
