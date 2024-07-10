@@ -458,7 +458,10 @@ export const sendMultipleMail = catchAsync(
                 logger.info('Recipient email not found', 'sendMultipleMail');
                 continue;
             }
-            if (!recipient.user) logger.info('Recipient not found', 'sendMultipleMail');
+            if (!recipient.user) {
+                logger.info('Recipient not found', 'sendMultipleMail');
+                continue;
+            }
 
             try {
                 Nodemailer({
