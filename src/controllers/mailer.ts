@@ -233,7 +233,8 @@ const getParamFuncFromReq = (
                     .replaceAll('{{GroupChat.description}}', groupchat.description || '');
             case 21:
                 return parameterizedHTML
-                    ?.replaceAll('{{Task.Title}}', task.title)
+                    ?.replaceAll('{{SecondaryUser.Name}}', secondaryUser?.name || '')
+                    .replaceAll('{{Task.Title}}', task.title)
                     .replaceAll('{{Task.Description}}', task.description)
                     .replaceAll(
                         '{{Task.URL}}',
