@@ -21,6 +21,7 @@ import {
     Task,
     User,
 } from '../types/index';
+import { getRedirectURL, getStrippedContent } from '../utils/comment';
 import logger from '../utils/logger';
 import { getNextSessionTime } from '../utils/session';
 
@@ -350,11 +351,12 @@ const getParamFuncFromReq = (
             case 35:
                 return parameterizedHTML
                     ?.replaceAll('{{SecondaryUser.Name}}', secondaryUser?.name || '')
-                    .replaceAll('{{Comment.Content}}', comment.content || '');
+                    .replaceAll('{{Comment.Content}}', getStrippedContent(comment))
+                    .replaceAll('{{Comment.URL}}', getRedirectURL(comment));
 
             case 50:
                 return parameterizedHTML
-                    ?.replaceAll('{{Comment.Content}}', comment.content || '')
+                    ?.replaceAll('{{Comment.Content}}', getStrippedContent(comment))
                     .replaceAll('{{Comment.Id}}', comment.id || '');
             case 51:
                 return parameterizedHTML?.replaceAll('{{Post.Title}}', post.content || '');
@@ -375,7 +377,10 @@ const getParamFuncFromReq = (
             case 56:
                 return parameterizedHTML?.replaceAll('{{Poll.Title}}', poll.title || '');
             case 70:
-                return parameterizedHTML?.replaceAll('{{Comment.Content}}', comment.content || '');
+                return parameterizedHTML?.replaceAll(
+                    '{{Comment.Content}}',
+                    getStrippedContent(comment)
+                );
             case 71:
                 return parameterizedHTML?.replaceAll('{{Post.Content}}', post.content || '');
             case 72:
@@ -395,7 +400,10 @@ const getParamFuncFromReq = (
             case 76:
                 return parameterizedHTML?.replaceAll('{{Poll.Title}}', poll.title || '');
             case 100:
-                return parameterizedHTML?.replaceAll('{{Comment.Content}}', comment.content);
+                return parameterizedHTML?.replaceAll(
+                    '{{Comment.Content}}',
+                    getStrippedContent(comment)
+                );
             case 101:
                 return parameterizedHTML?.replaceAll('{{Post.Content}}', post.content || '');
             case 102:

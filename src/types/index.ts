@@ -38,9 +38,20 @@ export interface Comment {
     post: Post;
     projectID: string;
     project: Project;
+    eventID: string;
+    event: Event | null;
+    announcementID: string;
+    announcement: Announcement | null;
+    taskID: string;
+    task: Task | null;
+    parentCommentID: string;
+    isRepliedComment: boolean;
+    level: number;
     content: string;
     noLikes: number;
+    noReplies: number;
     likedBy: string[];
+    taggedUsers: User[];
     createdAt: Date;
 }
 
@@ -170,18 +181,18 @@ export interface GroupChat {
     project: Project;
     invitations: Invitation[];
     createdAt: Date;
-  }
+}
 
-  export interface Organization {
+export interface Organization {
     id: string;
     userID: string;
     user: User;
     title: string;
     invitations: Invitation[];
     createdAt: Date;
-  }
+}
 
-  export interface Invitation {
+export interface Invitation {
     id: string;
     userID: string;
     user: User;
@@ -197,9 +208,9 @@ export interface GroupChat {
     status: number;
     isRead: boolean;
     createdAt: Date;
-  }
+}
 
-  export interface Task {
+export interface Task {
     id: string;
     title: string;
     description: string;
@@ -208,9 +219,9 @@ export interface GroupChat {
     users: User[];
     organizationID: string;
     project: Project;
-  }
-  
-  export interface Meeting {
+}
+
+export interface Meeting {
     id: string;
     dyteID: string;
     title: string;
@@ -233,12 +244,12 @@ export interface GroupChat {
     createdAt: Date;
     nextSessionTime: Date;
     sessions: Session[];
-  }
-  export interface Session {
+}
+export interface Session {
     id: string;
     meetingID: string;
     isLive: boolean;
     startedAt: Date;
     endedAt: Date;
     createdAt: Date;
-  }
+}
