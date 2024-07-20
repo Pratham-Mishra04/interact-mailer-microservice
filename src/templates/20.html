@@ -12,44 +12,57 @@
       color: #333;
       background-color: #f4f4f4;
       margin: 0;
-      padding: 48px;
+      padding: 20px;
     "
   >
     <div
       style="
-        max-width: 720px;
-        margin: 20px auto;
+        max-width: 600px;
+        width: 100%;
+        margin: 0 auto;
         padding: 20px;
         background-color: #fff;
         border-radius: 8px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       "
     >
-      <h1 style="color: #333">Your Invitation Has Been Accepted!</h1>
-      <h3 style="margin-bottom: 20px">Hello {{User.Name}},</h3>
-      <p style="margin-bottom: 20px">
+      <div style="background-color: #fff; padding: 10px; text-align: center;">
+        <img
+          src="cid:logo"
+          alt="Interact Logo"
+          style="display: block; margin: 0 auto; max-width: 100%; height: auto;"
+          width="170"
+        />
+      </div>
+      <h1 style="color: #333; text-align: left;">Your Invitation Has Been Accepted!</h1>
+      <h3 style="margin-bottom: 20px; text-align: left;">Hello {{User.Name}},</h3>
+      <p style="margin-bottom: 20px; text-align: left;">
         Good news! {{SecondaryUser.Name}} has accepted your invitation to join the group chat on
         Interact.
       </p>
-      <p style="margin-bottom: 20px">
+      <p style="margin-bottom: 20px; text-align: left;">
         The group chat is named: <strong>{{GroupChat.title}}</strong>
       </p>
-      <p style="margin-bottom: 20px"><i>{{GroupChat.Description}}</i></p>
-      <p style="margin-bottom: 20px">
+      <p style="margin-bottom: 20px; text-align: left;"><i>{{GroupChat.Description}}</i></p>
+      <p style="margin-bottom: 20px; text-align: left;">
         {{SecondaryUser.Name}} is excited to join the conversation and start collaborating with you
         and other members.
       </p>
-      <p style="margin-bottom: 20px">
+      <p style="margin-bottom: 20px; text-align: left;">
         Don't miss out on the engaging discussions and collaborative opportunities that lie ahead.
         Jump back into the chat and start interacting!
       </p>
-      <p style="margin-bottom: 20px">
+      <p style="margin-bottom: 20px; text-align: left;">
         If you have any questions or need assistance, feel free to reply to this email.
       </p>
-      <div style="margin-top: 20px">
+      <div style="margin-top: 20px; text-align: left;">
         <div>Best regards,</div>
         <div>Interact</div>
       </div>
+      <hr style="width: 100%; border: none; border-top: 1px solid #eaeaea; margin: 20px 0;" />
+      <p style="font-size: 12px; line-height: 24px; color: hsl(214, 7%, 62%); text-align: center;">
+        If you did not sign up for an account with us, please ignore this email or contact our support team immediately.
+      </p>
     </div>
   </body>
 </html>
