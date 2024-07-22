@@ -12,40 +12,65 @@
       color: #333;
       background-color: #f4f4f4;
       margin: 0;
-      padding: 48px;
+      padding: 20px;
     "
   >
     <div
       style="
         max-width: 720px;
-        margin: 20px auto;
+        width: 100%;
+        margin: 0 auto;
         padding: 20px;
         background-color: #fff;
         border-radius: 8px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       "
     >
-      <h1 style="color: #333">Congratulations! Your Application for Opening Has Been Submitted</h1>
-      <h3 style="margin-bottom: 20px">Hello {{User.Name}},</h3>
-      <p style="margin-bottom: 20px">
+    <div style="background-color: #fff; padding: 10px; text-align: center;">
+      <img src="cid:logo" alt="Interact Logo" style="display: block; margin: 0 auto; max-width: 100%; height: auto;" width="170" />
+    </div>
+      <h1 style="color: #333; text-align: left; font-size: 24px; margin-top: 0;">
+        Congratulations! Your Application for Opening Has Been Submitted
+      </h1>
+      <h3 style="margin-bottom: 20px; text-align: left;">
+        Hello {{User.Name}},
+      </h3>
+      <p style="margin-bottom: 20px; text-align: left;">
         We're happy to inform you that your application for opening on Interact has been
         successfully submitted!
       </p>
-      <p style="margin-bottom: 20px">
+      <p style="margin-bottom: 20px; text-align: left;">
         Our team will now review your application and get in touch with you shortly.
       </p>
-      <p style="margin-bottom: 20px">
+      <p style="margin-bottom: 20px; text-align: left;">
         In the meantime, you can explore our platform and learn more about what Interact has to
         offer.
       </p>
-      <p style="margin-bottom: 20px">
+      <p style="margin-bottom: 20px; text-align: left;">
         We appreciate your interest in opening with Interact. We look forward to potentially
         welcoming you to our community!
       </p>
-      <div style="margin-top: 20px">
-        <div>Best regards,</div>
-        <div>The Interact Team</div>
+      <div style="margin-top: 20px; text-align: center;">
+        <a
+          href="https://interactnow.in/explore"
+          style="
+            display: inline-block;
+            text-decoration: none;
+            padding: 10px 20px;
+            background-color: #1e88e5;
+            color: #fff;
+            border-radius: 5px;
+            font-weight: bold;
+            text-align: center;
+          "
+        >
+          Explore Interact
+        </a>
       </div>
+      <hr style="width: 100%; border: none; border-top: 1px solid #eaeaea; margin: 20px 0;" />
+      <p style="font-size: 12px; line-height: 24px; color: hsl(214, 7%, 62%); text-align: center;">
+        If you did not sign up for an account with us, please ignore this email or contact our support team immediately.
+      </p>
     </div>
   </body>
 </html>

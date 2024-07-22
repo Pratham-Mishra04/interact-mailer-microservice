@@ -3,54 +3,87 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>One-Time Password (OTP) for Verification | Interact</title>
+    <title>One-Time Password (OTP) for Deactivation | Interact</title>
   </head>
   <body
     style="
-      font-family: 'Arial', sans-serif;
+      font-family: Arial, sans-serif;
       line-height: 1.6;
       color: #333;
       background-color: #f4f4f4;
       margin: 0;
-      padding: 48px;
+      padding: 20px;
     "
   >
     <div
       style="
-        max-width: 720px;
-        margin: 20px auto;
+        max-width: 600px;
+        width: 100%;
+        margin: 0 auto;
         padding: 20px;
         background-color: #fff;
         border-radius: 8px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       "
     >
-      <h1 style="color: #333">Your One-Time Password (OTP) for Verification</h1>
-      <h3 style="margin-bottom: 20px">Hello {{User.Name}},</h3>
-      <p style="margin-bottom: 20px">
+      <h1 style="color: #333; font-size: 24px; text-align: center; margin: 0;">
+        Your One-Time Password (OTP) for Deactivation
+      </h1>
+      <h3 style="margin-bottom: 20px; text-align: center;">
+        Hello {{User.Name}},
+      </h3>
+      <p style="margin-bottom: 20px; text-align: left;">
         We're bummed to see you go, but totally understand. Before you deactivate your Interact
         account, let's just double-check it's you with this one-time code (OTP):
       </p>
-      <p style="margin-bottom: 20px">Your OTP is: <b>{{OTP}}</b></p>
-      <p style="margin-bottom: 20px">
+      <div
+        style="
+          background-color: #1e88e5;
+          color: #fff;
+          font-size: 28px;
+          font-weight: bold;
+          text-align: center;
+          padding: 16px;
+          border-radius: 8px;
+          margin: 20px auto;
+          width: 80%;
+          max-width: 300px;
+        "
+      >
+        {{OTP}}
+      </div>
+      <p style="margin-bottom: 20px; text-align: left;">
         This OTP is valid for the next 10 minutes. Please enter this code to complete the account
         deactivation process.
       </p>
-      <p style="margin-bottom: 20px">
+      <p style="margin-bottom: 20px; text-align: left;">
         Think of it as a secret handshake saying goodbye. Enter the code on the deactivation page,
         and that's it – your account will be off on its next adventure.
       </p>
-      <p style="margin-bottom: 20px">
+      <p style="margin-bottom: 20px; text-align: left;">
         For your security, do not share this OTP with anyone. If you did not sign up for an account
         with us, please ignore this email or contact our support team immediately.
       </p>
-      <p style="margin-bottom: 20px">
-        <b>Second thoughts? No worries!</b>Interact is always here for you if you change your mind.
+      <p style="margin-bottom: 20px; text-align: left;">
+        <b>Second thoughts? No worries!</b> Interact is always here for you if you change your mind.
       </p>
-      <div style="margin-top: 20px">
+
+      <!-- New content before the last div -->
+      <hr style="width: 100%; border: none; border-top: 1px solid #eaeaea; margin: 20px 0;" />
+      <p style="font-size: 12px; line-height: 24px; color: hsl(214, 7%, 62%); text-align: center;">
+        If you did not sign up for an account with us, please ignore this email or contact our support team immediately.
+      </p>
+
+      <div style="margin-top: 20px; text-align: center;">
         <div>Best regards,</div>
         <div>Interact</div>
       </div>
+
+      <!-- Footer -->
+      <hr style="width: 100%; border: none; border-top: 1px solid #eaeaea; margin: 26px 0;" />
+      <p style="font-size: small; color: hsl(214, 7%, 62%); text-align: center;">
+        This message was produced and distributed by Interact. If you were not expecting this email, you can ignore it. For any concerns, please contact support.
+      </p>
     </div>
   </body>
 </html>

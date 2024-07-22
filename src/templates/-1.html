@@ -5,86 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Interact Early Access Confirmation</title>
   </head>
-  <body
-    style="
-      font-family: 'Arial', sans-serif;
-      line-height: 1.6;
-      color: #333;
-      background-color: #f4f4f4;
-      margin: 0;
-      padding: 48px;
-    "
-  >
-    <div
-      style="
-        max-width: 720px;
-        margin: 20px auto;
-        padding: 20px;
-        background-color: #fff;
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      "
-    >
-      <h1 style="color: #333">Welcome to Interact Early Access!</h1>
-      <h3 style="margin-bottom: 20px">Dear {{User.Name}},</h3>
-      <p style="margin-bottom: 20px">
-        Thank you for signing up for Interact Early Access! You're just one step away from joining
-        our vibrant community of students.
+  <body style="font-family: 'Arial', sans-serif; line-height: 1.6; color: #100f0f; background-color: #f4f4f4; margin: 0; padding: 20px;">
+    <div style="max-width: 600px; width: 100%; margin: 0 auto; padding: 20px; background-color: #fff; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); text-align: center;">
+      <div style="background-color: #fff; padding: 10px; border-radius: 8px; box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); display: inline-block;">
+        <img alt="Interact" height="50" src="cid:logo" crossorigin="anonymous" width="170" style="display: block; margin: 0 auto; background-color: #fff; padding: 10px; border-radius: 8px;" />
+      </div>
+      <h1 style="color: #333; font-size: 24px; margin-top: 20px;">Welcome to Interact Early Access!</h1>
+      <h3 style="margin-bottom: 20px;">Dear {{User.Name}},</h3>
+      <p style="margin-bottom: 20px;">
+        Thank you for signing up for Interact Early Access! You're just one step away from joining our vibrant community of students.
       </p>
-      <p style="margin-bottom: 20px">
+      <p style="margin-bottom: 20px;">
         To complete your signup process and start exploring Interact, click the button below:
       </p>
-
       <a
         href="https://interactnow.in/signup?email={{ .Email }}&token={{ .Token }}"
-        style="
-          width: 50%;
-          text-decoration: none;
-          text-align: center;
-          margin: auto;
-          display: flex;
-          padding: 1em;
-          gap: 0.4rem;
-          border: none;
-          font-weight: bolder;
-          border-radius: 10px;
-          text-shadow: 2px 2px 3px rgb(136 0 136 / 50%);
-          background: linear-gradient(
-              15deg,
-              #880088,
-              #aa2068,
-              #cc3f47,
-              #de6f3d,
-              #f09f33,
-              #de6f3d,
-              #cc3f47,
-              #aa2068,
-              #880088
-            )
-            no-repeat;
-          background-size: 300%;
-          background-position: left center;
-          transition: background 0.3s ease;
-          color: #fff;
-        "
-        class="button"
-        onmouseover="this.style.backgroundSize='320%'; this.style.backgroundPosition='right center';"
-        onmouseout="this.style.backgroundSize='300%'; this.style.backgroundPosition='left center';"
+        style="width: 50%; max-width: 280px; text-decoration: none; text-align: center; margin: 20px auto; display: block; padding: 10px; border: none; font-weight: bolder; border-radius: 10px; background: #1E88E5; color: #fff;"
       >
         Complete Signup!
       </a>
-
-      <p style="margin-bottom: 20px">
-        <b>This link is valid for 7 days.</b> After that, you'll need to request a new early access
-        token.
+      <p style="margin-top: 20px; margin-bottom: 20px;">
+        <b>This link is valid for 7 days.</b> After that, you'll need to request a new early access token.
       </p>
-      <p style="margin-bottom: 20px">
+      <p style="margin-bottom: 20px;">
         If you have any questions or need assistance, feel free to reply to this email.
       </p>
-      <div style="margin-top: 20px">
+      <div style="margin-top: 20px;">
         <div>Best regards,</div>
         <div>Interact</div>
       </div>
+      <hr style="width: 100%; border: none; border-top: 1px solid #eaeaea; margin: 26px 0;" />
+      <p style="font-size: small; color: hsl(214, 7%, 62%);">
+        This message was produced and distributed by Interact. If you were not expecting this email, you can ignore it. For any concerns, please contact support.
+      </p>
     </div>
   </body>
 </html>

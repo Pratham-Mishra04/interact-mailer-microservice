@@ -4,102 +4,39 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>New Chat from {{SecondaryUser.Name}} | Interact</title>
-    <style>
-      body {
-        font-family: 'Arial', sans-serif;
-        line-height: 1.6;
-        color: #333;
-        background-color: #f4f4f4;
-        margin: 0;
-        padding: 48px;
-      }
-      .container {
-        max-width: 720px;
-        margin: 20px auto;
-        padding: 20px;
-        background-color: #fff;
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      }
-      .logo-container {
-        background-color: #fff;
-        padding: 10px;
-        text-align: center;
-      }
-      .logo {
-        display: block;
-        margin: 0 auto 20px;
-        height: 50px;
-      }
-      h1 {
-        color: #333;
-      }
-      h3 {
-        margin-bottom: 20px;
-      }
-      p {
-        font-size: 16px;
-        line-height: 26px;
-        margin: 16px 0;
-      }
-      a.button {
-        display: block;
-        max-width: 100%;
-        background-color: #1e88e5;
-        border-radius: 0.25rem;
-        color: #fff;
-        font-size: 16px;
-        text-align: center;
-        padding: 12px;
-        text-decoration: none;
-        margin: 20px auto;
-        width: 50%;
-        text-align: center;
-        margin: auto;
-        display: flex;
-        padding: 1em;
-        gap: 0.4rem;
-        border: none;
-        font-weight: bolder;
-        border-radius: 10px;
-        background-color: #1e88e5;
-        background-size: 300%;
-        background-position: left center;
-        transition: background 0.3s ease;
-        color: #fff;
-      }
-      a.button:hover {
-        background-size: 320%;
-        background-position: right center;
-      }
-      hr {
-        width: 100%;
-        border: none;
-        border-top: 1px solid #eaeaea;
-        margin: 20px 0;
-      }
-    </style>
   </head>
-  <body>
-    <div class="container">
-      <div class="logo-container">
-        <img src="cid:logo" crossorigin="anonymous" alt="Logo" class="logo" />
+  <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333; background-color: #f4f4f4; margin: 0; padding: 20px;">
+    <div style="max-width: 720px; margin: 0 auto; padding: 20px; background-color: #fff; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+      <div style="background-color: #fff; padding: 10px; text-align: center;">
+        <img src="cid:logo" crossorigin="anonymous" alt="Logo" style="display: block; margin: 0 auto 20px; height: 50px;" />
       </div>
-      <h1>New Chat Notification</h1>
-      <h3>Hello {{User.Name}},</h3>
-      <p>
+      <h1 style="color: #333; font-size: 24px; text-align: left; margin: 20px 0;">New Chat Notification</h1>
+      <h3 style="margin-bottom: 20px; text-align: left;">Hello {{User.Name}},</h3>
+      <p style="font-size: 16px; line-height: 26px; margin: 16px 0; color: #444; text-align: left;">
         You've got a new chat from {{SecondaryUser.Name}} waiting for you on Interact! Connect with
         your potential collaborators, discuss ideas, and make your projects come to life.
       </p>
-      <p>Click the button below to jump into your inbox:</p>
-      <a href="https://interactnow.in/messaging?chat=personal&tab=request" class="button"
-        >Open Inbox</a
-      >
-      <p>Don't miss out on exciting collaborations and discussions. Head to your inbox now!</p>
-      <p>If you have any questions or need assistance, feel free to reply to this email.</p>
-      <div>
-        <p>Best regards,<br />Interact</p>
+      <p style="font-size: 16px; line-height: 26px; margin: 16px 0; color: #444; text-align: left;">
+        Click the button below to jump into your inbox:
+      </p>
+      <a href="https://interactnow.in/messaging?chat=personal&tab=request" style="display: block; max-width: 100%; background-color: #1e88e5; border-radius: 10px; color: #fff; font-size: 16px; text-align: center; padding: 12px; text-decoration: none; margin: 20px auto; width: 50%; text-align: center; background: linear-gradient(135deg, #1e88e5 0%, #42a5f5 100%); transition: background 0.3s ease;">
+        Open Inbox
+      </a>
+      <p style="font-size: 16px; line-height: 26px; margin: 16px 0; color: #444; text-align: left;">
+        Don't miss out on exciting collaborations and discussions. Head to your inbox now!
+      </p>
+      <p style="font-size: 16px; line-height: 26px; margin: 16px 0; color: #444; text-align: left;">
+        If you have any questions or need assistance, feel free to reply to this email.
+      </p>
+      <div style="margin-top: 20px;">
+        <p style="font-size: 16px; line-height: 26px; color: #444; text-align: left;">
+          Best regards,<br />Interact
+        </p>
       </div>
+      <hr style="width: 100%; border: none; border-top: 1px solid #eaeaea; margin: 20px 0;" />
+      <p style="font-size: 12px; line-height: 24px; color: hsl(214, 7%, 62%); text-align: center;">
+        If you did not sign up for an account with us, please ignore this email or contact our support team immediately.
+      </p>
     </div>
   </body>
 </html>

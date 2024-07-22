@@ -12,41 +12,48 @@
       color: #333;
       background-color: #f4f4f4;
       margin: 0;
-      padding: 48px;
+      padding: 20px;
     "
   >
     <div
       style="
         max-width: 720px;
-        margin: 20px auto;
+        margin: 0 auto;
         padding: 20px;
         background-color: #fff;
         border-radius: 8px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       "
     >
-      <h1 style="color: #333">Project Invitation Accepted!</h1>
-      <h3 style="margin-bottom: 20px">Hello {{User.Name}},</h3>
-      <p style="margin-bottom: 20px">
+      <div style="background-color: #fff; padding: 10px; text-align: center;">
+        <img src="cid:logo" alt="Interact Logo" style="display: block; margin: 0 auto; max-width: 100%; height: auto;" width="170" />
+      </div>
+      <h1 style="color: #333; text-align: left;">Project Invitation Accepted!</h1>
+      <h3 style="margin-bottom: 20px; text-align: left;">Hello {{User.Name}},</h3>
+      <p style="margin-bottom: 20px; text-align: left;">
         We are excited to inform you that {{SecondaryUser.Name}} has accepted your invitation to
         join the project titled:<strong> {{Project.Title}}</strong>
       </p>
-      <p style="margin-bottom: 20px">
+      <p style="margin-bottom: 20px; text-align: left;">
         {{SecondaryUser.Name}} is thrilled to collaborate and contribute their expertise to the
         project. Here's a brief description of the project:
       </p>
-      <p style="margin-bottom: 20px"><i>{{Project.Description}}</i></p>
-      <p style="margin-bottom: 20px">
+      <p style="margin-bottom: 20px; text-align: left;"><i>{{Project.Description}}</i></p>
+      <p style="margin-bottom: 20px; text-align: left;">
         The Interact team looks forward to seeing the innovative ideas and solutions that
         {{SecondaryUser.Name}} will bring to the table.
       </p>
-      <p style="margin-bottom: 20px">
+      <p style="margin-bottom: 20px; text-align: left;">
         If you have any further questions or need assistance, feel free to reply to this email.
       </p>
-      <div style="margin-top: 20px">
+      <div style="margin-top: 20px; text-align: left;">
         <div>Best regards,</div>
         <div>The Interact Team</div>
       </div>
+      <hr style="width: 100%; border: none; border-top: 1px solid #eaeaea; margin: 20px 0;" />
+      <p style="font-size: 12px; line-height: 24px; color:hsl(214, 7%, 62%); text-align: center;">
+        If you did not sign up for an account with us, please ignore this email or contact our support team immediately.
+      </p>
     </div>
   </body>
 </html>
