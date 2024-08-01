@@ -243,7 +243,8 @@ const getParamFuncFromReq = (
                     );
             case 22:
                 return parameterizedHTML
-                    ?.replaceAll('{{Task.Title}}', task.title || '')
+                    ?.replaceAll('{{SecondaryUser.Name}}', secondaryUser?.name || '')
+                    .replaceAll('{{Task.Title}}', task.title || '')
                     .replaceAll('{{Task.Description}}', task.description || '')
                     .replaceAll(
                         '{{Task.URL}}',
