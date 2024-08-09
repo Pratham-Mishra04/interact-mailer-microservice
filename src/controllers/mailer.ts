@@ -207,7 +207,8 @@ const getParamFuncFromReq = (
 
             case 16:
                 return parameterizedHTML
-                    ?.replaceAll('{{Organization.title}}', organization.title || '')
+                    ?.replaceAll('{{SecondaryUser.Name}}', secondaryUser?.name || '')
+                    .replaceAll('{{Organization.title}}', organization.title || '')
                     .replaceAll(
                         '{{Organization.Link}}',
                         `${ENV.FRONTEND_URL}/invitations?tab=organisations`
