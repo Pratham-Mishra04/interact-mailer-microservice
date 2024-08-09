@@ -207,7 +207,8 @@ const getParamFuncFromReq = (
 
             case 16:
                 return parameterizedHTML
-                    ?.replaceAll('{{Organization.title}}', organization.title || '')
+                    ?.replaceAll('{{SecondaryUser.Name}}', secondaryUser?.name || '')
+                    .replaceAll('{{Organization.title}}', organization.title || '')
                     .replaceAll(
                         '{{Organization.Link}}',
                         `${ENV.FRONTEND_URL}/invitations?tab=organisations`
@@ -445,7 +446,7 @@ export const sendMail = catchAsync(async (req: Request, res: Response, next: Nex
         templateName: getTemplateNameFromType(req.body.type),
         paramFunc: getParamFuncFromReq(req, req.body.user),
         service: req.service,
-    });
+    }).catch(err => logger.error(`Error sending email to ${req.body.email}:`, 'sendMail', err));
 
     res.status(200).json({
         status: 'success',
@@ -481,7 +482,11 @@ export const sendMultipleMail = catchAsync(
                     service: req.service,
                 });
             } catch (error) {
-                logger.error(`Error sending email to ${recipient}:`, 'sendMultipleMail', error);
+                logger.error(
+                    `Error sending email to ${recipient.email}:`,
+                    'sendMultipleMail',
+                    error
+                );
             }
             count++;
             if (count % 5 === 0) await delay(5000);

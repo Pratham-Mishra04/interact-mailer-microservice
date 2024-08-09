@@ -69,6 +69,7 @@ const logToAdminLogger = (level: string, title: string, description: string, pat
         'Content-Type': 'application/json',
         Authorization: 'Bearer ' + jwt,
         'api-token': ENV.LOGGER_TOKEN,
+        Origin: ENV.MAILER_URL,
     };
 
     fetch(ENV.LOGGER_URL, {
