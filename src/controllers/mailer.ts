@@ -198,7 +198,12 @@ const getParamFuncFromReq = (
 
             case 12:
             case 13:
+                return parameterizedHTML
+                    ?.replaceAll('{{SecondaryUser.Name}}', secondaryUser?.name || '')
+                    .replaceAll('{{Opening.Title}}', opening.title || '');
             case 14:
+                return parameterizedHTML
+                    .replaceAll('{{Opening.Title}}', opening.title || '');
             case 15:
                 return parameterizedHTML
                     ?.replaceAll('{{SecondaryUser.Name}}', secondaryUser?.name || '')
