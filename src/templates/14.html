@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Application Update: Your Interact Account Opening Request | Interact</title>
+    <title>Opening Application for {{Opening.Title}} got Rejected</title>
   </head>
   <body
     style="
@@ -18,6 +18,7 @@
     <div
       style="
         max-width: 720px;
+        width: 100%;
         margin: 0 auto;
         padding: 20px;
         background-color: #fff;
@@ -25,69 +26,53 @@
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       "
     >
-    <div style="background-color: #fff; padding: 10px; text-align: center;">
-      <img src="cid:logo" alt="Interact Logo" style="display: block; margin: 0 auto; max-width: 100%; height: auto;" width="170" />
-    </div>
-      <h1 style="color: #333; font-size: 24px; text-align: left; margin: 20px 0;">
-        Application Update: Your Interact Account Opening
-      </h1>
-      <h3 style="margin-bottom: 20px; text-align: left;">
-        Hello {{User.Name}},
-      </h3>
+      <div style="background-color: #fff; padding: 10px; text-align: center;">
+        <img src="cid:logo" alt="Interact Logo" style="display: block; margin: 0 auto; max-width: 100%; height: auto;" width="170" />
+      </div>
+      <h1 style="color: #333; text-align: center;">Your Application got rejected</h1>
+      <h3 style="margin-bottom: 20px; text-align: left;">Hello {{User.Name}},</h3>
       <p style="margin-bottom: 20px; text-align: left;">
-        We're writing to inform you about your recent application to open an Interact account.
+        Thank you for applying to the position of <b>{{Opening.Title}}</b> on Interact.
       </p>
       <p style="margin-bottom: 20px; text-align: left;">
-        Unfortunately, your application was not approved at this time.
+        We wanted to inform you that your application was not selected. 
       </p>
       <p style="margin-bottom: 20px; text-align: left;">
-        We understand this might be disappointing, and we apologize for any inconvenience caused.
+        We truly appreciate your interest and effort in applying. Although you were not selected for this role, we encourage you to keep exploring other opportunities on our platform. There are plenty of exciting projects where your skills could be a perfect fit.
       </p>
       <p style="margin-bottom: 20px; text-align: left;">
-        While we cannot disclose specific reasons for rejection due to privacy concerns, here are
-        some common reasons applications may not be approved:
+        If you have any questions or need further assistance, please feel free to reach out to our support team. We're here to help!
       </p>
-      <ul style="margin-bottom: 20px; list-style: disc; padding-left: 15px; text-align: left;">
-        <li>Incomplete or inaccurate information provided in the application.</li>
-        <li>Failure to meet eligibility criteria (if applicable).</li>
-        <li>Potential security concerns identified during the review process.</li>
-      </ul>
-      <p style="margin-bottom: 20px; text-align: left;">
-        We appreciate your interest in joining the Interact community. We hope to see a revised
-        application from you soon (if applicable).
-      </p>
-      <p style="margin-bottom: 20px; text-align: left;">
-        If you don't intend to reapply or have any other questions, you can disregard this email.
-      </p>
-      <p style="margin-bottom: 20px; text-align: left;">
-        Thank you for your understanding.
-      </p>
-      <div style="text-align: center; margin-top: 20px;">
+      <div
+        style="
+          margin: 20px auto;
+          text-align: center;
+        "
+      >
         <a
-          href="https://interactnow.in/reapply"
+          href="https://interactnow.in/explore"
           style="
             display: inline-block;
-            text-decoration: none;
+            padding: 10px 20px;
+            font-size: 16px;
             color: #fff;
             background: #1e88e5;
-            padding: 12px 20px;
-            border-radius: 8px;
-            font-weight: bold;
-            font-size: 16px;
-            margin-top: 10px;
+            text-decoration: none;
+            border-radius: 5px;
+            text-align: center;
           "
         >
-          Reapply Now
+          Browse Other Opportunities
         </a>
       </div>
-      <hr style="width: 100%; border: none; border-top: 1px solid #eaeaea; margin: 20px 0;" />
-      <p style="font-size: 12px; line-height: 24px; color: hsl(214, 7%, 62%); text-align: center; margin: 20px 0;">
-        If you did not sign up for an account with us, please ignore this email or contact our support team immediately.
-      </p>
-      <div style="text-align: left;">
+      <div style="margin-top: 20px; text-align: left;">
         <div>Best regards,</div>
         <div>The Interact Team</div>
       </div>
+      <hr style="width: 100%; border: none; border-top: 1px solid #eaeaea; margin: 20px 0;" />
+      <p style="font-size: 12px; line-height: 24px; color: hsl(214, 7%, 62%); text-align: center;">
+        If you did not apply for this position or believe this message was sent in error, please contact our support team immediately.
+      </p>
     </div>
   </body>
 </html>

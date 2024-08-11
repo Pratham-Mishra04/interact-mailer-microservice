@@ -4,113 +4,33 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tagged you in a comment | Interact</title>
-    <style>
-      body {
-        font-family: 'Arial', sans-serif;
-        line-height: 1.6;
-        color: #333;
-        background-color: #f4f4f4;
-        margin: 0;
-        padding: 48px;
-      }
-      .container {
-        max-width: 720px;
-        margin: 20px auto;
-        padding: 20px;
-        background-color: #fff;
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      }
-      h1 {
-        color: #333;
-      }
-      h3 {
-        margin-bottom: 20px;
-      }
-      p {
-        margin-bottom: 20px;
-      }
-      .button {
-        width: 50%;
-        text-decoration: none;
-        text-align: center;
-        margin: auto;
-        display: flex;
-        padding: 1em;
-        gap: 0.4rem;
-        border: none;
-        font-weight: bolder;
-        border-radius: 10px;
-        background: #1e88e5;
-        background-size: 300%;
-        background-position: left center;
-        color: #fff;
-      }
-      .button:hover {
-        background-size: 320%;
-        background-position: right center;
-      }
-      .comment-box {
-        padding: 15px;
-        border-radius: 10px;
-        background-color: #f9f9f9;
-        border: 1px solid #ddd;
-        margin-bottom: 20px;
-        color: #555;
-        text-decoration: none;
-      }
-    </style>
   </head>
-  <body>
-    <div class="container">
-      <div class="header">
-        <div
-          class="logo-container"
-          style="background-color: #fff; padding: 10px; text-align: center"
-        >
-          <div
-            class="logo-container"
-            style="background-color: #fff; padding: 10px; text-align: center"
-          >
-            <img
-              class="logo"
-              src="cid:logo"
-              crossorigin="anonymous"
-              alt="Interact"
-              width="170"
-              height="50"
-            />
-          </div>
-        </div>
+  <body style="font-family: 'Arial', sans-serif; line-height: 1.6; color: #333; background-color: #f4f4f4; margin: 0; padding: 20px;">
+    <div style="max-width: 720px; margin: 0 auto; padding: 20px; background-color: #fff; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+      <div style="background-color: #fff; padding: 10px; text-align: center;">
+        <img src="cid:logo" alt="Interact" width="170" height="50" style="display: block; margin: 0 auto;" />
       </div>
-      <h1>You were tagged in a comment</h1>
-      <h3>Hello {{User.Name}},</h3>
-      <p>
-        You've been tagged in a comment by {{SecondaryUser.Name}} on Interact! Join the conversation
-        and stay engaged.
+      <h1 style="color: #333; text-align: center; margin: 20px 0;">You were tagged in a comment</h1>
+      <h3 style="margin-bottom: 20px; text-align: left;">Hello {{User.Name}},</h3>
+      <p style="margin-bottom: 20px; text-align: left;">
+        You've been tagged in a comment by {{SecondaryUser.Name}} on Interact! Join the conversation and stay engaged.
       </p>
-
-      <a href="{{Comment.URL}}" class="comment-box" style="color: #555"> {{Comment.Content}} </a>
-      <p>Don't miss out on important updates and discussions. Head to the comment section now!</p>
-      <p>If you have any questions or need assistance, feel free to reply to this email.</p>
-      <div>
+      <a href="{{Comment.URL}}" style="display: block; padding: 15px; border-radius: 10px; background-color: #f9f9f9; border: 1px solid #ddd; color: #555; text-decoration: none; margin-bottom: 20px;">
+        {{Comment.Content}}
+      </a>
+      <p style="margin-bottom: 20px; text-align: left;">
+        Don't miss out on important updates and discussions. Head to the comment section now!
+      </p>
+      <p style="margin-bottom: 20px; text-align: left;">
+        If you have any questions or need assistance, feel free to reply to this email.
+      </p>
+      <div style="text-align: left;">
         <div>Best regards,</div>
         <div>Interact</div>
       </div>
-      <hr style="width: 100%; border: none; border-top: 1px solid #eaeaea; margin: 26px 0" />
-      <p
-        style="
-          font-size: 13px;
-          line-height: 24px;
-          margin: 0;
-          color: #333;
-          letter-spacing: 0;
-          padding: 0 40px;
-          text-align: center;
-        "
-      >
-        If you did not sign up for an account with us, please ignore this email or contact our
-        support team immediately.
+      <hr style="width: 100%; border: none; border-top: 1px solid #eaeaea; margin: 26px 0;" />
+      <p style="font-size: 13px; line-height: 24px; color: hsl(214, 7%, 62%); text-align: center; margin: 0;">
+        If you did not sign up for an account with us, please ignore this email or contact our support team immediately.
       </p>
     </div>
   </body>
