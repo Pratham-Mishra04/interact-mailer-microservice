@@ -208,7 +208,11 @@ const getParamFuncFromReq = (
                 return parameterizedHTML
                     ?.replaceAll('{{SecondaryUser.Name}}', secondaryUser?.name || '')
                     .replaceAll('{{Project.Title}}', project.title || '')
-                    .replaceAll('{{Project.Description}}', project.description || '');
+                    .replaceAll('{{Project.Description}}', project.description || '')
+                    .replaceAll(
+                        '{{Project.Link}}',
+                        `${ENV.FRONTEND_URL}/invitations?tab=projects`
+                    );
 
             case 16:
                 return parameterizedHTML
