@@ -34,7 +34,11 @@ const logger = {
     },
     error: (message: string, path: string, error: Error) => {
         errorLogger.error(message, path, error);
-        logToAdminLogger('error', message, error.message, path);
+
+        const formattedErrorMessage = `Error: ${error.message} \n Stack: ${
+            error.stack || 'No stack trace available'
+        }`;
+        logToAdminLogger('error', message, formattedErrorMessage, path);
     },
     warn: (message: string, path: string, error: Error) => {
         warnLogger.warn(message, path, error);
