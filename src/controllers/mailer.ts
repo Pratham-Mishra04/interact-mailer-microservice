@@ -24,6 +24,7 @@ import {
 import { getRedirectURL, getStrippedContent } from '../utils/comment';
 import logger from '../utils/logger';
 import { getNextSessionTime } from '../utils/session';
+import ResendMailer from '../mailers/resend';
 
 const getTemplateNameFromType = (type: number): string => {
     return `${type}.html`;
@@ -449,12 +450,11 @@ export const sendMail = catchAsync(async (req: Request, res: Response, next: Nex
     if (emailType == undefined) return next(new AppError('Email Type Not Defined', 400));
     if (!req.body.email) return next(new AppError('Email Destination Not Defined', 400));
 
-    await Nodemailer({
+    await ResendMailer({
         email: req.body.email,
         subject: getSubjectFromType(req.body.type),
         templateName: getTemplateNameFromType(req.body.type),
         paramFunc: getParamFuncFromReq(req, req.body.user),
-        service: req.service,
     }).catch(err => logger.error(`Error sending email to ${req.body.email}:`, 'sendMail', err));
 
     res.status(200).json({
@@ -483,12 +483,11 @@ export const sendMultipleMail = catchAsync(
             }
 
             try {
-                Nodemailer({
+                ResendMailer({
                     email: recipient.email,
                     subject: getSubjectFromType(emailType),
                     templateName: getTemplateNameFromType(emailType),
                     paramFunc: getParamFuncFromReq(req, recipient.user),
-                    service: req.service,
                 });
             } catch (error) {
                 logger.error(

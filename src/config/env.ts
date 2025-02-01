@@ -22,6 +22,8 @@ interface ENV_struct {
     BACKEND_SECRET: string;
     ADMIN_TOKEN: string;
     ADMIN_SECRET: string;
+
+    RESEND_API_KEY: string;
 }
 
 const ENV: ENV_struct = {
@@ -39,6 +41,7 @@ const ENV: ENV_struct = {
     ADMIN_TOKEN: '',
     BACKEND_SECRET: '',
     BACKEND_TOKEN: '',
+    RESEND_API_KEY: '',
 };
 
 const configENV = () => {
