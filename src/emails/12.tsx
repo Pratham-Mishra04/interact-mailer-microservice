@@ -1,17 +1,19 @@
 import React from 'react';
-import { Html, Head, Body, Container, Text, Img, Link, Hr } from '@react-email/components';
-import { User } from '../types';
-interface WelcomeEmailProps {
+import { Html, Head, Body, Container, Text, Img, Hr, Link } from '@react-email/components';
+import { User } from '../types/index';
+interface ApplicationSubmissionConfirmationProps {
     user: User;
 }
 
-export default function WelcomeEmail({ user }: WelcomeEmailProps) {
+export default function ApplicationSubmissionConfirmation({
+    user,
+}: ApplicationSubmissionConfirmationProps) {
     return (
         <Html>
             <Head />
             <Body
                 style={{
-                    fontFamily: "'Arial', sans-serif",
+                    fontFamily: 'Arial, sans-serif',
                     lineHeight: '1.6',
                     color: '#333',
                     backgroundColor: '#f4f4f4',
@@ -23,13 +25,14 @@ export default function WelcomeEmail({ user }: WelcomeEmailProps) {
                     style={{
                         maxWidth: '720px',
                         width: '100%',
-                        margin: '20px auto',
+                        margin: '0 auto',
                         padding: '20px',
                         backgroundColor: '#fff',
                         borderRadius: '8px',
                         boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
                     }}
                 >
+                    {/* Interact Logo */}
                     <div style={{ backgroundColor: '#fff', padding: 10, textAlign: 'center' }}>
                         <Img
                             src="https://interactnow.in/logo-public-long.png"
@@ -47,66 +50,92 @@ export default function WelcomeEmail({ user }: WelcomeEmailProps) {
                     <Text
                         style={{
                             color: '#333',
+                            textAlign: 'left',
                             fontSize: '24px',
-                            marginTop: '20px',
+                            marginTop: '0',
                         }}
                     >
-                        Welcome to Interact!
+                        Congratulations! Your Application for Opening Has Been Submitted
                     </Text>
 
                     <Text
                         style={{
-                            fontSize: '16px',
-                            lineHeight: '26px',
-                            margin: '16px 0',
+                            marginBottom: '20px',
+                            textAlign: 'left',
                         }}
                     >
-                        Hi {user.name},
+                        Hello {user.name},
                     </Text>
 
                     <Text
                         style={{
-                            fontSize: '16px',
-                            lineHeight: '26px',
-                            margin: '16px 0',
+                            marginBottom: '20px',
+                            textAlign: 'left',
                         }}
                     >
-                        Welcome to Interact, the connecting platform that helps you find the right
-                        projects for your niche and helps organizations collaborate effectively.
+                        We're happy to inform you that your application for opening on Interact has
+                        been successfully submitted!
                     </Text>
-
-                    <Link
-                        href="https://interactnow.in"
-                        style={{
-                            display: 'block',
-                            maxWidth: '100%',
-                            backgroundColor: '#1e88e5',
-                            borderRadius: '0.25rem',
-                            color: '#fff',
-                            fontSize: '16px',
-                            textAlign: 'center',
-                            padding: '12px',
-                            textDecoration: 'none',
-                            margin: '20px auto',
-                            width: '100%',
-                            boxSizing: 'border-box',
-                        }}
-                    >
-                        Let's Interact
-                    </Link>
 
                     <Text
                         style={{
-                            fontSize: '16px',
-                            lineHeight: '26px',
-                            margin: '16px 0',
+                            marginBottom: '20px',
+                            textAlign: 'left',
                         }}
                     >
-                        Best Regards,
+                        Our team will now review your application and get in touch with you shortly.
+                    </Text>
+
+                    <Text
+                        style={{
+                            marginBottom: '20px',
+                            textAlign: 'left',
+                        }}
+                    >
+                        In the meantime, you can explore our platform and learn more about what
+                        Interact has to offer.
+                    </Text>
+
+                    <Text
+                        style={{
+                            marginBottom: '20px',
+                            textAlign: 'left',
+                        }}
+                    >
+                        We appreciate your interest in opening with Interact. We look forward to
+                        potentially welcoming you to our community!
+                    </Text>
+
+                    <div style={{ marginTop: '20px', textAlign: 'center' }}>
+                        <Link
+                            href="https://interactnow.in/explore"
+                            style={{
+                                display: 'inline-block',
+                                textDecoration: 'none',
+                                padding: '10px 20px',
+                                backgroundColor: '#1e88e5',
+                                color: '#fff',
+                                borderRadius: '5px',
+                                fontWeight: 'bold',
+                                textAlign: 'center',
+                            }}
+                        >
+                            Explore Interact
+                        </Link>
+                    </div>
+
+                    <Text
+                        style={{
+                            marginBottom: '20px',
+                            textAlign: 'left',
+                        }}
+                    >
+                        Best regards,
                         <br />
                         Interact
                     </Text>
 
+                    {/* Footer */}
                     <Hr
                         style={{
                             width: '100%',

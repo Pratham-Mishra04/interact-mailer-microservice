@@ -190,6 +190,7 @@ export interface Organization {
     title: string;
     invitations: Invitation[];
     createdAt: Date;
+    slug: string;
 }
 
 export interface Invitation {

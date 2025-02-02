@@ -1,8 +1,7 @@
 import { ENV } from '../config/env';
 import { ReactElement } from 'react';
 import { Resend, CreateEmailOptions } from 'resend';
-import {WelcomeEmailProps} from '../emails/1';
-import {OTPEmailProps} from '../emails/2';
+import {WelcomeEmailProps,OTPEmailProps} from '../emails/props/prop';
 
 type EmailProps = OTPEmailProps | WelcomeEmailProps;
 

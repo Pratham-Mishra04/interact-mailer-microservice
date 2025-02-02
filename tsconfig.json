@@ -3,14 +3,16 @@
         "module": "CommonJS",
         "moduleResolution": "node",
         "target": "ES2021",
-        "lib": ["es2021"],
+        "lib": ["es2021" ,"dom"],
         "sourceMap": true,
         "outDir": "dist",
         "typeRoots": [
             "./node_module/@types",
             "./src/types"
         ],
-        "isolatedModules": false
+        "isolatedModules": false,
+        "jsx": "react-jsx",
+        "esModuleInterop": true,
     },
-    "include": ["src/**/*"]
+    "include": ["src/**/*", "react-email-starter" , "**/*.ts", "**/*.tsx"]
 }

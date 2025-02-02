@@ -1,17 +1,18 @@
 import React from 'react';
-import { Html, Head, Body, Container, Text, Img, Link, Hr } from '@react-email/components';
-import { User } from '../types';
-interface WelcomeEmailProps {
+import { Html, Head, Body, Container, Text, Img, Hr, Link } from '@react-email/components';
+import { User, Task } from '../types';
+interface TaskDueTodayEmailProps {
     user: User;
+    task: Task;
 }
 
-export default function WelcomeEmail({ user }: WelcomeEmailProps) {
+export default function TaskDueTodayEmail({ user, task }: TaskDueTodayEmailProps) {
     return (
         <Html>
             <Head />
             <Body
                 style={{
-                    fontFamily: "'Arial', sans-serif",
+                    fontFamily: 'Arial, sans-serif',
                     lineHeight: '1.6',
                     color: '#333',
                     backgroundColor: '#f4f4f4',
@@ -22,12 +23,10 @@ export default function WelcomeEmail({ user }: WelcomeEmailProps) {
                 <Container
                     style={{
                         maxWidth: '720px',
-                        width: '100%',
                         margin: '20px auto',
                         padding: '20px',
                         backgroundColor: '#fff',
                         borderRadius: '8px',
-                        boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
                     }}
                 >
                     <div style={{ backgroundColor: '#fff', padding: 10, textAlign: 'center' }}>
@@ -43,69 +42,82 @@ export default function WelcomeEmail({ user }: WelcomeEmailProps) {
                             width="170"
                         />
                     </div>
-
                     <Text
                         style={{
                             color: '#333',
                             fontSize: '24px',
-                            marginTop: '20px',
+                            marginBottom: '20px',
                         }}
                     >
-                        Welcome to Interact!
+                        Task Due Today
                     </Text>
 
                     <Text
                         style={{
-                            fontSize: '16px',
-                            lineHeight: '26px',
-                            margin: '16px 0',
+                            marginBottom: '20px',
+                            fontSize: '18px',
                         }}
                     >
-                        Hi {user.name},
+                        Hello {user.name},
                     </Text>
 
                     <Text
                         style={{
+                            marginBottom: '20px',
                             fontSize: '16px',
-                            lineHeight: '26px',
-                            margin: '16px 0',
                         }}
                     >
-                        Welcome to Interact, the connecting platform that helps you find the right
-                        projects for your niche and helps organizations collaborate effectively.
+                        This is a reminder that you have a task due today on Interact. Please find
+                        the task details below:
+                    </Text>
+
+                    <Text
+                        style={{
+                            marginBottom: '20px',
+                            fontSize: '16px',
+                        }}
+                    >
+                        <strong>Task Title:</strong> {task.title}
+                        <br />
+                        <strong>Description:</strong> {task.description}
+                    </Text>
+
+                    <Text
+                        style={{
+                            marginBottom: '20px',
+                            fontSize: '16px',
+                        }}
+                    >
+                        Please ensure that you review and complete this task by the end of the day.
+                        You can view and manage this task by logging into your Interact account or
+                        by clicking the button below:
                     </Text>
 
                     <Link
-                        href="https://interactnow.in"
+                        href={`https://interactnow/organisations?oid=${task.organizationID}&redirect_url=/tasks?tid=${task.id}`}
                         style={{
+                            lineHeight: '100%',
                             display: 'block',
                             maxWidth: '100%',
-                            backgroundColor: '#1e88e5',
-                            borderRadius: '0.25rem',
+                            background: '#1e88e5',
+                            borderRadius: '3px',
+                            fontWeight: '600',
                             color: '#fff',
-                            fontSize: '16px',
+                            fontSize: '15px',
                             textAlign: 'center',
-                            padding: '12px',
+                            padding: '11px 23px',
+                            margin: 'auto',
                             textDecoration: 'none',
-                            margin: '20px auto',
-                            width: '100%',
-                            boxSizing: 'border-box',
                         }}
+                        target="_blank"
                     >
-                        Let's Interact
+                        View Task
                     </Link>
 
-                    <Text
-                        style={{
-                            fontSize: '16px',
-                            lineHeight: '26px',
-                            margin: '16px 0',
-                        }}
-                    >
-                        Best Regards,
-                        <br />
-                        Interact
-                    </Text>
+                    <div style={{ marginTop: '20px' }}>
+                        <Text>Best regards,</Text>
+                        <Text>The Interact Team</Text>
+                    </div>
 
                     <Hr
                         style={{
@@ -115,6 +127,7 @@ export default function WelcomeEmail({ user }: WelcomeEmailProps) {
                             margin: '20px 0',
                         }}
                     />
+
                     <Text
                         style={{
                             fontSize: '12px',
@@ -123,8 +136,8 @@ export default function WelcomeEmail({ user }: WelcomeEmailProps) {
                             textAlign: 'center',
                         }}
                     >
-                        If you did not sign up for an account with us, please ignore this email or
-                        contact our support team immediately.
+                        If you did not apply for this position or believe this message was sent in
+                        error, please contact our support team immediately.
                     </Text>
                 </Container>
             </Body>

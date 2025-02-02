@@ -1,6 +1,10 @@
 import React from 'react';
 import { Html, Head, Body, Container, Text, Img, Link, Hr } from '@react-email/components';
 
+interface OTPEmailProps {
+    otp: string;
+}
+
 export default function OTPEmail({ otp }: OTPEmailProps) {
     return (
         <Html>
@@ -12,7 +16,7 @@ export default function OTPEmail({ otp }: OTPEmailProps) {
                     color: '#333',
                     backgroundColor: '#f4f4f4',
                     margin: 0,
-                    padding: '20px',
+                    padding: '25px',
                 }}
             >
                 <Container
@@ -28,7 +32,7 @@ export default function OTPEmail({ otp }: OTPEmailProps) {
                 >
                     <div style={{ backgroundColor: '#fff', padding: 10, textAlign: 'center' }}>
                         <Img
-                            src="https://interactnow.in/logo.png"
+                            src="https://interactnow.in/logo-public-long.png"
                             alt="Interact Logo"
                             style={{
                                 display: 'block',

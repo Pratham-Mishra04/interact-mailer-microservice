@@ -1,17 +1,18 @@
 import React from 'react';
 import { Html, Head, Body, Container, Text, Img, Link, Hr } from '@react-email/components';
-import { User } from '../types';
-interface WelcomeEmailProps {
+import { User, Comment } from '../types';
+interface CommentTagEmailProps {
     user: User;
+    secondaryUser: User;
+    comment: Comment;
 }
-
-export default function WelcomeEmail({ user }: WelcomeEmailProps) {
+export default function CommentTagEmail({ user, secondaryUser, comment }: CommentTagEmailProps) {
     return (
         <Html>
             <Head />
             <Body
                 style={{
-                    fontFamily: "'Arial', sans-serif",
+                    fontFamily: 'Arial, sans-serif',
                     lineHeight: '1.6',
                     color: '#333',
                     backgroundColor: '#f4f4f4',
@@ -22,8 +23,7 @@ export default function WelcomeEmail({ user }: WelcomeEmailProps) {
                 <Container
                     style={{
                         maxWidth: '720px',
-                        width: '100%',
-                        margin: '20px auto',
+                        margin: '0 auto',
                         padding: '20px',
                         backgroundColor: '#fff',
                         borderRadius: '8px',
@@ -43,84 +43,66 @@ export default function WelcomeEmail({ user }: WelcomeEmailProps) {
                             width="170"
                         />
                     </div>
-
                     <Text
                         style={{
                             color: '#333',
+                            textAlign: 'center',
+                            margin: '20px 0',
                             fontSize: '24px',
-                            marginTop: '20px',
+                            fontWeight: '400',
                         }}
                     >
-                        Welcome to Interact!
+                        You were tagged in a comment
                     </Text>
-
-                    <Text
-                        style={{
-                            fontSize: '16px',
-                            lineHeight: '26px',
-                            margin: '16px 0',
-                        }}
-                    >
-                        Hi {user.name},
+                    <Text style={{ marginBottom: '20px', textAlign: 'left' }}>
+                        Hello {user.name},
                     </Text>
-
-                    <Text
-                        style={{
-                            fontSize: '16px',
-                            lineHeight: '26px',
-                            margin: '16px 0',
-                        }}
-                    >
-                        Welcome to Interact, the connecting platform that helps you find the right
-                        projects for your niche and helps organizations collaborate effectively.
+                    <Text style={{ marginBottom: '20px', textAlign: 'left' }}>
+                        You've been tagged in a comment by {secondaryUser.name} on Interact! Join
+                        the conversation and stay engaged.
                     </Text>
-
                     <Link
-                        href="https://interactnow.in"
+                        href="interactnow.in"
                         style={{
                             display: 'block',
-                            maxWidth: '100%',
-                            backgroundColor: '#1e88e5',
-                            borderRadius: '0.25rem',
-                            color: '#fff',
-                            fontSize: '16px',
-                            textAlign: 'center',
-                            padding: '12px',
+                            padding: '15px',
+                            borderRadius: '10px',
+                            backgroundColor: '#f9f9f9',
+                            border: '1px solid #ddd',
+                            color: '#555',
                             textDecoration: 'none',
-                            margin: '20px auto',
-                            width: '100%',
-                            boxSizing: 'border-box',
+                            marginBottom: '20px',
                         }}
                     >
-                        Let's Interact
+                        {comment.content}
                     </Link>
-
-                    <Text
-                        style={{
-                            fontSize: '16px',
-                            lineHeight: '26px',
-                            margin: '16px 0',
-                        }}
-                    >
-                        Best Regards,
-                        <br />
-                        Interact
+                    <Text style={{ marginBottom: '20px', textAlign: 'left' }}>
+                        Don't miss out on important updates and discussions. Head to the comment
+                        section now!
                     </Text>
-
+                    <Text style={{ marginBottom: '20px', textAlign: 'left' }}>
+                        If you have any questions or need assistance, feel free to reply to this
+                        email.
+                    </Text>
+                    <div style={{ textAlign: 'left' }}>
+                        <div>Best regards,</div>
+                        <div>Interact</div>
+                    </div>
                     <Hr
                         style={{
                             width: '100%',
                             border: 'none',
                             borderTop: '1px solid #eaeaea',
-                            margin: '20px 0',
+                            margin: '26px 0',
                         }}
                     />
                     <Text
                         style={{
-                            fontSize: '12px',
+                            fontSize: '13px',
                             lineHeight: '24px',
                             color: 'hsl(214, 7%, 62%)',
                             textAlign: 'center',
+                            margin: 0,
                         }}
                     >
                         If you did not sign up for an account with us, please ignore this email or
