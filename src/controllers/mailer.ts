@@ -4,11 +4,60 @@ import { NextFunction, Request, Response } from 'express';
 import { AttachmentLike } from 'nodemailer/lib/mailer';
 import { Readable } from 'nodemailer/lib/xoauth2';
 import { ENV } from '../config/env';
+import OTPVerificationEmail from '../emails/0';
 import WelcomeEmail from '../emails/1';
 import OTPEmail from '../emails/2';
+import OTPDeactivationEmail from '../emails/3';
+import PasswordResetEmail from '../emails/4';
+import ChatNotificationEmail from '../emails/10';
+import PostAttentionEmail from '../emails/11';
+import ApplicationSubmissionConfirmationEmail from '../emails/12';
+import ApplicationAcceptedEmail from '../emails/13';
+import ApplicationRejectedEmail from '../emails/14';
+import ProjectInvitationEmail from '../emails/15';
+import OrganizationInvitationEmail from '../emails/16';
+import GroupChatInvitationEmail from '../emails/17';
+import ProjectInvitationAcceptedEmail from '../emails/18';
+import OrganizationInvitationAcceptedEmail from '../emails/19';
+import GroupChatInvitationAcceptedEmail from '../emails/20';
+import TaskAssignedEmail from '../emails/21';
+import TaskCompletedEmail from '../emails/22';
+import MeetingScheduledEmail from '../emails/23';
+import MeetingRescheduledEmail from '../emails/24';
+import ProjectAttentionEmail from '../emails/25';
+import EventAttentionEmail from '../emails/26';
+import OpeningAttentionEmail from '../emails/27';
+import NewActivitiesEmail from '../emails/30';
+import WeMissYouEmail from '../emails/31';
+import NewsletterEmail from '../emails/32';
+import TaskDueTodayEmail from '../emails/33';
+import MeetingDueTodayEmail from '../emails/34';
+import CommentTaggedEmail from '../emails/35';
+import FlaggedCommentEmail from '../emails/50';
+import FlaggedPostEmail from '../emails/51';
+import FlaggedProjectEmail from '../emails/52';
+import FlaggedOpeningEmail from '../emails/53';
+import FlaggedEventEmail from '../emails/54';
+import FlaggedAnnouncementEmail from '../emails/55';
+import FlaggedPollEmail from '../emails/56';
+import FlagRemovedCommentEmail from '../emails/70';
+import FlagResolvedPostEmail from '../emails/71';
+import FlagClearedProjectEmail from '../emails/72';
+import FlagLiftedOpeningEmail from '../emails/73';
+import FlagResolvedEventEmail from '../emails/74';
+import FlagResolvedAnnouncementEmail from '../emails/75';
+import FlagResolvedPollEmail from '../emails/76';
+import FlaggedCommentDeletedEmail from '../emails/100';
+import FlaggedPostDeletedEmail from '../emails/101';
+import FlaggedProjectDeletedEmail from '../emails/102';
+import FlaggedOpeningDeletedEmail from '../emails/103';
+import FlaggedEventDeletedEmail from '../emails/104';
+import FlaggedAnnouncementDeletedEmail from '../emails/105';
+import FlaggedPollDeletedEmail from '../emails/106';
+
 import AppError from '../helpers/app_error';
 import catchAsync from '../helpers/catch_async';
-import ResendMailer from '../mailers/resend';
+// import ResendMailer from '../mailers/resend';
 import {
     Announcement,
     Comment,
@@ -48,9 +97,11 @@ interface EmailRequestBody {
 }
 
 const getTemplateNameFromType = (type: number): string => {
-    return `${type}.html`;
+    return `${type}`;
 };
 
+import EarlyAccessEmail from '../emails/-1';
+import AccountAttentionEmail from '../emails/53';
 const getSubjectFromType = (type: number): string => {
     switch (type) {
         case -1:
@@ -465,17 +516,108 @@ const getSubjectFromType = (type: number): string => {
 
 const getEmailProps = (body: EmailRequestBody) => {
     switch (body.type) {
+        case -1:
+            return { user: body.user, template: EarlyAccessEmail };
         case 0:
+            return { user: body.user, template: OTPVerificationEmail };
         case 1:
-            return {
-                user: body.user,
-                template: WelcomeEmail,
-            };
+            return { user: body.user, template:     WelcomeEmail };
         case 2:
-            return {
-                otp: body.otp || '',
-                template: OTPEmail,
-            };
+            return { otp: body.otp || '', template: OTPEmail };
+        case 3:
+            return { user: body.user, otp: body.otp, template: OTPDeactivationEmail };
+        case 4:
+            return { user: body.user, otp: body.otp, template: PasswordResetEmail };
+        case 10:
+            return { user: body.user, secondaryUser: body.secondaryUser, template: ChatNotificationEmail };
+        case 11:
+            return { user: body.user, post: body.post, template: PostAttentionEmail };
+        case 12:
+            return { user: body.user, template: ApplicationSubmissionConfirmationEmail };
+        case 13:
+            return { user: body.user, opening: body.opening, secondaryUser: body.secondaryUser, template: ApplicationAcceptedEmail };
+        case 14:
+            return { user: body.user, opening: body.opening, template: ApplicationRejectedEmail };
+        case 15:
+            return { user: body.user, secondaryUser: body.secondaryUser, project: body.project, template: ProjectInvitationEmail };
+        case 16:
+            return { user: body.user, secondaryUser: body.secondaryUser, organization: body.organization, template: OrganizationInvitationEmail };
+        case 17:
+            return { user: body.user, secondaryUser: body.secondaryUser, groupChat: body.groupchat, template: GroupChatInvitationEmail };
+        case 18:
+            return { user: body.user, secondaryUser: body.secondaryUser, project: body.project, template: ProjectInvitationAcceptedEmail };
+        case 19:
+            return { user: body.user, organization: body.organization, template: OrganizationInvitationAcceptedEmail };
+        case 20:
+            return { user: body.user, groupChat: body.groupchat, secondaryUser: body.secondaryUser, template: GroupChatInvitationAcceptedEmail };
+        case 21:
+            return { user: body.user, task: body.task, template: TaskAssignedEmail };
+        case 22:
+            return { user: body.user, secondaryUser: body.secondaryUser, task: body.task, template: TaskCompletedEmail };
+        case 23:
+            return { user: body.user, meeting: body.meeting, template: MeetingScheduledEmail };
+        case 24:
+            return { user: body.user, meeting: body.meeting, template: MeetingRescheduledEmail };
+        case 25:
+            return { user: body.user, template: ProjectAttentionEmail };
+        case 26:
+            return { user: body.user, template: EventAttentionEmail };
+        case 27:
+            return { user: body.user, template: OpeningAttentionEmail };
+        case 30:
+            return { user: body.user, template: NewActivitiesEmail };
+        case 31:
+            return { user: body.user, template: WeMissYouEmail };
+        case 32:
+            return { user: body.user, template: NewsletterEmail };
+        case 33:
+            return { user: body.user, task: body.task, template: TaskDueTodayEmail };
+        case 34:
+            return { user: body.user, meeting: body.meeting, template: MeetingDueTodayEmail };
+        case 35:
+            return { user: body.user, secondaryUser: body.secondaryUser, comment: body.comment, template: CommentTaggedEmail };
+        case 50:
+            return { user: body.user, comment: body.comment, template: FlaggedCommentEmail };
+        case 51:
+            return { user: body.user, post: body.post, template: FlaggedPostEmail };
+        case 52:
+            return { user: body.user, project: body.project, template: FlaggedProjectEmail };
+        case 53:
+            return { user: body.user, opening: body.opening, template: AccountAttentionEmail };
+        case 54:
+            return { user: body.user, event: body.event, template: FlaggedEventEmail };
+        case 55:
+            return { user: body.user, announcement: body.announcement, template: FlaggedAnnouncementEmail };
+        case 56:
+            return { user: body.user, poll: body.poll, template: FlaggedPollEmail };
+        case 70:
+            return { user: body.user, comment: body.comment, template: FlagRemovedCommentEmail };
+        case 71:
+            return { user: body.user, post: body.post, template: FlagResolvedPostEmail };
+        case 72:
+            return { user: body.user, project: body.project, template: FlagClearedProjectEmail };
+        case 73:
+            return { user: body.user, opening: body.opening, template: FlagLiftedOpeningEmail };
+        case 74:
+            return { user: body.user, event: body.event, template: FlagResolvedEventEmail };
+        case 75:
+            return { user: body.user, announcement: body.announcement, template: FlagResolvedAnnouncementEmail };
+        case 76:
+            return { user: body.user, poll: body.poll, template: FlagResolvedPollEmail };
+        case 100:   
+            return { user: body.user, comment: body.comment, template: FlaggedCommentDeletedEmail };
+        case 101:
+            return { user: body.user, post: body.post, template: FlaggedPostDeletedEmail };
+        case 102:
+            return { user: body.user, project: body.project, template: FlaggedProjectDeletedEmail };
+        case 103:
+            return { user: body.user, opening: body.opening, template: FlaggedOpeningDeletedEmail };
+        case 104:
+            return { user: body.user, event: body.event, template: FlaggedEventDeletedEmail };
+        case 105:
+            return { user: body.user, announcement: body.announcement, template: FlaggedAnnouncementDeletedEmail };
+        case 106:
+            return { user: body.user, poll: body.poll, template: FlaggedPollDeletedEmail };
 
     }
 }
@@ -485,65 +627,68 @@ interface Recipient {
     user: User;
 }
 
-export const sendMail = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
-    const emailType: number | undefined = req.body.type;
-    if (emailType == undefined) return next(new AppError('Email Type Not Defined', 400));
-    if (!req.body.email) return next(new AppError('Email Destination Not Defined', 400));
+// export const sendMail = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
+//     const emailType: number | undefined = req.body.type;
+//     if (emailType == undefined) return next(new AppError('Email Type Not Defined', 400));
+//     if (!req.body.email) return next(new AppError('Email Destination Not Defined', 400));
 
-    await ResendMailer({
-        email: req.body.email,
-        subject: getSubjectFromType(req.body.type),
-        templateName: getTemplateNameFromType(req.body.type),
-        paramFunc: getParamFuncFromReq(req, req.body.user),
-    }).catch(err => logger.error(`Error sending email to ${req.body.email}:`, 'sendMail', err));
+//     await ResendMailer({
+//         email: req.body.email,
+//         subject: getSubjectFromType(req.body.type),
+//         templateName: getTemplateNameFromType(req.body.type),
+//         user : req.body.user,
+//         paramFunc: getParamFuncFromReq(req, req.body.user),
+//     }).catch(err => logger.error(`Error sending email to ${req.body.email}:`, 'sendMail', err));
 
-    res.status(200).json({
-        status: 'success',
-    });
-});
+//     res.status(200).json({
+//         status: 'success',
+//     });
+// });
 
-export const sendMultipleMail = catchAsync(
-    async (req: Request, res: Response, next: NextFunction) => {
-        const emailType: number | undefined = req.body.type;
-        const recipients: Recipient[] | undefined = req.body.recipients;
-        if (emailType == undefined) return next(new AppError('Email Type Not Defined', 400));
-        if (!req.body.recipients) return next(new AppError('Recipients not defined', 400));
+// export const sendMultipleMail = catchAsync(
+//     async (req: Request, res: Response, next: NextFunction) => {
+//         const emailType: number | undefined = req.body.type;
+//         const recipients: Recipient[] | undefined = req.body.recipients;
+//         if (emailType == undefined) return next(new AppError('Email Type Not Defined', 400));
+//         if (!req.body.recipients) return next(new AppError('Recipients not defined', 400));
 
-        const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+//         const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
-        let count = 0;
-        for (const recipient of recipients) {
-            if (!recipient.email) {
-                logger.info('Recipient email not found', 'sendMultipleMail');
-                continue;
-            }
-            if (!recipient.user) {
-                logger.info('Recipient not found', 'sendMultipleMail');
-                continue;
-            }
+//         let count = 0;
+//         for (const recipient of recipients) {
+//             if (!recipient.email) {
+//                 logger.info('Recipient email not found', 'sendMultipleMail');
+//                 continue;
+//             }
+//             if (!recipient.user) {
+//                 logger.info('Recipient not found', 'sendMultipleMail');
+//                 continue;
+//             }
 
-            try {
-                ResendMailer({
-                    email: recipient.email,
-                    subject: getSubjectFromType(emailType),
-                    templateName: getTemplateNameFromType(emailType),
-                    paramFunc: getParamFuncFromReq(req, recipient.user),
-                });
-            } catch (error) {
-                logger.error(
-                    `Error sending email to ${recipient.email}:`,
-                    'sendMultipleMail',
-                    error
-                );
-            }
-            count++;
-            if (count % 5 === 0) await delay(5000);
-        }
-        res.status(200).json({
-            status: 'success',
-        });
-    }
-);
+//             try {
+//                 ResendMailer({
+//                     email: recipient.email,
+//                     subject: getSubjectFromType(emailType),
+//                     templateName: getTemplateNameFromType(emailType),
+//                     user : recipient.user,
+//                     paramFunc: getParamFuncFromReq(req, recipient.user),
+
+//                 });
+//             } catch (error) {
+//                 logger.error(
+//                     `Error sending email to ${recipient.email}:`,
+//                     'sendMultipleMail',
+//                     error
+//                 );
+//             }
+//             count++;
+//             if (count % 5 === 0) await delay(5000);
+//         }
+//         res.status(200).json({
+//             status: 'success',
+//         });
+//     }
+// );
 
 export const sendMailv2 = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
     const { type, email } = req.body;

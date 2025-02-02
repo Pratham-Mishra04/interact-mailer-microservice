@@ -1,20 +1,23 @@
 import React from 'react';
-import { Html, Head, Body, Container, Text, Img, Link, Hr } from '@react-email/components';
-import { User } from '../types';
-interface WelcomeEmailProps {
+import { Html, Head, Body, Container, Text, Img, Hr, Link } from '@react-email/components';
+import { Project, User } from '../types';
+interface ProjectInvitationAcceptedEmailProps {
     user: User;
+    secondaryUser: User;
+    project: Project;
 }
-
-export default function WelcomeEmail({ user }: WelcomeEmailProps) {
+export default function ProjectInvitationAcceptedEmail({
+    user,
+    secondaryUser,
+    project,
+}: ProjectInvitationAcceptedEmailProps) {
     return (
         <Html>
             <Head />
             <Body
                 style={{
-                    fontFamily: "'Arial', sans-serif",
-                    lineHeight: '1.6',
-                    color: '#333',
                     backgroundColor: '#f4f4f4',
+                    fontFamily: 'Arial, sans-serif',
                     margin: 0,
                     padding: '25px',
                 }}
@@ -22,14 +25,14 @@ export default function WelcomeEmail({ user }: WelcomeEmailProps) {
                 <Container
                     style={{
                         maxWidth: '720px',
-                        width: '100%',
-                        margin: '20px auto',
+                        margin: '0 auto',
                         padding: '20px',
                         backgroundColor: '#fff',
                         borderRadius: '8px',
                         boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
                     }}
                 >
+                    {/* Logo */}
                     <div style={{ backgroundColor: '#fff', padding: 10, textAlign: 'center' }}>
                         <Img
                             src="https://interactnow.in/logo-public-long.png"
@@ -43,69 +46,83 @@ export default function WelcomeEmail({ user }: WelcomeEmailProps) {
                             width="170"
                         />
                     </div>
-
+                    {/* Heading */}
                     <Text
                         style={{
                             color: '#333',
                             fontSize: '24px',
-                            marginTop: '20px',
+                            textAlign: 'left',
                         }}
                     >
-                        Welcome to Interact!
+                        Project Invitation Accepted!
+                    </Text>
+
+                    {/* Greeting */}
+                    <Text
+                        style={{
+                            marginBottom: '20px',
+                            textAlign: 'left',
+                        }}
+                    >
+                        Hello {user.name},
+                    </Text>
+
+                    {/* Project Invitation Content */}
+                    <Text
+                        style={{
+                            marginBottom: '20px',
+                            textAlign: 'left',
+                        }}
+                    >
+                        We are excited to inform you that {secondaryUser.name} has accepted your
+                        invitation to join the project titled: <strong>{project.title}</strong>
                     </Text>
 
                     <Text
                         style={{
-                            fontSize: '16px',
-                            lineHeight: '26px',
-                            margin: '16px 0',
+                            marginBottom: '20px',
+                            textAlign: 'left',
                         }}
                     >
-                        Hi {user.name},
+                        {secondaryUser.name} is thrilled to collaborate and contribute their
+                        expertise to the project. Here's a brief description of the project:
                     </Text>
 
                     <Text
                         style={{
-                            fontSize: '16px',
-                            lineHeight: '26px',
-                            margin: '16px 0',
+                            marginBottom: '20px',
+                            textAlign: 'left',
+                            fontStyle: 'italic',
                         }}
                     >
-                        Welcome to Interact, the connecting platform that helps you find the right
-                        projects for your niche and helps organizations collaborate effectively.
+                        {project.description}
                     </Text>
-
-                    <Link
-                        href="https://interactnow.in"
-                        style={{
-                            display: 'block',
-                            maxWidth: '100%',
-                            backgroundColor: '#1e88e5',
-                            borderRadius: '0.25rem',
-                            color: '#fff',
-                            fontSize: '16px',
-                            textAlign: 'center',
-                            padding: '12px',
-                            textDecoration: 'none',
-                            margin: '20px auto',
-                            width: '100%',
-                            boxSizing: 'border-box',
-                        }}
-                    >
-                        Let's Interact
-                    </Link>
 
                     <Text
                         style={{
-                            fontSize: '16px',
-                            lineHeight: '26px',
-                            margin: '16px 0',
+                            marginBottom: '20px',
+                            textAlign: 'left',
                         }}
                     >
-                        Best Regards,
-                        <br />
-                        Interact
+                        The Interact team looks forward to seeing the innovative ideas and solutions
+                        that {secondaryUser.name} will bring to the table.
                     </Text>
+
+                    <Text
+                        style={{
+                            marginBottom: '20px',
+                            textAlign: 'left',
+                        }}
+                    >
+                        If you have any further questions or need assistance, feel free to reply to
+                        this email.
+                    </Text>
+
+                    {/* Signature */}
+                    <div style={{ marginTop: '20px', textAlign: 'left' }}>
+                        <Text>Best regards,</Text>
+                        <Text>The Interact Team</Text>
+                    </div>
 
                     <Hr
                         style={{
@@ -115,6 +132,7 @@ export default function WelcomeEmail({ user }: WelcomeEmailProps) {
                             margin: '20px 0',
                         }}
                     />
+
                     <Text
                         style={{
                             fontSize: '12px',

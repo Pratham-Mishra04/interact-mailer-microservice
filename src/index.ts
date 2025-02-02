@@ -1,9 +1,9 @@
-import * as express from 'express';
+import  express from 'express';
 import { Express, NextFunction, Request, Response } from 'express';
-import * as ExpressMongoSanitize from 'express-mongo-sanitize';
+import  ExpressMongoSanitize from 'express-mongo-sanitize';
 import helmet from 'helmet';
-import * as morgan from 'morgan';
-import * as path from 'path';
+import  morgan from 'morgan';
+import  path from 'path';
 import CORS from './config/cors';
 import { ENV, configENV } from './config/env';
 import ErrorController from './controllers/error';

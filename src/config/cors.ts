@@ -1,4 +1,4 @@
-import * as cors from 'cors';
+import cors from 'cors';  // Correct way to import the default export
 
 const CORS = () =>
     cors({

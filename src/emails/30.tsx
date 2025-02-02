@@ -1,17 +1,18 @@
 import React from 'react';
-import { Html, Head, Body, Container, Text, Img, Link, Hr } from '@react-email/components';
+import { Html, Head, Body, Container, Text, Img, Hr } from '@react-email/components';
 import { User } from '../types';
-interface WelcomeEmailProps {
+
+interface NewActivitiesEmailProps {
     user: User;
 }
 
-export default function WelcomeEmail({ user }: WelcomeEmailProps) {
+export default function NewActivitiesEmail({ user }: NewActivitiesEmailProps) {
     return (
         <Html>
             <Head />
             <Body
                 style={{
-                    fontFamily: "'Arial', sans-serif",
+                    fontFamily: 'Arial, sans-serif',
                     lineHeight: '1.6',
                     color: '#333',
                     backgroundColor: '#f4f4f4',
@@ -23,13 +24,14 @@ export default function WelcomeEmail({ user }: WelcomeEmailProps) {
                     style={{
                         maxWidth: '720px',
                         width: '100%',
-                        margin: '20px auto',
+                        margin: '0 auto',
                         padding: '20px',
                         backgroundColor: '#fff',
                         borderRadius: '8px',
                         boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
                     }}
                 >
+                    {/* Logo */}
                     <div style={{ backgroundColor: '#fff', padding: 10, textAlign: 'center' }}>
                         <Img
                             src="https://interactnow.in/logo-public-long.png"
@@ -44,68 +46,90 @@ export default function WelcomeEmail({ user }: WelcomeEmailProps) {
                         />
                     </div>
 
+                    {/* Email Content */}
                     <Text
                         style={{
                             color: '#333',
                             fontSize: '24px',
-                            marginTop: '20px',
+                            fontWeight: '400',
+                            textAlign: 'left',
+                            margin: '30px 0',
                         }}
                     >
-                        Welcome to Interact!
+                        New Activities
                     </Text>
 
                     <Text
                         style={{
+                            marginBottom: '20px',
+                            textAlign: 'left',
                             fontSize: '16px',
-                            lineHeight: '26px',
-                            margin: '16px 0',
                         }}
                     >
-                        Hi {user.name},
+                        Hello {user.name},
                     </Text>
 
                     <Text
                         style={{
-                            fontSize: '16px',
-                            lineHeight: '26px',
-                            margin: '16px 0',
+                            marginBottom: '20px',
+                            fontSize: '14px',
+                            lineHeight: '24px',
+                            textAlign: 'left',
                         }}
                     >
-                        Welcome to Interact, the connecting platform that helps you find the right
-                        projects for your niche and helps organizations collaborate effectively.
+                        You are missing out on some new activities.
                     </Text>
-
-                    <Link
-                        href="https://interactnow.in"
-                        style={{
-                            display: 'block',
-                            maxWidth: '100%',
-                            backgroundColor: '#1e88e5',
-                            borderRadius: '0.25rem',
-                            color: '#fff',
-                            fontSize: '16px',
-                            textAlign: 'center',
-                            padding: '12px',
-                            textDecoration: 'none',
-                            margin: '20px auto',
-                            width: '100%',
-                            boxSizing: 'border-box',
-                        }}
-                    >
-                        Let's Interact
-                    </Link>
 
                     <Text
                         style={{
-                            fontSize: '16px',
-                            lineHeight: '26px',
-                            margin: '16px 0',
+                            marginBottom: '20px',
+                            fontSize: '14px',
+                            lineHeight: '24px',
+                            textAlign: 'left',
                         }}
                     >
-                        Best Regards,
-                        <br />
-                        Interact
+                        Don't miss out on exciting collaborations and discussions. Head to your
+                        inbox now!
                     </Text>
+
+                    <Text
+                        style={{
+                            marginBottom: '20px',
+                            fontSize: '14px',
+                            lineHeight: '24px',
+                            textAlign: 'left',
+                        }}
+                    >
+                        If you have any questions or need assistance, feel free to reply to this
+                        email.
+                    </Text>
+
+                    {/* Button */}
+                    <div style={{ textAlign: 'center', margin: '20px 0' }}>
+                        <a
+                            href="https://interactnow.in/explore"
+                            style={{
+                                display: 'inline-block',
+                                textDecoration: 'none',
+                                color: '#fff',
+                                backgroundColor: '#1e88e5',
+                                padding: '10px 20px',
+                                borderRadius: '5px',
+                                fontWeight: 'bold',
+                                fontSize: '16px',
+                                textAlign: 'center',
+                                width: '100%',
+                                maxWidth: '300px',
+                            }}
+                        >
+                            View Activities
+                        </a>
+                    </div>
+
+                    <div style={{ marginTop: '20px', textAlign: 'left' }}>
+                        <div>Best regards,</div>
+                        <div>Interact</div>
+                    </div>
 
                     <Hr
                         style={{
@@ -115,6 +139,7 @@ export default function WelcomeEmail({ user }: WelcomeEmailProps) {
                             margin: '20px 0',
                         }}
                     />
+
                     <Text
                         style={{
                             fontSize: '12px',
