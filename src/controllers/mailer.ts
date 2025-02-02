@@ -4,9 +4,11 @@ import { NextFunction, Request, Response } from 'express';
 import { AttachmentLike } from 'nodemailer/lib/mailer';
 import { Readable } from 'nodemailer/lib/xoauth2';
 import { ENV } from '../config/env';
+import WelcomeEmail from '../emails/1';
+import OTPEmail from '../emails/2';
 import AppError from '../helpers/app_error';
 import catchAsync from '../helpers/catch_async';
-import Nodemailer from '../mailers/nodemailer';
+import ResendMailer from '../mailers/resend';
 import {
     Announcement,
     Comment,
@@ -24,7 +26,26 @@ import {
 import { getRedirectURL, getStrippedContent } from '../utils/comment';
 import logger from '../utils/logger';
 import { getNextSessionTime } from '../utils/session';
-import ResendMailer from '../mailers/resend';
+import { emailService } from '../mailers/resend-v2';
+
+interface EmailRequestBody {
+    type: number;
+    email: string;
+    user: User;
+    secondaryUser?: User;
+    organization?: Organization;
+    groupchat?: GroupChat;
+    comment?: Comment;
+    post?: Post;
+    project?: Project;
+    opening?: Opening;
+    event?: Event;
+    announcement?: Announcement;
+    poll?: Poll;
+    otp?: string;
+    task?: Task;
+    meeting?: Meeting;
+}
 
 const getTemplateNameFromType = (type: number): string => {
     return `${type}.html`;
@@ -149,296 +170,314 @@ const getSubjectFromType = (type: number): string => {
     }
 };
 
-const getParamFuncFromReq = (
-    req: Request,
-    recipient: User
-): ((
-    html: string | Readable | Buffer | AttachmentLike | undefined
-) => string | Readable | Buffer | AttachmentLike | undefined) => {
-    const user: User = recipient;
-    const secondaryUser: User | undefined = req.body.secondaryUser;
-    const organization: Organization | undefined = req.body.organization;
-    const groupchat: GroupChat | undefined = req.body.groupchat;
-    const comment: Comment | undefined = req.body.comment;
-    const post: Post | undefined = req.body.post;
-    const project: Project | undefined = req.body.project;
-    const opening: Opening | undefined = req.body.opening;
-    const event: Event | undefined = req.body.event;
-    const announcement: Announcement | undefined = req.body.announcement;
-    const poll: Poll | undefined = req.body.poll;
-    const otp: string | undefined = req.body.otp;
-    const task: Task | undefined = req.body.task;
-    const type: number = req.body.type;
-    const meeting: Meeting | undefined = req.body.meeting;
+// const getParamFuncFromReq = (
+//     req: Request,
+//     recipient: User
+// ): ((
+//     html: string | Readable | Buffer | AttachmentLike | undefined
+// ) => string | Readable | Buffer | AttachmentLike | undefined) => {
+//     const user: User = recipient;
+//     const secondaryUser: User | undefined = req.body.secondaryUser;
+//     const organization: Organization | undefined = req.body.organization;
+//     const groupchat: GroupChat | undefined = req.body.groupchat;
+//     const comment: Comment | undefined = req.body.comment;
+//     const post: Post | undefined = req.body.post;
+//     const project: Project | undefined = req.body.project;
+//     const opening: Opening | undefined = req.body.opening;
+//     const event: Event | undefined = req.body.event;
+//     const announcement: Announcement | undefined = req.body.announcement;
+//     const poll: Poll | undefined = req.body.poll;
+//     const otp: string | undefined = req.body.otp;
+//     const task: Task | undefined = req.body.task;
+//     const type: number = req.body.type;
+//     const meeting: Meeting | undefined = req.body.meeting;
 
-    return html => {
-        const parameterizedHTML = html
-            ?.toString()
-            .replaceAll('{{User.Name}}', user.name)
-            .replaceAll('{{User.Username}}', user.username);
+//     return html => {
+//         const parameterizedHTML = html
+//             ?.toString()
+//             .replaceAll('{{User.Name}}', user.name)
+//             .replaceAll('{{User.Username}}', user.username);
 
-        switch (type) {
-            case 0:
-            case 1:
-            case 2:
-            case 3:
-            case 4:
-                return parameterizedHTML?.replaceAll('{{OTP}}', otp || '');
-            case 10:
-                return parameterizedHTML?.replaceAll(
-                    '{{SecondaryUser.Name}}',
-                    secondaryUser?.name || ''
-                );
-            case 11:
-                return parameterizedHTML
-                    ?.replaceAll('{{User.noImpressions}}', `${user.noImpressions || 0}`)
-                    ?.replaceAll('{{Post.noImpressions}}', `${post.noImpressions || 0}`)
-                    ?.replaceAll('{{Project.noImpressions}}', `${project.noImpressions || 0}`)
-                    ?.replaceAll('{{Opening.noImpressions}}', `${opening.noImpressions || 0}`)
-                    ?.replaceAll('{{Event.noImpressions}}', `${event.noImpressions || 0}`);
+//         switch (type) {
+//             case 0:
+//             case 1:
+//             case 2:
+//             case 3:
+//             case 4:
+//                 return parameterizedHTML?.replaceAll('{{OTP}}', otp || '');
+//             case 10:
+//                 return parameterizedHTML?.replaceAll(
+//                     '{{SecondaryUser.Name}}',
+//                     secondaryUser?.name || ''
+//                 );
+//             case 11:
+//                 return parameterizedHTML
+//                     ?.replaceAll('{{User.noImpressions}}', `${user.noImpressions || 0}`)
+//                     ?.replaceAll('{{Post.noImpressions}}', `${post.noImpressions || 0}`)
+//                     ?.replaceAll('{{Project.noImpressions}}', `${project.noImpressions || 0}`)
+//                     ?.replaceAll('{{Opening.noImpressions}}', `${opening.noImpressions || 0}`)
+//                     ?.replaceAll('{{Event.noImpressions}}', `${event.noImpressions || 0}`);
 
-            case 12:
-            case 13:
-                return parameterizedHTML
-                    ?.replaceAll('{{SecondaryUser.Name}}', secondaryUser?.name || '')
-                    .replaceAll('{{Opening.Title}}', opening.title || '');
-            case 14:
-                return parameterizedHTML
-                    .replaceAll('{{Opening.Title}}', opening.title || '');
-            case 15:
-                return parameterizedHTML
-                    ?.replaceAll('{{SecondaryUser.Name}}', secondaryUser?.name || '')
-                    .replaceAll('{{Project.Title}}', project.title || '')
-                    .replaceAll('{{Project.Description}}', project.description || '')
-                    .replaceAll(
-                        '{{Project.Link}}',
-                        `${ENV.FRONTEND_URL}/invitations?tab=projects`
-                    );
+//             case 12:
+//             case 13:
+//                 return parameterizedHTML
+//                     ?.replaceAll('{{SecondaryUser.Name}}', secondaryUser?.name || '')
+//                     .replaceAll('{{Opening.Title}}', opening.title || '');
+//             case 14:
+//                 return parameterizedHTML
+//                     .replaceAll('{{Opening.Title}}', opening.title || '');
+//             case 15:
+//                 return parameterizedHTML
+//                     ?.replaceAll('{{SecondaryUser.Name}}', secondaryUser?.name || '')
+//                     .replaceAll('{{Project.Title}}', project.title || '')
+//                     .replaceAll('{{Project.Description}}', project.description || '')
+//                     .replaceAll(
+//                         '{{Project.Link}}',
+//                         `${ENV.FRONTEND_URL}/invitations?tab=projects`
+//                     );
 
-            case 16:
-                return parameterizedHTML
-                    ?.replaceAll('{{SecondaryUser.Name}}', secondaryUser?.name || '')
-                    .replaceAll('{{Organization.title}}', organization.title || '')
-                    .replaceAll(
-                        '{{Organization.Link}}',
-                        `${ENV.FRONTEND_URL}/invitations?tab=organisations`
-                    );
-            case 17:
-                return parameterizedHTML
-                    ?.replaceAll('{{SecondaryUser.Name}}', secondaryUser?.name || '')
-                    .replaceAll('{{GroupChat.title}}', groupchat.title || '')
-                    .replaceAll('{{GroupChat.description}}', groupchat.description || '');
-            case 18:
-                return parameterizedHTML
-                    ?.replaceAll('{{SecondaryUser.Name}}', secondaryUser?.name || '')
-                    .replaceAll('{{Project.Title}}', project.title || '')
-                    .replaceAll('{{Project.Description}}', project.description || '');
-            case 19:
-                return parameterizedHTML?.replaceAll(
-                    '{{Organization.title}}',
-                    organization.title || ''
-                );
-            case 20:
-                return parameterizedHTML
-                    ?.replaceAll('{{SecondaryUser.Name}}', secondaryUser?.name || '')
-                    .replaceAll('{{GroupChat.title}}', groupchat.title || '')
-                    .replaceAll('{{GroupChat.description}}', groupchat.description || '');
-            case 21:
-                return parameterizedHTML
-                    ?.replaceAll('{{SecondaryUser.Name}}', secondaryUser?.name || '')
-                    .replaceAll('{{Task.Title}}', task.title)
-                    .replaceAll('{{Task.Description}}', task.description)
-                    .replaceAll(
-                        '{{Task.URL}}',
-                        `${ENV.FRONTEND_URL}/organisations?oid=${task.organizationID}&redirect_url=/tasks?tid=${task.id}`
-                    );
-            case 22:
-                return parameterizedHTML
-                    ?.replaceAll('{{SecondaryUser.Name}}', secondaryUser?.name || '')
-                    .replaceAll('{{Task.Title}}', task.title || '')
-                    .replaceAll('{{Task.Description}}', task.description || '')
-                    .replaceAll(
-                        '{{Task.URL}}',
-                        `${ENV.FRONTEND_URL}/organisations?oid=${task.organizationID}&redirect_url=/tasks?tid=${task.id}`
-                    );
-            case 23:
-                return parameterizedHTML
-                    .replaceAll('{{Meeting.Title}}', meeting.title || '')
-                    .replaceAll('{{Meeting.Description}}', meeting.description || '')
-                    .replaceAll(
-                        '{{Meeting.Time}}',
-                        meeting.startTime ? getNextSessionTime(meeting) : '-'
-                    )
-                    .replaceAll(
-                        '{{Meeting.Frequency}}',
-                        meeting.frequency
-                            ? meeting.frequency == 'none'
-                                ? 'One Time'
-                                : meeting.frequency
-                            : '-'
-                    )
-                    .replaceAll(
-                        '{{Meeting.Organization.Name}}',
-                        meeting.organization.title ? meeting.organization.title : ''
-                    )
-                    .replaceAll(
-                        '{{Meeting.URL}}',
-                        `${ENV.FRONTEND_URL}/organisations?oid=${meeting.organizationID}&redirect_url=/meetings/${meeting.id}`
-                    );
-            case 24:
-                return parameterizedHTML
-                    .replaceAll('{{Meeting.Title}}', meeting.title || '')
-                    .replaceAll('{{Meeting.Description}}', meeting.description || '')
-                    .replaceAll(
-                        '{{Meeting.Time}}',
-                        meeting.startTime ? getNextSessionTime(meeting) : '-'
-                    )
-                    .replaceAll(
-                        '{{Meeting.Frequency}}',
-                        meeting.frequency
-                            ? meeting.frequency == 'none'
-                                ? 'One Time'
-                                : meeting.frequency
-                            : '-'
-                    )
-                    .replaceAll(
-                        '{{Meeting.Organization.Name}}',
-                        meeting.organization.title ? meeting.organization.title : ''
-                    )
-                    .replaceAll(
-                        '{{Meeting.URL}}',
-                        `${ENV.FRONTEND_URL}/organisations?oid=${meeting.organizationID}&redirect_url=/meetings/${meeting.id}`
-                    );
-            case 25:
-                return parameterizedHTML
-                    ?.replaceAll('{{User.noImpressions}}', `${user.noImpressions || 0}`)
-                    ?.replaceAll('{{Project.noImpressions}}', `${project.noImpressions || 0}`);
-            case 26:
-                return parameterizedHTML
-                    ?.replaceAll('{{User.noImpressions}}', `${user.noImpressions || 0}`)
-                    ?.replaceAll('{{Event.noImpressions}}', `${event.noImpressions || 0}`);
-            case 27:
-                return parameterizedHTML
-                    ?.replaceAll('{{User.noImpressions}}', `${user.noImpressions || 0}`)
-                    ?.replaceAll('{{Opening.noImpressions}}', `${opening.noImpressions || 0}`);
-            case 30:
-                return parameterizedHTML;
-            case 31:
-                return parameterizedHTML.replaceAll('{{User.Name}}', user.name || '');
-            case 32:
-                return parameterizedHTML;
-            case 33:
-                return parameterizedHTML
-                    ?.replaceAll('{{Task.Title}}', task.title)
-                    .replaceAll('{{Task.Description}}', task.description)
-                    .replaceAll(
-                        '{{Task.URL}}',
-                        `${ENV.FRONTEND_URL}/organisations?oid=${task.organizationID}&redirect_url=/tasks?tid=${task.id}`
-                    );
+//             case 16:
+//                 return parameterizedHTML
+//                     ?.replaceAll('{{SecondaryUser.Name}}', secondaryUser?.name || '')
+//                     .replaceAll('{{Organization.title}}', organization.title || '')
+//                     .replaceAll(
+//                         '{{Organization.Link}}',
+//                         `${ENV.FRONTEND_URL}/invitations?tab=organisations`
+//                     );
+//             case 17:
+//                 return parameterizedHTML
+//                     ?.replaceAll('{{SecondaryUser.Name}}', secondaryUser?.name || '')
+//                     .replaceAll('{{GroupChat.title}}', groupchat.title || '')
+//                     .replaceAll('{{GroupChat.description}}', groupchat.description || '');
+//             case 18:
+//                 return parameterizedHTML
+//                     ?.replaceAll('{{SecondaryUser.Name}}', secondaryUser?.name || '')
+//                     .replaceAll('{{Project.Title}}', project.title || '')
+//                     .replaceAll('{{Project.Description}}', project.description || '');
+//             case 19:
+//                 return parameterizedHTML?.replaceAll(
+//                     '{{Organization.title}}',
+//                     organization.title || ''
+//                 );
+//             case 20:
+//                 return parameterizedHTML
+//                     ?.replaceAll('{{SecondaryUser.Name}}', secondaryUser?.name || '')
+//                     .replaceAll('{{GroupChat.title}}', groupchat.title || '')
+//                     .replaceAll('{{GroupChat.description}}', groupchat.description || '');
+//             case 21:
+//                 return parameterizedHTML
+//                     ?.replaceAll('{{SecondaryUser.Name}}', secondaryUser?.name || '')
+//                     .replaceAll('{{Task.Title}}', task.title)
+//                     .replaceAll('{{Task.Description}}', task.description)
+//                     .replaceAll(
+//                         '{{Task.URL}}',
+//                         `${ENV.FRONTEND_URL}/organisations?oid=${task.organizationID}&redirect_url=/tasks?tid=${task.id}`
+//                     );
+//             case 22:
+//                 return parameterizedHTML
+//                     ?.replaceAll('{{SecondaryUser.Name}}', secondaryUser?.name || '')
+//                     .replaceAll('{{Task.Title}}', task.title || '')
+//                     .replaceAll('{{Task.Description}}', task.description || '')
+//                     .replaceAll(
+//                         '{{Task.URL}}',
+//                         `${ENV.FRONTEND_URL}/organisations?oid=${task.organizationID}&redirect_url=/tasks?tid=${task.id}`
+//                     );
+//             case 23:
+//                 return parameterizedHTML
+//                     .replaceAll('{{Meeting.Title}}', meeting.title || '')
+//                     .replaceAll('{{Meeting.Description}}', meeting.description || '')
+//                     .replaceAll(
+//                         '{{Meeting.Time}}',
+//                         meeting.startTime ? getNextSessionTime(meeting) : '-'
+//                     )
+//                     .replaceAll(
+//                         '{{Meeting.Frequency}}',
+//                         meeting.frequency
+//                             ? meeting.frequency == 'none'
+//                                 ? 'One Time'
+//                                 : meeting.frequency
+//                             : '-'
+//                     )
+//                     .replaceAll(
+//                         '{{Meeting.Organization.Name}}',
+//                         meeting.organization.title ? meeting.organization.title : ''
+//                     )
+//                     .replaceAll(
+//                         '{{Meeting.URL}}',
+//                         `${ENV.FRONTEND_URL}/organisations?oid=${meeting.organizationID}&redirect_url=/meetings/${meeting.id}`
+//                     );
+//             case 24:
+//                 return parameterizedHTML
+//                     .replaceAll('{{Meeting.Title}}', meeting.title || '')
+//                     .replaceAll('{{Meeting.Description}}', meeting.description || '')
+//                     .replaceAll(
+//                         '{{Meeting.Time}}',
+//                         meeting.startTime ? getNextSessionTime(meeting) : '-'
+//                     )
+//                     .replaceAll(
+//                         '{{Meeting.Frequency}}',
+//                         meeting.frequency
+//                             ? meeting.frequency == 'none'
+//                                 ? 'One Time'
+//                                 : meeting.frequency
+//                             : '-'
+//                     )
+//                     .replaceAll(
+//                         '{{Meeting.Organization.Name}}',
+//                         meeting.organization.title ? meeting.organization.title : ''
+//                     )
+//                     .replaceAll(
+//                         '{{Meeting.URL}}',
+//                         `${ENV.FRONTEND_URL}/organisations?oid=${meeting.organizationID}&redirect_url=/meetings/${meeting.id}`
+//                     );
+//             case 25:
+//                 return parameterizedHTML
+//                     ?.replaceAll('{{User.noImpressions}}', `${user.noImpressions || 0}`)
+//                     ?.replaceAll('{{Project.noImpressions}}', `${project.noImpressions || 0}`);
+//             case 26:
+//                 return parameterizedHTML
+//                     ?.replaceAll('{{User.noImpressions}}', `${user.noImpressions || 0}`)
+//                     ?.replaceAll('{{Event.noImpressions}}', `${event.noImpressions || 0}`);
+//             case 27:
+//                 return parameterizedHTML
+//                     ?.replaceAll('{{User.noImpressions}}', `${user.noImpressions || 0}`)
+//                     ?.replaceAll('{{Opening.noImpressions}}', `${opening.noImpressions || 0}`);
+//             case 30:
+//                 return parameterizedHTML;
+//             case 31:
+//                 return parameterizedHTML.replaceAll('{{User.Name}}', user.name || '');
+//             case 32:
+//                 return parameterizedHTML;
+//             case 33:
+//                 return parameterizedHTML
+//                     ?.replaceAll('{{Task.Title}}', task.title)
+//                     .replaceAll('{{Task.Description}}', task.description)
+//                     .replaceAll(
+//                         '{{Task.URL}}',
+//                         `${ENV.FRONTEND_URL}/organisations?oid=${task.organizationID}&redirect_url=/tasks?tid=${task.id}`
+//                     );
 
-            case 34:
-                return parameterizedHTML
-                    .replaceAll('{{Meeting.Title}}', meeting.title || '')
-                    .replaceAll('{{Meeting.Description}}', meeting.description || '')
-                    .replaceAll(
-                        '{{Meeting.Time}}',
-                        meeting.startTime ? getNextSessionTime(meeting) : '-'
-                    )
-                    .replaceAll(
-                        '{{Meeting.Frequency}}',
-                        meeting.frequency
-                            ? meeting.frequency == 'none'
-                                ? 'One Time'
-                                : meeting.frequency
-                            : '-'
-                    )
-                    .replaceAll(
-                        '{{Meeting.Organization.Name}}',
-                        meeting.organization.title ? meeting.organization.title : ''
-                    )
-                    .replaceAll(
-                        '{{Meeting.URL}}',
-                        `${ENV.FRONTEND_URL}/organisations?oid=${meeting.organizationID}&redirect_url=/meetings/${meeting.id}`
-                    );
-            case 35:
-                return parameterizedHTML
-                    ?.replaceAll('{{SecondaryUser.Name}}', secondaryUser?.name || '')
-                    .replaceAll('{{Comment.Content}}', getStrippedContent(comment))
-                    .replaceAll('{{Comment.URL}}', getRedirectURL(comment));
+//             case 34:
+//                 return parameterizedHTML
+//                     .replaceAll('{{Meeting.Title}}', meeting.title || '')
+//                     .replaceAll('{{Meeting.Description}}', meeting.description || '')
+//                     .replaceAll(
+//                         '{{Meeting.Time}}',
+//                         meeting.startTime ? getNextSessionTime(meeting) : '-'
+//                     )
+//                     .replaceAll(
+//                         '{{Meeting.Frequency}}',
+//                         meeting.frequency
+//                             ? meeting.frequency == 'none'
+//                                 ? 'One Time'
+//                                 : meeting.frequency
+//                             : '-'
+//                     )
+//                     .replaceAll(
+//                         '{{Meeting.Organization.Name}}',
+//                         meeting.organization.title ? meeting.organization.title : ''
+//                     )
+//                     .replaceAll(
+//                         '{{Meeting.URL}}',
+//                         `${ENV.FRONTEND_URL}/organisations?oid=${meeting.organizationID}&redirect_url=/meetings/${meeting.id}`
+//                     );
+//             case 35:
+//                 return parameterizedHTML
+//                     ?.replaceAll('{{SecondaryUser.Name}}', secondaryUser?.name || '')
+//                     .replaceAll('{{Comment.Content}}', getStrippedContent(comment))
+//                     .replaceAll('{{Comment.URL}}', getRedirectURL(comment));
 
-            case 50:
-                return parameterizedHTML
-                    ?.replaceAll('{{Comment.Content}}', getStrippedContent(comment))
-                    .replaceAll('{{Comment.Id}}', comment.id || '');
-            case 51:
-                return parameterizedHTML?.replaceAll('{{Post.Title}}', post.content || '');
-            case 52:
-                return parameterizedHTML?.replaceAll('{{Project.Name}}', project.title || '');
-            case 53:
-                return parameterizedHTML
-                    ?.replaceAll('{{Opening.Title}}', opening.title || '')
-                    .replaceAll('{{Opening.Description}}', opening.description || '');
-            case 54:
-                return parameterizedHTML
-                    ?.replaceAll('{{Event.Title}}', event.title || '')
-                    .replaceAll('{{Event.Description}}', event.description || '');
-            case 55:
-                return parameterizedHTML
-                    ?.replaceAll('{{Announcement.Title}}', announcement.title || '')
-                    .replaceAll('{{Announcement.Content}}', announcement.content || '');
-            case 56:
-                return parameterizedHTML?.replaceAll('{{Poll.Title}}', poll.title || '');
-            case 70:
-                return parameterizedHTML?.replaceAll(
-                    '{{Comment.Content}}',
-                    getStrippedContent(comment)
-                );
-            case 71:
-                return parameterizedHTML?.replaceAll('{{Post.Content}}', post.content || '');
-            case 72:
-                return parameterizedHTML?.replaceAll('{{Project.Title}}', project.title || '');
-            case 73:
-                return parameterizedHTML
-                    ?.replaceAll('{{Opening.Title}}', opening.title || '')
-                    .replaceAll('{{Opening.Description}}', opening.description || '');
-            case 74:
-                return parameterizedHTML
-                    ?.replaceAll('{{Event.Title}}', event.title || '')
-                    .replaceAll('{{Event.Description}}', event.description || '');
-            case 75:
-                return parameterizedHTML
-                    ?.replaceAll('{{Announcement.Title}}', announcement.title || '')
-                    .replaceAll('{{Announcement.Content}}', announcement.content || '');
-            case 76:
-                return parameterizedHTML?.replaceAll('{{Poll.Title}}', poll.title || '');
-            case 100:
-                return parameterizedHTML?.replaceAll(
-                    '{{Comment.Content}}',
-                    getStrippedContent(comment)
-                );
-            case 101:
-                return parameterizedHTML?.replaceAll('{{Post.Content}}', post.content || '');
-            case 102:
-                return parameterizedHTML?.replaceAll('{{Project.Title}}', project.title || '');
-            case 103:
-                return parameterizedHTML
-                    ?.replaceAll('{{Opeing.Title}}', opening.title || '')
-                    .replaceAll('{{Opening.Description}}', opening.description || '');
-            case 104:
-                return parameterizedHTML
-                    ?.replaceAll('{{Event.Title}}', event.title || '')
-                    .replaceAll('{{Event.Description}}', event.description || '');
-            case 105:
-                return parameterizedHTML
-                    ?.replaceAll('{{Announcement.Title}}', announcement.title || '')
-                    .replaceAll('{{Announcement.Content}}', announcement.content || '');
-            case 106:
-                return parameterizedHTML?.replaceAll('{{Poll.Title}}', poll.title || '');
-            default:
-                return parameterizedHTML;
-        }
-    };
-};
+//             case 50:
+//                 return parameterizedHTML
+//                     ?.replaceAll('{{Comment.Content}}', getStrippedContent(comment))
+//                     .replaceAll('{{Comment.Id}}', comment.id || '');
+//             case 51:
+//                 return parameterizedHTML?.replaceAll('{{Post.Title}}', post.content || '');
+//             case 52:
+//                 return parameterizedHTML?.replaceAll('{{Project.Name}}', project.title || '');
+//             case 53:
+//                 return parameterizedHTML
+//                     ?.replaceAll('{{Opening.Title}}', opening.title || '')
+//                     .replaceAll('{{Opening.Description}}', opening.description || '');
+//             case 54:
+//                 return parameterizedHTML
+//                     ?.replaceAll('{{Event.Title}}', event.title || '')
+//                     .replaceAll('{{Event.Description}}', event.description || '');
+//             case 55:
+//                 return parameterizedHTML
+//                     ?.replaceAll('{{Announcement.Title}}', announcement.title || '')
+//                     .replaceAll('{{Announcement.Content}}', announcement.content || '');
+//             case 56:
+//                 return parameterizedHTML?.replaceAll('{{Poll.Title}}', poll.title || '');
+//             case 70:
+//                 return parameterizedHTML?.replaceAll(
+//                     '{{Comment.Content}}',
+//                     getStrippedContent(comment)
+//                 );
+//             case 71:
+//                 return parameterizedHTML?.replaceAll('{{Post.Content}}', post.content || '');
+//             case 72:
+//                 return parameterizedHTML?.replaceAll('{{Project.Title}}', project.title || '');
+//             case 73:
+//                 return parameterizedHTML
+//                     ?.replaceAll('{{Opening.Title}}', opening.title || '')
+//                     .replaceAll('{{Opening.Description}}', opening.description || '');
+//             case 74:
+//                 return parameterizedHTML
+//                     ?.replaceAll('{{Event.Title}}', event.title || '')
+//                     .replaceAll('{{Event.Description}}', event.description || '');
+//             case 75:
+//                 return parameterizedHTML
+//                     ?.replaceAll('{{Announcement.Title}}', announcement.title || '')
+//                     .replaceAll('{{Announcement.Content}}', announcement.content || '');
+//             case 76:
+//                 return parameterizedHTML?.replaceAll('{{Poll.Title}}', poll.title || '');
+//             case 100:
+//                 return parameterizedHTML?.replaceAll(
+//                     '{{Comment.Content}}',
+//                     getStrippedContent(comment)
+//                 );
+//             case 101:
+//                 return parameterizedHTML?.replaceAll('{{Post.Content}}', post.content || '');
+//             case 102:
+//                 return parameterizedHTML?.replaceAll('{{Project.Title}}', project.title || '');
+//             case 103:
+//                 return parameterizedHTML
+//                     ?.replaceAll('{{Opeing.Title}}', opening.title || '')
+//                     .replaceAll('{{Opening.Description}}', opening.description || '');
+//             case 104:
+//                 return parameterizedHTML
+//                     ?.replaceAll('{{Event.Title}}', event.title || '')
+//                     .replaceAll('{{Event.Description}}', event.description || '');
+//             case 105:
+//                 return parameterizedHTML
+//                     ?.replaceAll('{{Announcement.Title}}', announcement.title || '')
+//                     .replaceAll('{{Announcement.Content}}', announcement.content || '');
+//             case 106:
+//                 return parameterizedHTML?.replaceAll('{{Poll.Title}}', poll.title || '');
+//             default:
+//                 return parameterizedHTML;
+//         }
+//     };
+// };
+
+
+const getEmailProps = (body: EmailRequestBody) => {
+    switch (body.type) {
+        case 0:
+        case 1:
+            return {
+                user: body.user,
+                template: WelcomeEmail,
+            };
+        case 2:
+            return {
+                otp: body.otp || '',
+                template: OTPEmail,
+            };
+
+    }
+}
 
 interface Recipient {
     email: string;
@@ -504,3 +543,25 @@ export const sendMultipleMail = catchAsync(
         });
     }
 );
+
+export const sendMailv2 = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
+    const { type, email } = req.body;
+  
+    try {
+      const emailConfig = getEmailProps(req.body);
+      
+      await emailService.sendEmail({
+        to: email,
+        subject: getSubjectFromType(type),
+        template: emailConfig.template,
+        props: emailConfig
+      });
+  
+      res.status(200).json({
+        status: 'success',
+      });
+    } catch (err) {
+      logger.error(`Error sending email to ${email}:`, 'sendMail', err);
+      next(new AppError('Failed to send email', 500));
+    }
+  });
