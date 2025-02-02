@@ -28,6 +28,18 @@ const JoiErrorHandler = err => {
     return new AppError(message, 400);
 };
 
+const MailerErrorHandler = (req, err: ExtendedError) => {
+    if (req.body?.type) {
+        const formattedBody = JSON.stringify(req.body, null, 2); // Format nested objects
+        logger.error(`Mailer Error: ${err.message}, Request Body: ${formattedBody}`, req.path, err);
+        return {
+            ...err,
+            message: `${err.message}. Request Body: ${formattedBody}`,
+        };
+    }
+    return err;
+};
+
 interface ExtendedError extends AppError {
     _message?: string;
     isJoi?: boolean;
@@ -54,6 +66,7 @@ const ErrorController = (error: Error, req: Request, res: Response, next: NextFu
         if (err?.name === 'JsonWebTokenError') error = JWTErrorHandler(error, 'invalid');
         if (err?.name === 'TokenExpiredError') error = JWTErrorHandler(error, 'expired');
         if (err?.isJoi) error = JoiErrorHandler(error);
+        if (req.body.type) error = MailerErrorHandler(req, error);
 
         if (error.isOperationError) {
             res.status(error.statusCode).json({

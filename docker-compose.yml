@@ -13,3 +13,9 @@ services:
       - .env
     volumes:
       - ./logs:/app/logs/
+    networks:
+      - interact_go_backend-network
+
+networks:
+  interact_go_backend-network:
+    external: true

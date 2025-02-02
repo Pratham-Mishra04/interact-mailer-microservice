@@ -218,6 +218,7 @@ const getSubjectFromType = (type: number): string => {
 //                     ?.replaceAll('{{Opening.noImpressions}}', `${opening.noImpressions || 0}`)
 //                     ?.replaceAll('{{Event.noImpressions}}', `${event.noImpressions || 0}`);
 
+
 //             case 12:
 //             case 13:
 //                 return parameterizedHTML
